@@ -1,0 +1,54 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<div class="main_pack">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Default Price</h1>
+
+                    </div>
+
+                   
+                    <form action="{% url 'adminPanel:dashboardDefaultPrice' %}" method="POST">
+                        
+                    {% csrf_token %}
+
+                     
+                    <table class="table" id="" >
+                        
+                            <tr>
+                                
+                                <th style="width: 25%;" ></th>
+                                <td >                                  
+                                    {{ form }}
+                                 </td>                             
+                               
+                            </tr>
+                            
+                     </table>
+                     
+                    <div class="row  save_Delete">
+
+                        <button type="submit" class="save button_inner ">SAVE</button>
+                    
+                    </div>
+                     
+                    </form>
+
+        
+                  
+                        </div> <!-- 		End of Container -->
+
+                                    </div>
+                 
+
+                
+                <!-- /.container-fluid -->
+
+            
+            <!-- End of Main Content -->
+
+ {% endblock %}

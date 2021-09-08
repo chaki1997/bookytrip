@@ -1,0 +1,298 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- fixed left_side_bar steps -->
+<div id="fixed-steps">
+    <div>
+      <a href="#" class="fixed step_1 active" target="_blank">
+          1 Step </a>
+    </div>
+    <div>
+      <a href="#" class="fixed step_2" target="_blank">
+          2 Step </a>
+    </div>
+    <div>
+      <a href="#" class="fixed step_3" target="_blank">
+          3 step </a>
+    </div>
+    <div>
+      <a href="#" class="fixed step_4" target="_blank">
+          4 step </a>
+    </div>
+    <!-- <div>
+      <a href="#" class="fixed step_5" target="_blank"> 
+          5 step </a>
+    </div>
+    <div>
+      <a href="#" class="fixed step_6" target="_blank">
+          6 Step </a>
+    </div> -->
+  </div>
+<!-- fixed left_side_bar steps -->
+    <!-- Main Filter -->
+    <div class="spicer_section_20"></div>
+    <section id="Main_filter">
+        <div class="container">
+            <div class="Section_inner">
+                <div class="row">
+                <div class="Destination_section col-lg-12 col-md-12">
+                    <form action="" class="form_layers">
+                        <div class="row">
+                        <div class="choose_form Destination col-lg-2 col-md-12">
+                            <label for="Destination">Destination</label>
+                            <select name="Destination" class="selectpicker form-control" id="Destination">
+                                {% for country in countries %}
+                                    <option value="{{ country.country.name }}">{{ country.country.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="choose_form departure  col-lg-2 col-md-12">
+                            <label for="departure">Departure</label>
+                            <select name="departure" class="selectpicker form-control" id="departure">
+                                {% for city in cities %}
+                                    <option value="{{ city.city }}">{{ city.city }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="choose_form Departure_Date  col-lg-2 col-md-12">
+                            <label for="Departure_Date">Departure Date</label>
+
+                            <input class="form-control date_input " autocomplete="off" placeholder="DD/MM/YYYY" name="Departure_Date" id="depart_date" type="date">
+
+                        </div>
+                        <!-- გასარკვევია -->
+                        <div class="choose_form duration  col-lg-1 col-md-12">
+                            <label for="duration">duration</label>
+                            <select name="duration" class="selectpicker form-control" id="duration">
+                                {% for duration in durations %}
+                                    <option value="{{ duration.duration }}">{{ duration.duration }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="choose_form Travelers col-lg-3 col-md-12">
+                            <label for="Travelers">Number Or Travelers</label>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <span>Adult: </span> <span id="room"> 1</span>
+                                <span> Children :</span> <span id="adult"> 0</span>
+                                <span> Room :</span> <span id="rooms"> 1</span>
+                                </button>
+                                <div class="dropdown-menu keep-open" aria-labelledby="dropdownMenuButton"
+                                style="width: 285px;">
+                                <div class="dropdown-item">
+
+                                    <div class="rooms_dropdown_ranger">
+                                    <div class="rooms_choise_text">
+                                        <h6>Adults</h6>
+                                    </div>
+                                    <div class="calculation_choise_numb">
+                                        <div class="value-button" id="decrease" onclick="decreaseValue()"
+                                        value="Decrease Value">-</div>
+                                        <input type="number" id="number" value="1" disabled
+                                        style="background: transparent; color: black;" minlength="1" />
+                                        <div class="value-button" id="increase" onclick="increaseValue()"
+                                        value="Increase Value">+</div>
+                                    </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="dropdown-item">
+
+                                    <div class="rooms_dropdown_ranger">
+                                    <div class="rooms_choise_text">
+                                        <h6>Children</h6>
+                                    </div>
+                                    <div class="calculation_choise_numb">
+                                        <div class="value-button" id="decrease"
+                                        onclick="decreaseValuee()" value="Decrease Value">-</div>
+                                        <input type="number" id="numbers" value="0" disabled
+                                        maxlength="10"
+                                        style="background: transparent; color: black;"  />
+                                        <div class="value-button" id="increase"
+                                        onclick="increaseValuee()" value="Increase Value">+</div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown-item">
+
+                                    <div class="rooms_dropdown_ranger">
+                                    <div class="rooms_choise_text">
+                                        <h6>Room</h6>
+                                    </div>
+                                    <div class="calculation_choise_numb">
+                                        <div class="value-button" id="decrease"
+                                        onclick="decreaseValueee()" value="Decrease Value" >-</div>
+                                        <input type="number" id="numberss" value="1" disabled minlength="1"
+                                        maxlength="10"
+                                        style="background: transparent; color: black;" />
+                                        <div class="value-button" id="increase"
+                                        onclick="increaseValueee()" value="Increase Value">+</div>
+                                    </div>
+                                    </div>
+                                </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="submit_button  col-lg-2 col-md-12">
+                            <button type="submit" class="form-control">Actualized</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+                </div>
+
+            </div>
+            <div class="col-lg-12 col-md-12 " >
+                <form action="">
+                    <div class="sort archive_sort">
+                        <label for="Sort_BY">Sort</label>
+                        <select name="sort_price" class="form-control"  id="">
+                          <option value="">By Rating</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- en Main FIlter -->
+
+    <!-- main section_archive -->
+    <div class="spicer_section_20"></div>
+    <section id="main_section_archive">
+        <div class="container">
+            <div class="section">
+                <div class="row"  style="margin-left: 0;">
+                    <!-- left filter -->
+                    <div class="column_left col-lg-2 col-md-12">
+                        <div class="section_column_inner">
+                            <h4>Filter</h4>
+                            <div class="divider_main_color"></div>
+                            <div class="filter_section_rate">
+                                <form action="">
+                                    <div class="rating">
+                                        <legend>Start Rating</legend>
+                                        <div class="rating_inner">
+                                            <input type="checkbox" name="rating" class="form-group">
+                                            <label for="filter_rating">1 Star</label>
+                                        </div>
+                                        <div class="rating_inner">
+                                            <input type="checkbox" name="rating" class="form-group">
+                                            <label for="filter_rating">2 Star</label>
+                                        </div>
+                                        <div class="rating_inner">
+                                            <input type="checkbox" name="rating" class="form-group">
+                                            <label for="filter_rating">3 Star</label>
+                                        </div>
+                                            <div class="rating_inner">
+                                                <input type="checkbox" name="rating" class="form-group">
+                                                <label for="filter_rating">4 Star</label>
+                                            </div>
+                                            <div class="rating_inner">
+                                                <input type="checkbox" name="rating" class="form-group">
+                                                <label for="filter_rating">5 Star</label>
+                                            </div>
+                                    </div>
+
+                                    <!-- style -->
+                                    <div class="Pack_by_theme">
+                                        <legend>Packs By Themes </legend>
+                                        <div class="pack_by_theme_inner">
+                                            <select class="selectpicker" data-live-search="true">
+                                                {% for variety in varieties %}
+                                                <option data-tokens="ketchup mustard">{{ variety.pack_variety }}</option>
+                                                {% endfor %}
+                                              </select>
+                                              
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- result filter -->
+                    <div class="column_right col-lg-10 col-md-12">
+                        {% for pack, price in themed_pack_dict.items %}
+                        <div class="sub_main_column">
+                            <div class="row wrap_text">
+                                <div class="col-lg-7 col-md-12">
+                                    <div class="title">
+                                    <a href="{% url 'themedTour:themedsingle' pack.id %}"><h3>{{ pack.pack_name }}</h3></a>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="list_items">
+                                      <ul class="list_item_ul">
+                                          <li>
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>{{ pack.country.get }}</span>
+                                          </li>
+                                          <li>
+                                            <i class="fas fa-user"></i>
+                                            <span>{{ pack.number_of_travelers }} People</span>
+                                          </li>
+                                          <li>
+                                            <i class="far fa-clock"></i>
+                                            <span>{{ pack.number_of_days }} Days</span>
+                                          </li>
+                                          <li>
+                                            <i class="fas fa-hand-holding-usd"></i>
+                                            <span>{{ price }} EUR</span>
+                                          </li>
+                                      </ul>
+                                    </div>
+
+                                    <div class="description">
+                                        <p>{{ pack.description }}</p>
+                                    </div>
+                                    <div class="see_more">
+                                         <a href="{% url 'themedTour:themedsingle' pack.id %}"> See More</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-12">
+                                    <div class="right_side">
+                                        <div class="img">
+                                            <video width="400"  autoplay loop muted poster="{{ pack.small_video.url }}">
+                                                <source src="{{ pack.small_video.url }}" type="video/mp4">
+                                            </video>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- end result filter -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("Destination").value=localStorage.getItem("txtValue");
+document.getElementById("departure").value=localStorage.getItem("txtValue1");
+document.getElementById("depart_date").value=localStorage.getItem("txtValue2");
+document.getElementById("duration").value=localStorage.getItem("txtValue3");
+document.getElementById("number").value=localStorage.getItem("adult1");
+document.getElementById("room").innerHTML=localStorage.getItem("adult1");
+document.getElementById("numbers").value=localStorage.getItem("children1");
+document.getElementById("adult").innerHTML=localStorage.getItem("children1");
+document.getElementById("numberss").value=localStorage.getItem("room1");
+document.getElementById("rooms").innerHTML=localStorage.getItem("room1");
+
+    </script>
+    <!-- main section_archive -->
+{% endblock %}

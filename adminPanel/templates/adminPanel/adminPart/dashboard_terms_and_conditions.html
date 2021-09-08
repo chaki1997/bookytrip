@@ -1,0 +1,61 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+<div class="main_pack">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Terms and Conditions</h1>
+
+                    </div>
+
+                   
+                    <form action="{% url 'adminPanel:dashboardTermsAndConditions' %}" method="POST">
+                        
+                    {% csrf_token %}
+
+                     
+                    <table class="table table_terms" id="" >
+                        
+                            <tr>
+                                
+                                <th style="width: 25%;" ></th>
+                                <td >                                  
+                                    {{ form.text }}
+                                 </td>                             
+                               
+                            </tr>
+                            
+                     </table>
+                     
+                    <div class="row  save_Delete">
+
+                        <button type="submit" class="save button_inner ">SAVE</button>
+                    
+                    </div>
+                     
+                    </form>
+
+        
+                  
+                        </div> <!-- 		End of Container -->
+
+                                    </div>
+                 
+
+                                    <script>
+                                        ClassicEditor
+                                            .create( document.querySelector( '#editor' ) )
+                                            .catch( error => {
+                                                console.error( error );
+                                            } );
+                                    </script>
+                <!-- /.container-fluid -->
+
+            
+            <!-- End of Main Content -->
+
+ {% endblock %}

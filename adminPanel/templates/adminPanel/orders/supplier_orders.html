@@ -1,0 +1,162 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% block content %}
+{% load static %}
+<style>
+  .currentpay td {
+    text-transform: none;
+}
+
+#nothing{
+  text-align: center;
+}
+</style>
+                 <div class="container">
+                   
+                    <div class="row">
+                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
+                          <div class="filter_table_supplier">
+                            <!-- <select name="Hotels" class="select-table-filter form-control" data-table="order-table">
+                              <option value="">Accomodation</option>
+                              {% for accommodation in accommodations %}
+                                <option value="{{ accommodation }}">{{ accommodation }}</option>
+                              {% endfor %}
+                            </select> -->
+                            
+                            <select name="Suppliers" class="select-table-filter form-control" data-table="order-table" id="mySelector">
+                              <option value="">Supplier</option>
+                              <option value="" id="noFilter">no filter</option>
+                              {% for supplier in suppliers %}
+                                <option value="{{ supplier }}">{{ supplier }}</option>
+                              {% endfor %}
+                            </select>
+                            </div>
+
+                            
+                          <div class="persontitle">
+                            <h2>Current Payments</h2>
+                         </div>
+                         <!------------ USER TABLE ----------->
+                          
+                      <div class="boxsshadautab">
+                             <table class="table order-table" id="myTable">
+                                 <thead class="table_bgcolor">
+                                   <tr>
+                                     <th>ORDER NUMBER</th>
+                                     <th>ITEM</th>
+                                     <th>TITLE</th>
+                                     <th>START DATE</th>
+                                     <th>END DATE</th>
+                                     <th>Order Date</th>
+                                     <th>PRICE</th>
+                                     <th>Supplier</th>
+                                     <th></th>
+                                   </tr>
+                                 </thead>
+         
+                                 
+                                 <tbody>
+                                  <tr  colspan="5" id="nothing">
+                                    <td colspan="5" ></td>
+                                  </tr>
+                                 {% for hotel in hotels %}
+                                   <tr class="currentpay">
+                                   
+                                         <td>{{hotel.id}}</td>
+                                       {% if hotel.hotel.hotel_name.accommodation_type == '1' %}
+                                         <td>Hotel</td>
+                                       {% else %}
+                                        <td>Hotel</td>
+                                       {% endif %}
+
+                                         <td>{{hotel.hotel.hotel_name.name}}</td>
+                                         <td>{{hotel.hotel_order_start_date}}</td>
+                                         <td>{{hotel.hotel_order_end_date}}</td>
+                                         <td>10/25/2020</td>
+                                         <td>{{hotel.order_price}} EUR</td>
+                                         <td>{{hotel.hotel.hotel_name.user}}</td>
+                                       <td style="background: #562443;
+                                                   padding: 0;">
+                                           <form action="{% url 'adminPanel:supplierOrdersPost' 'unpaid' hotel.id %}" method="POST">
+                                               {% csrf_token %}
+                                               <button class="payOrders" type="submit" id="payOrders">pay</button>
+                                           </form>
+
+                                       </td>
+                                     </tr>
+                                 {% endfor %}
+                                 
+
+                                 </tbody>
+                            
+                                
+                             </table>
+                         </div>
+
+
+
+                            
+
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    let payOrders=document.getElementsByClassName('payOrders');
+                    for(let i=0; i<payOrders.length; i++){
+                      payOrders[i].addEventListener('click', function(e){
+    
+                      localStorage.setItem('selectedVal',$('#mySelector').val());
+                     })
+  
+   
+                    }
+                    var selectedVal = localStorage.getItem('selectedVal');
+                    if (selectedVal){
+                      $('#mySelector').val(selectedVal)
+                    }
+   
+  $(document).ready(function($) {
+    $('table').show();
+    var selection = $('#mySelector').val();
+    var dataset = $('#myTable tbody').find('tr');
+    // show all rows first
+    dataset.show();
+    // filter the rows that should be hidden
+    dataset.filter(function(index, item) {
+      return $(item).find('td:nth-child(8)').text().split(',').indexOf(selection) === -1;
+    }).hide();
+    if(selection===''){
+    alert()
+    dataset.filter(function(index, item) {
+      return $(item).find('td:nth-child(8)').text().split(',').indexOf(selection) === -1;
+    }).show();
+    }
+
+  $('#mySelector').change(function() {
+    $('table').show();
+    var selection = $(this).val();
+    var dataset = $('#myTable tbody').find('tr');
+    // show all rows first
+    dataset.show();
+    // filter the rows that should be hidden
+    dataset.filter(function(index, item) {
+      return $(item).find('td:nth-child(8)').text().split(',').indexOf(selection) === -1;
+    }).hide();
+    let nofilter=document.getElementById('noFilter')
+    if(nofilter){
+      dataset.show();
+    }
+    
+    
+  });
+});
+
+                </script>
+
+
+{% endblock %}
+
+
+
+
+

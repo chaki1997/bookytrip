@@ -1,0 +1,71 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="main_pack">
+                <div class="container-fluid">
+                    <!----------------------------------------------------------------------------------->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">change themed pack review</h1>
+                    </div>
+
+
+
+
+                    <!---------------------- change themed pack review--------------------------------------------> 
+                <form method="POST" action="{% url 'adminPanel:editThemedPackReview' themed_pack_review.id %}">
+                    {% csrf_token %}
+                    <div class="contentalladd carpack pack">
+
+                        <table>
+                            <thead>
+                               
+                                    <div class="row align-items-center change_username">
+                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+                                            {{ form }}
+                                        </div>
+                                    </div>
+                                
+                            </thead>
+                        </table>
+
+                        <div class="row  save_Delete">
+                            
+                            <button type="submit" class="save button_inner ">SAVE</button>
+                           
+                            <button type="button" class="Delete2  button_inner">Delete</button>
+    
+    
+                </div>
+                
+            </form>
+
+
+                        <!----------------------END themed pack review---------------------------------------------> 
+
+                        
+
+                        
+                    
+
+
+
+
+                    
+
+                        </div> <!-- 		End of Container -->
+
+                                    </div>
+                 <!---------------------------------------------------------------------------------------->
+
+                
+                <!-- /.container-fluid -->
+
+            
+            <!-- End of Main Content -->
+
+{% endblock %}
+
+
+

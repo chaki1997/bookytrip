@@ -1,0 +1,45 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<div class="main_pack">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Add Car</h1>
+                    </div>
+
+                 
+
+                    <!-- Content Row -->
+               
+<div class="acomodationSubPage">
+    <form action="{% url 'adminPanel:dashboardCarAdd' %}" class="form-group container-fluid" method="POST" enctype="multipart/form-data">
+         {% csrf_token %}   
+         <div class="contentalladd">
+            <div class="contentalladd carpack">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <div class="row align-items-center change_username">
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+                                    {{ form }}
+                                </div>
+                            </div>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+         <div class="row  save_Delete">
+                            
+            <button type="submit" class="save button_inner ">SAVE</button>
+
+        </div>
+    </form>
+
+</div>
+
+
+ {% endblock %}

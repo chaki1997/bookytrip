@@ -1,0 +1,859 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- fontawesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><!-- jQuery library -->
+    <!-- animate wow -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+      <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+     <!--  custom css -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom_css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom_css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom_css/intlTelInput.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom_css/metro-components.css' %}">
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- <link href="http://vitalets.github.io/combodate/prettify/prettify-bootstrap.css" rel="stylesheet"/> -->
+<!-- <link href="http://vitalets.github.io/combodate/bootstrap/css/bootstrap.css" rel="stylesheet"/> -->
+
+
+</head>
+
+
+<!-- Header -->
+    <header>
+        {% for message in messages %}
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert" id="error">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <p id="ajax_message">{{ message }}</p>
+        </div>
+      {% endfor %}
+        <div class="container">
+            <div class="Header_section">
+                <div class="row">
+                <div class="Header_left col-lg-9 col-md-6 col-4 ">
+                    <!-- mobile navbar -->
+                    <div class="hide_nav_bar">
+                        <div id="mySidenav" class="sidenav ">
+                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                            <a href="#">{% trans 'Home' %}</a>
+                            <a href="#">{% trans 'Who We Are' %}</a>
+                            <a href="#">{% trans 'FAQ' %}</a>
+                            <a href="#">{% trans 'Contact' %}</a>
+                            <li class="nav-item cart_item mobile_cart"  data-toggle="modal" data-target="#modal_aside_right">
+                                <i class="fas fa-cart-arrow-down"></i>
+                            </li>
+                          </div>
+                          
+                          <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+                    </div>
+                    <!-- end hidden navbar -->
+                    <div class="logo ">
+                        <h1>
+                            <a href="{% url 'homepage:homepage' %}"><img src="{% static 'images/LogoBooky.png' %}" alt=""></a>
+                        </h1>
+                    </div>
+                <!-- navbar -->
+                    <nav class="navbar navbar-expand-lg   ">
+                
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'homepage:homepage' %}">{% trans 'Home' %} <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="{% url 'components:about' %}">{% trans 'Who We Are' %}</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="{% url 'components:faq' %}">{% trans 'FAQ' %}</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="{% url 'components:contact' %}">{% trans 'Contact' %}</a>
+                            </li>                   
+                        </ul>
+                        </div>
+                    </nav>
+                </div>
+
+                <!-- right header -->
+                <div class="Header_right col-lg-3 col-md-6 col-8">
+                    <!-- language div -->
+                    <div class="language_row">
+                    <form action="{% url 'set_language' %}" method="post">
+                      {% csrf_token %}
+
+                      <select class="selectpicker" name="language" style="width: auto;" onchange="this.form.submit()">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+
+                            <option
+                              value="{{ language.code }}"
+                              {% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}
+                              data-content='<img src="../../static/images/gif/{{ language.code }}.gif"></span>
+                              <span style="display:inline-block; width:100px; padding-left: 10px; text-shadow:none">
+                                {{ language.code }}
+                                <!-- span style="color:#999;">&nbsp;[{{ language.code }}]</span -->
+                              </span>'>
+                              {{ language.code }}
+                            </option>
+
+                        {% endfor %}
+                      </select>
+                  </form>
+                    </div>
+
+                    
+
+                    <!-- pro -->
+                    <div class="navbar navbar-expand-lg ">
+                      
+                        <div class=" navbar-collapse" id="navbarNavDropdown">
+                          <ul class="navbar-nav">
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_supplier %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="{% static 'images/Bitmap.png' %}" alt="">
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{% url 'userProfile:supplierItems' %}">My Supplier Profile</a>
+                                    <a class="dropdown-item" href="{% url 'registration:logout' %}">Log Out</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item cart_item mobile_hidden"  data-toggle="modal" data-target="#modal_aside_right">
+                                    <i class="fas fa-cart-arrow-down"></i>
+                                </li>
+                                {% elif request.user.is_superuser %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="{% static 'images/Bitmap.png' %}" alt="">
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{% url 'adminPanel:dashboard' %}">My Profile</a>
+                                    <a class="dropdown-item" href="{% url 'registration:logout' %}">Log Out</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item cart_item mobile_hidden"  data-toggle="modal" data-target="#modal_aside_right">
+                                    <i class="fas fa-cart-arrow-down"></i>
+                                </li>
+                                {% else %}                      
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="{% static 'images/Bitmap.png' %}" alt="">
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{% url 'userProfile:customerProfile' request.user.id %}">My BookyTrip Profile</a>
+                                    <a class="dropdown-item" href="{% url 'userProfile:userReservation' %}">My Reservation</a>
+                                    <a class="dropdown-item" href="{% url 'userProfile:ratepartners' %}">My Booky Partners</a>
+                                    <a class="dropdown-item" href="{% url 'registration:logout' %}">Log Out</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item cart_item mobile_hidden"  data-toggle="modal" data-target="#modal_aside_right">
+                                    <i class="fas fa-cart-arrow-down"></i>
+                                </li>
+                                {% endif %}
+                            {% else %}
+                            <li class="nav-item logout" data-toggle="modal" data-target="#login_signUp">
+                                <div class="menu_logout_icon">
+                                    <div class="logout_inner">
+                                        <i class="fas fa-user-alt"></i>
+                                    </div>
+                                </div>
+                                </li>
+                                <li class="nav-item cart_item mobile_hidden"  data-toggle="modal" data-target="#modal_aside_right">
+                                    <i class="fas fa-cart-arrow-down"></i>
+                                </li>
+                            {% endif %}
+                         
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+      
+    </header>
+
+    <div class="modal fade" id="login_signUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <div id="button_sign_login">
+                    <button id="login_button" class="active" type="button">Login</button>
+                    <button id="sign_up_button" type="button">Sing Up</button>
+                </div>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <!-- ============ -->
+            <div class="modal-body">
+                <div id="login_form">
+                    <form  class="form_login" id="login_form_ajax">
+                        <div id="srff_login"> {% csrf_token %} </div>  
+                        <!-- <input type="text" name="username" class="form-control" placeholder="Email or Username">
+                        <input type="password" name="password" class="form-control" placeholder="password"> -->
+                        {{ login_form.email }}
+                        {{ login_form.password }}
+                        <div class="input-group-addon">
+                            <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                          </div>
+                        <span id="forgot_password">Forgot password?</span>
+                        <div id="ajax_alert">{% include 'adminPanel/messages.html' %}</div>
+                       
+                        
+                        <button type="submit" class="form-control login_form_button" id="login_form_button">Log In</button>
+                        <a class="form-control social_registration facebook_button">
+                            <i class="fab fa-facebook-f"></i>  Log in With Facebook
+                        </a>
+                        <a class="form-control social_registration google_button">
+                            <i class="fab fa-google-plus-g"></i>  Log in With Google
+                        </a>
+ 
+                    </form>
+                </div>
+                 
+                <div id="mypassword" style="display: none;" >
+                    <div> 
+                        <h6 class="pb-3">Send Email</h6>
+                    </div>
+                    <form  class="form_login" method="Post" action="{% url 'registration:signUp' %}" >
+                        {% csrf_token %}
+                         
+                        {{ login_form.email }}
+                       
+                        <button type="submit" class="form-control login_form_button mt-3" id="login_form_button">Send</button>
+                        <a class="form-control social_registration facebook_button">
+                            <i class="fab fa-facebook-f"></i>  Log in With Facebook
+                        </a>
+                        <a class="form-control social_registration google_button">
+                            <i class="fab fa-google-plus-g"></i>  Log in With Google
+                        </a>
+ 
+                    </form>
+                </div>
+                
+            <!-- ========= -->
+                <div id="registration_form" style="display: none;" >
+                    <form  id="registar_form" enctype="multipart/form-data">
+                        <div id="srff"> {% csrf_token %} </div>
+
+                        <div class="radio_btn">
+                            <button type="button" class="btn_choose_sent bg_btn_chose_1 addClass">
+                                <input type="radio" class="type_input" name="user_type" id="Customer"  value="customer" checked />Customer
+                            </button>
+
+                            <button type="button" class="btn_choose_sent bg_btn_chose_2">
+                                <input type="radio" class="type_input" name="user_type" id="supplier" value="supplier"/>Supplier
+                            </button>
+                        </div>
+
+                       
+                        <div class="username">
+                            {{ registration_form.name }}
+                            {{ registration_form.surname }}
+                        </div>
+                            {{ registration_form.email }}
+                            {{ registration_form.errors }}
+                        <div class="birth_day">
+                            <label for="Date_of_birth ">Date of birth </label>
+                            <!-- <input data-role="datepicker" id="date_inputtt"  data-value="01" name="date"  data-max-year="2003" > -->
+                            <input type="text" id="date_inputtt" data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date" value="Month">
+                            {{ registration_form.phone }}
+                        </div>
+                            {{ registration_form.picture }}
+                            {{ registration_form.password1 }}
+                            {{ registration_form.password2 }}
+
+                        <div class="form-group form-check iagree">
+                            <input type="checkbox" class="form-check-input" id="i_agree_to" required>
+                            <label for="i_agree_to">
+                                I agree to the <a href="{% url 'components:termsAndConditions' %}" target="_blank">Terms and Conditions</a> 
+                            </label>
+                        </div>
+                        <div id="ajax_alert_sign">{% include 'adminPanel/messages.html' %}</div>
+                        <button type="submit" class="form-control login_form_button" id="login_form_button">Sign Up</button>
+                        <a class="form-control social_registration facebook_button">
+                            <i class="fab fa-facebook-f"></i>  Log in With Facebook
+                        </a>
+                        <a class="form-control social_registration google_button">
+                            <i class="fab fa-google-plus-g"></i>  Log in With Google
+                        </a>
+                    </form>
+                </div>
+            </div>
+         
+          </div>
+        </div>
+      </div>
+        
+
+      <script>
+      
+      </script>
+    <div class="cart_full">
+   
+        <div id="modal_aside_right" class="modal fixed-right fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-aside" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Items In Your Cart</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                {% if request.user.is_authenticated %}
+
+                    
+
+
+                    <div class="modal-body">
+                        <div class="tab">
+                            <button class="tablinks active" id="acommodation_id" onclick="openCity(event, 'hotel')">Accomodation</button>
+                            <button id="Car_id" class="tablinks" onclick="openCity(event, 'car')">Car</button>
+
+                          </div>
+                          <div id="hotel" class="tabcontent"  style="display: block;">
+
+                            {%for item in cart %}
+                            <div class="items cart_table">
+
+                            {% if item.type == 'hotel' %}
+
+                            <form action="{% url 'cart:cartremove' item.product.id %}" method="Post" >
+                             {% csrf_token %}
+                                <input type="hidden" class="form_url" name="next" value="{{ request.path }}">
+                                    <div class="items">
+                                          <input type="submit" class="delete_checkitems" value="X" />
+                                     <div class="row">
+                                         <div class="col-md-6 left_side checkcart">
+                                             <img src=" https://i.pinimg.com/474x/4d/9d/d6/4d9dd658da8a62f5f9726c903af2be98--kerala-home-design-home-design-floor-plans.jpg">
+                                         </div>
+                                         <div class="col-md-6 right_side">
+                                             <h5 id="test">{{item.product.hotel_name}}</h5>
+                                             <hr>
+                                             <div class="description">
+                                                 <h6>Room Type</h6>
+                                                 <p class="desc_inner room_type">{{item.room_type}}</p>
+                                                <h6>Capacity</h6>
+                                                 <p class="desc_inner">{{item.capacity}} People</p>
+                                                 <h6>Price</h6>
+                                                 <p class="desc_inner">{{item.price}} $</p>
+                                             </div>
+                                         </div>
+                                     </div>
+                                    </div>
+
+
+                            </form>
+                                {% endif %}
+
+
+
+                            </div>
+                        {% endfor %}
+
+                          </div>
+
+<!--Car modal b-->
+                          <div id="car" class="tabcontent">
+
+                            {%for item in cart %}
+                            <div class="items cart_table">
+                            {% if item.type == 'car' %}
+
+
+
+                            <form action="{% url 'cart:cartremove' item.product.id %}" method="Post" >
+                             {% csrf_token %}
+                                <input type="hidden" class="form_url" name="next" value="{{ request.path }}">
+                                    <div class="items">
+                                          <input type="submit" class="delete_checkitems" value="X" />
+                                     <div class="row">
+                                         <div class="col-md-6 left_side checkcart">
+                                             <img src="{{ item.product.picture1.url }}">
+                                         </div>
+                                         <div class="col-md-6 right_side">
+                                             <h5 id="test">{{item.product.mark}}</h5>
+                                             <hr>
+                                             <div class="description">
+                                                <h6>Car Type</h6>
+                                                <p class="desc_inner room_type">{{ car.get_car_types_display }}</p>
+                                               <h6>Pick Up Location</h6>
+                                                <p class="desc_inner">{{ car.get_pick_up_location_display }} </p>
+                                                <h6>Number Of Sits</h6>
+                                                <p class="desc_inner">{{ car.number_of_sits }} </p>
+                                                <h6>Price</h6>
+                                                <p class="desc_inner">{{item.price}} $</p>
+                                            </div>
+                                         </div>
+                                     </div>
+                                    </div>
+
+
+                            </form>
+
+                            {% endif %}
+
+                            </div>
+                        {% endfor %}
+
+                          </div>
+
+
+
+
+                     <div class="modal-footer">
+
+                            <div class="total">
+                                <h6>Total: <span class="reservation_price" id="total_car_price">{{cart.cart_calcs.total_order_price_car}} $</span>
+                                            <span class="reservation_price" id="total_hotel_price">{{cart.cart_calcs.total_order_price_hotel}} $</span>
+                                </h6>
+
+
+                            </div>
+
+                            <div >
+                                <form action="{% url 'personalTour:personalCheckout' %}" method="GET" id="form_checkout">
+                                    <button  class="checkout" type="submit">Checkout</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    </form>
+
+                  <script>
+
+                  </script>
+                {% else %}
+                    <div class="modal-body">
+                        <div class="tab">
+                            <button class="tablinks active" id="acommodation_id" onclick="openCity(event, 'hotel')">Accomodation</button>
+                            <button  id="Car_id" class="tablinks" onclick="openCity(event, 'car')">Car</button>
+
+                          </div>
+                          <div id="hotel" class="tabcontent" style="display: block;">
+
+                            {%for item in cart %}
+                            <div class="items cart_table" >
+
+
+
+                                {% if item.type == 'hotel' %}
+
+                            <form action="{% url 'cart:cartremove' item.product.id %}" method="Post" >
+                             {% csrf_token %}
+                                <input type="hidden" class="form_url" name="next" value="{{ request.path }}">
+                                    <div class="items">
+                                          <input type="submit" class="delete_checkitems" value="X" />
+                                     <div class="row">
+                                         <div class="col-md-6 left_side checkcart">
+                                             <img src=" https://i.pinimg.com/474x/4d/9d/d6/4d9dd658da8a62f5f9726c903af2be98--kerala-home-design-home-design-floor-plans.jpg">
+                                         </div>
+                                         <div class="col-md-6 right_side">
+                                             <h5 id="test">{{item.product.hotel_name}}</h5>
+                                             <hr>
+                                             <div class="description">
+                                                 <h6>Room Type</h6>
+                                                 <p class="desc_inner room_type">{{item.room_type}}</p>
+                                                <h6>Capacity</h6>
+                                                 <p class="desc_inner">{{item.capacity}} People</p>
+                                                 <h6>Price</h6>
+                                                 <p class="desc_inner">{{item.price}} $</p>
+                                             </div>
+                                         </div>
+                                     </div>
+                                    </div>
+
+
+                            </form>
+                                {% endif %}
+
+
+
+                            </div>
+                        {% endfor %}
+
+                          </div>
+
+<!--Car modal b-->
+                          <div id="car" class="tabcontent">
+
+                            {%for item in cart %}
+                            <div class="items cart_table">
+                            {% if item.type == 'car' %}
+                                <form action="{% url 'cart:cartremove' item.product.id %}" method="Post" >
+                             {% csrf_token %}
+                                <input type="hidden" class="form_url" name="next" value="{{ request.path }}">
+                                    <div class="items">
+                                          <input type="submit" class="delete_checkitems" value="X" />
+                                     <div class="row">
+                                         <div class="col-md-6 left_side checkcart">
+                                             <img src="{{ item.product.picture1.url }}">
+                                         </div>
+                                         <div class="col-md-6 right_side">
+                                             <h5 id="test">{{item.product.mark}}</h5>
+                                             <hr>
+                                             <div class="description">
+                                                <h6>Car Type</h6>
+                                                <p class="desc_inner room_type">{{ car.get_car_types_display }}</p>
+                                               <h6>Pick Up Location</h6>
+                                                <p class="desc_inner">{{ car.get_pick_up_location_display }} </p>
+                                                <h6>Number Of Sits</h6>
+                                                <p class="desc_inner">{{ car.number_of_sits }} </p>
+                                                <h6>Price</h6>
+                                                <p class="desc_inner">{{item.price}} $</p>
+                                            </div>
+                                         </div>
+                                     </div>
+                                    </div>
+
+
+                            </form>
+
+                            {% endif %}
+
+                            </div>
+                        {% endfor %}
+                          </div>
+
+
+
+
+
+                        <div class="modal-footer">
+
+
+                             <div class="total">
+                                <h6>Total: <span class="reservation_price" id="total_car_price">{{cart.cart_calcs.total_order_price_car}} $</span>
+                                            <span class="reservation_price" id="total_hotel_price">{{cart.cart_calcs.total_order_price_hotel}} $</span>
+                                </h6>
+
+
+                            </div>
+                            <div>
+                                <form action="" method="" id="form_checkout">
+                                <button  class="login_checkout" type="button" data-toggle="modal"
+                                         data-target="#login_signUp">Checkout</button>
+                                </form>
+                            </div>
+
+
+                    </div>
+                    </div>
+
+                    </form>
+              
+                {% endif %}
+            </div> <!-- modal-bialog .// -->
+          </div> <!-- modal.// -->
+          </div>
+
+    <!-- Header -->
+{% block content %}
+{% endblock %}
+
+<footer>
+    
+        <div class="container">
+            <div class="footer_inner">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                        <div class="logo">
+                            <img src="{% static 'images/footerlogo.png' %}" alt="">
+                        </div>
+                        <div class="description">
+
+                           <p>{{ footer.description }}</p>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                       <div class="footer_menu">
+                           <h3> Main</h3>
+                           <ul>
+                               <li><a href="{% url 'components:privacyPolicy' %}">Privacy Policy</a></li>
+                               <li><a href="{% url 'components:termsAndConditions' %}">Terms and Conditions</a></li>
+
+                           </ul>
+                       </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                        <div class="footer_socials">
+                            <h3> Socials</h3>
+                            <div class="footer_inner_socials">
+                                <div class="socials_content">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                <div class="socials_content">
+                                    <i class="fab fa-instagram"></i>
+                                </div>
+                                <div class="socials_content">
+                                    <i class="fab fa-youtube"></i>
+                                </div>
+                            </div>
+                    </div>
+                    <address>
+                        <ul>
+                            <li><a href="">Address: <span>{{ footer.address }}</span></a></li>
+                            <li><a href="MailTo:">Mail: <span>{{ footer.email }}</span></a></li>
+                            {% if request.LANGUAGE_CODE == 'ka' %}
+                            <li><a href="tel: 599 25 5 25 ">Phone: <span>{{ footer.phoneKA }}</span></a></li>
+                            {% elif request.LANGUAGE_CODE == 'en' %}
+                            <li><a href="tel: 599 25 5 25 ">Phone: <span>{{ footer.phoneEN }}</span></a></li>
+                            {% elif request.LANGUAGE_CODE == 'fr' %}
+                            <li><a href="tel: 599 25 5 25 ">Phone: <span>{{ footer.phoneFR }}</span></a></li>
+                            {% elif request.LANGUAGE_CODE == 'az' %}
+                            <li><a href="tel: 599 25 5 25 ">Phone: <span>{{ footer.phoneAZ }}</span></a></li>
+                            {% elif request.LANGUAGE_CODE == 'de' %}
+                            <li><a href="tel: 599 25 5 25 ">Phone: <span>{{ footer.phoneDE }}</span></a></li>
+                            {% elif request.LANGUAGE_CODE == 'es' %}
+                            <li><a href="tel: 599 25 5 25 ">Phone: <span>{{ footer.phoneES }}</span></a></li>
+                            {% elif request.LANGUAGE_CODE == 'hy' %}
+                            <li><a href="tel: 599 25 5 25 ">Phone: <span>{{ footer.phoneHY }}</span></a></li>
+                            {% elif request.LANGUAGE_CODE == 'it' %}
+                            <li><a href="tel: 599 25 5 25 ">Phone: <span>{{ footer.phoneIT }}</span></a></li>
+                            {% elif request.LANGUAGE_CODE == 'ru' %}
+                            <li><a href="tel: 599 25 5 25 ">Phone: <span>{{ footer.phoneRU }}</span></a></li>
+                            {% endif %}
+                        </ul>
+                    </address>
+                    
+                </div>
+            </div>
+            <hr>
+            <div class="make_with">
+                © All rights reserved
+            </div>
+        </div>
+    </footer>
+
+
+    
+    <script>
+        (function(d, w, c) {
+            w.ChatraID = 'aYCfG8NosNM5oz2E8';
+            var s = d.createElement('script');
+            w[c] = w[c] || function() {
+                (w[c].q = w[c].q || []).push(arguments);
+            };
+            s.async = true;
+            s.src = 'https://call.chatra.io/chatra.js';
+            if (d.head) d.head.appendChild(s);
+        })(document, window, 'Chatra');
+    </script>
+
+    <!-- footer -->
+
+    
+    <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+
+    let input=document.getElementsByClassName('type_input');
+    for(let i=0; i<input.length; i++){
+        input[0].addEventListener('click', function(e){
+            if(e.target.checked==true){
+            input[0].parentElement.classList.add('addClass');
+            input[1].parentElement.classList.remove('addClass');
+
+            console.log(e.currentTarget)
+            }
+
+        })
+        input[1].addEventListener('click', function(e){
+            if(e.target.checked==true){
+            input[1].parentElement.classList.add('addClass');
+            input[0].parentElement.classList.remove('addClass');
+            console.log(e.currentTarget)
+            }
+
+        })
+       
+    }
+
+    </script>
+
+ 
+
+ 
+ 
+<script src="{% static 'js/manual/intlTelInput.js' %}"></script>
+<script src="{% static 'js/manual/sponsor.js' %}"></script>
+ 
+<script src="{% static 'js/main.js' %}" ></script>
+ 
+<!-- typewritter -->
+<script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+<!-- Latest compiled JavaScript -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<script src="{% static 'js/manual/choose_number.js' %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+ 
+<!--<script src="{% static 'js/manual/addtocart.js' %}"></script>-->
+<script src="{% static 'js/metro.js' %}" ></script>
+
+<!-- <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script> -->
+
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous"></script> -->
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+
+<script src="http://vitalets.github.io/combodate/combodate.js"></script>
+<script src="http://vitalets.github.io/combodate/momentjs/moment.min.2.5.0.js"></script>
+ 
+<script>
+    $(function(){
+      var dtToday = new Date();
+      
+      var month = dtToday.getMonth() + 1;
+      
+      var day = dtToday.getDate();
+      var year = dtToday.getFullYear();
+      if(month < 10)
+          month = '0' + month.toString();
+      if(day < 10)
+          day = '0' + day.toString();
+      
+      var maxDate = year + '-' + month + '-' + day;
+  
+      // or instead:
+      // var maxDate = dtToday.toISOString().substr(0, 10);
+  
+      
+      $('.date_input').attr('min', maxDate);
+  });
+ 
+  document.getElementById('textfield7').onchange = function () {
+
+    document.getElementById('textfield8').setAttribute('min',  this.value);
+ 
+};
+$('#textfield7').on('change', function()
+{
+    var checkInDate = $(this).val();
+    var split = checkInDate.split('-');
+    var tomorrow = new Date(split[0], split[1]-1, parseInt(split[2])+2, 0,0,0,0);
+    console.log(tomorrow)
+    $('#textfield8')[0].valueAsDate = tomorrow;
+    let re=
+    $('#textfield8')[0].attr('min', tomorrow);
+    console.log(re)
+});
+
+  </script>
+
+  <script>
+      $(document).ready(function() {
+    $("#login_form_ajax a").on('click', function(event) {
+        event.preventDefault();
+        if($('#password').attr("type") == "text"){
+            $('#password').attr('type', 'password');
+            $('#login_form_ajax i').addClass( "fa-eye-slash" );
+            $('#login_form_ajax i').removeClass( "fa-eye" );
+        }else if($('#password').attr("type") == "password"){
+            $('#password').attr('type', 'text');
+            $('#login_form_ajax i').removeClass( "fa-eye-slash" );
+            $('#login_form_ajax i').addClass( "fa-eye" );
+        }
+    });
+});
+  </script>
+<script>
+    $(function(){
+    $('#date_inputtt').combodate({
+      
+   value: null, 
+   minYear:1925, 
+   maxYear: new Date().getFullYear()-18,
+
+   firstItem: 'name',
+   errorClass: null,   
+   customClass: 'form-control',
+
+    });  
+    
+    $('.year').change(function(){
+        $(this).parent('.combodate').find('.month').show();
+    });
+    
+    $('.month').change(function(){
+        $(this).parent('.combodate').find('.day').show();
+    });
+    
+});
+</script>
+
+<!-- 
+
+    <script>
+        let error=document.getElementById('error');
+        let error_registration=document.getElementById('error_registration');
+        console.log(error)
+        if(error){
+            $('#login_signUp').modal("show");
+            let login_but=document.getElementById('login_button')
+            let regustbut=document.getElementById('sign_up_button')
+            let login_form=document.getElementById('login_form')
+            let regist_form=document.getElementById('registration_form')
+            login_form.style.display="block";
+            regist_form.style.display="none";
+          
+            login_but.classList.add('active');
+            regustbut.classList.remove('active')
+
+
+
+        }
+        else if(error_registration){
+            
+            $('#login_signUp').modal("show");
+            let login_but=document.getElementById('login_button');
+            let regustbut=document.getElementById('sign_up_button');
+            let login_form=document.getElementById('login_form').style.display="none";
+            let regist_form=document.getElementById('registration_form').style.display="none";
+
+
+
+    
+        }
+//   registraion error
+
+
+       
+    </script> -->
+
+     
+</body>
+</html>

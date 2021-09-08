@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-29 17:48+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: components/templates/components/about.html:16
+msgid "About Us"
+msgstr "ჩვენ შესახებ"
+
+#: components/templates/components/about.html:48
+#: homepage/templates/homepage/homepage.html:237
+msgid "Why Us"
+msgstr "რატომ ჩვენ"
+
+#: components/templates/components/contact.html:10
+msgid "Contact Us"
+msgstr "დაგვიკავშირდით"
+
+#: components/templates/components/faq.html:11
+#: components/templates/components/faq.html:75
+msgid "Pre-Sale Questions"
+msgstr "წინასწარ დასმული კითხვები"
+
+#: components/templates/components/faq.html:40
+#: components/templates/components/faq.html:76
+msgid "Other Types"
+msgstr "სხვა ტიპები"
+
+#: components/templates/components/faq.html:68
+msgid "Ask Question"
+msgstr "პასუხები"
+
+#: homepage/templates/homepage/base.html:33
+#: homepage/templates/homepage/base.html:52
+msgid "Home"
+msgstr "მთავარი"
+
+#: homepage/templates/homepage/base.html:34
+#: homepage/templates/homepage/base.html:55
+msgid "Who We Are"
+msgstr "ჩვენ შესახებ"
+
+#: homepage/templates/homepage/base.html:35
+#: homepage/templates/homepage/base.html:58
+msgid "FAQ"
+msgstr "ხდკ"
+
+#: homepage/templates/homepage/base.html:36
+#: homepage/templates/homepage/base.html:61
+msgid "Contact"
+msgstr "კონტაქტი"
+
+#: homepage/templates/homepage/homepage.html:379
+msgid "INTERESTING FACTS"
+msgstr "საინტერესო ფაქტები"
+
+#: homepage/templates/homepage/homepage.html:381
+msgid "About Georgia"
+msgstr "საქართველოს შესახებ"
+
+#: personalTour/templates/personalTour/accommodation_single.html:218
+#: personalTour/templates/personalTour/single_car.html:129
+#: themedTour/templates/themedTour/pack_single.html:192
+msgid "Write Review"
+msgstr "შეფასების დაწერა"
+
+#: userProfile/templates/userProfile/profile.html:15
+#: userProfile/templates/userProfile/rate_booky_partners.html:16
+#: userProfile/templates/userProfile/reservation.html:18
+msgid "My BookyTrip Profile"
+msgstr "ჩემი პროფილი"
+
+#: userProfile/templates/userProfile/profile.html:28
+#: userProfile/templates/userProfile/rate_booky_partners.html:30
+#: userProfile/templates/userProfile/reservation.html:31
+msgid "My Reservation"
+msgstr "ჩემი რეზერვაციები"
+
+#: userProfile/templates/userProfile/profile.html:42
+#: userProfile/templates/userProfile/rate_booky_partners.html:43
+#: userProfile/templates/userProfile/reservation.html:44
+msgid "Rate Booky Partners"
+msgstr "შეაფასეთ Booky პარტნიორები"

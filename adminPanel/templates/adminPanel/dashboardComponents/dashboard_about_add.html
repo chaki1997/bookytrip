@@ -1,0 +1,45 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<div class="main_pack">
+    <style>
+        table#add {
+            width: 68%;
+        }
+    </style>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Add About Page Content</h1>
+        </div>
+
+        
+
+        <!-- Content Row -->
+        <form method="POST" action="" enctype="multipart/form-data"> 
+            {% csrf_token %}
+            
+            <table class="table" id="add" >
+                <thead>
+                    <tr>
+                        <th >
+                            {{ form }}
+                        </th>
+                    </tr>
+                </thead>
+                
+            </table>
+
+            <div class="row  save_Delete">
+                
+            <button type="submit" class="save button_inner ">SAVE</button>   
+
+            </div>
+                
+        </form>
+    </div>           
+</div> 
+
+{% endblock %}

@@ -1,0 +1,257 @@
+{% extends 'userProfile/base_supplier.html' %}
+{% block content %}
+{% load static %}
+<script>
+    $(function(){
+        $('.stars').stars();
+        
+    });
+</script>
+<div class="addallcarand col-md-12 col-sm-12">
+    <div class="addallbuttonbook">
+        <a  class="btn btn-link collapsed buttonmy_items addbuttonall"  href="{% url 'userProfile:supplierAddPack' %}"> Add Themed Pack </a>
+    </div>
+    
+    <div class="addallbuttonbook">
+        <a class="btn btn-link collapsed buttonmy_items addbuttonall"  href="{% url 'userProfile:supplierAccommodationAdd' %}"> Add Accommodation </a>
+    </div>
+
+    <div class="addallbuttonbook">
+        <a class="btn btn-link collapsed buttonmy_items addbuttonall"  href="{% url 'userProfile:supplierCarAdd' %}"> Add Car </a>
+    </div>
+</div>
+                <!-- Begin Page Content -->
+                <div class="container-fluid my_item" >
+                    <!----------------------------------------------------------------------------------->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+                    </div>
+
+
+                    <!-------------------ORDERED THEMED PACKS---------------------------> 
+    <div class=" " id="accordion">
+        <div class="collapse_headeing">
+            <div class="" id="headingOne">
+                {% if themed_packs %}
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Themed Packs
+                    </button>
+                {% endif %}
+            </div>
+            <div class="" id="headingTwo">
+            {% if apartments or accommodations %}
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Accommodations
+                    </button>
+            {% endif %}
+            </div>
+            <div class="" id="headingThree">
+                {% if cars %}
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Cars
+                    </button>
+                {% endif %}
+        </div>
+            
+    </div>
+
+        {% if themed_packs %}    
+           
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <table class="table table-striped " >
+                        <div class="row">
+                        <thead>
+                        <tr>
+                    
+                            <th class="AcomodationHeader">MY ITEMS</th> 
+                            <th class="rate_star">
+                        <span>Raiting</span>
+                            <span class="hidden_star">({{ avarange_themed_pack_stars }})</span>
+                            </th> 
+                            <th >Price</th>
+                            <th>Start date</th>
+                            <th>End date</th>
+                            <th></th>
+                            
+                        </tr>
+                        </thead>
+                    
+                        <tbody >
+                        {% for pack,star in themed_packs.items %}
+                            <tr>
+                            
+                                <td class=""><a href="{% url 'userProfile:supplierItem' pack.id %}">{{ pack.pack_name }}</a></td>
+                            
+                                <td class="rate_star">
+                                <span class="stars" data-rating="{{ star }}" data-num-stars="5" ></span>
+                                </td>
+                                <td>{{ pack.price }}$</td>
+                                <td>{{ pack.start_date }}</td>
+                                <td>{{ pack.end_date }}</td>
+                                <td><a href="{% url 'userProfile:supplierItem' pack.id %}"> Edit </a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                </div>
+                </div>
+            {% endif %}
+   
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+                {% if accommodations %}
+                    <h5 class="child_accomodation">Hotels</h5>
+                    <table class="table table-striped " >
+                    <div class="row">
+                    <thead>
+                    <tr>
+                    
+                        <th class="AcomodationHeader">MY ITEMS</th> 
+                        <th class="rate_star">
+                        
+                            <span >Raiting</span>
+                            <span class="hidden_star">({{ avarange_accommodation_stars }})</span>
+                            
+                        </th> 
+                        <th>Min.Price</th>
+                        <th>Num.Of.Rooms</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                
+                    <tbody >
+                    
+                    {% for accommodation,options in accommodations.items %} 
+                        <tr>
+                        
+                            <td class="">
+                                <a href="{% url 'userProfile:supplierHotel' accommodation.id %}">{{ accommodation.name }}</a>
+                            </td>
+                            <td class="rate_star">
+                                
+                            <span class="stars" data-rating="{{ options.0 }}" data-num-stars="5" ></span>
+                            </td>
+                            <td>{{ accommodation.price }}$</td>
+                            <td>{{ options.1.number_of_rooms }}</td>
+                            <td><a href="{% url 'userProfile:supplierHotel' accommodation.id %}"> Edit</a> </td>
+                            <td><a href="{% url 'userProfile:supplierHotelAdd' accommodation.id %}">Add Rooms</a></td>
+
+                        </tr>
+                    {% endfor %}
+                    
+                    </tbody>
+                    </table>
+                {% endif %}
+
+                {% if apartments %}
+                <h5 class="child_accomodation">Apartment</h5> 
+                <table class="table table-striped" >
+                <div class="row">
+                <thead>
+                <tr>
+                   
+                    <th class="AcomodationHeader">MY ITEMS</th> 
+                    <th class="rate_star">
+                    
+                        <span >Stars</span>
+                        <span class="hidden_star">({{ avarange_accommodation_stars }})</span>
+                        
+                    </th> 
+                    <th>Price</th>
+                    <th>Type of apartment</th>
+                    <th>Capacity</th>
+                    <th></th>
+                </tr>
+                </thead>
+            
+                <tbody >
+                {% for apartment,options in apartments.items %} 
+                    <tr>
+                      
+                            <td class=""><a href="{% url 'userProfile:supplierApartment' apartment.id %}">{{ apartment.name }}</a></td>
+                            <td class="rate_star">
+                            
+                            <span class="stars" data-rating="{{ options.0 }}" data-num-stars="5" ></span>
+                        </td>
+                        <td>{{ apartment.price }}$</td>
+                        <td>{{ options.1.choice_of_apartment }}</td>
+                        <td>{{ options.1.capacity }}</td>
+                            <td><a href="{% url 'userProfile:supplierApartment' apartment.id %}">Edit</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+                {% endif %}
+            </div>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    <table class="table table-striped " >
+                        <div class="row">
+                        <thead>
+                        <tr>
+                          
+                            <th class="AcomodationHeader">MY ITEMS</th> 
+                            <th class="rate_star">
+                                
+                                <span  >Raiting</span>
+                                <span class="hidden_star">({{ avarange_car_stars }})</span>
+                            </th> 
+                            <th >Price</th>
+                            <th>Car Types</th>
+                            <th>Num.Of.Sits</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                    
+                        <tbody >
+                        {% for car,start in cars.items %}
+                            <tr>
+                              
+                                    <td class=""><a href="{% url 'userProfile:supplierCar' car.id %}">{{ car.mark }}</a></td>
+                                    <td class="rate_star">
+                                    <span class="stars" data-rating="{{ star }}" data-num-stars="5" ></span>
+                                    </td>
+                                    <td>{{ car.price }}</td>
+                                    <td>{{ car.get_car_types_display }}</td>
+                                    <td>{{ car.number_of_sits }}</td>
+                                    <td><a href="{% url 'userProfile:supplierCar' car.id %}">Edit</a></td>
+                                    <td class="delete" onclick="myFunction()" >Delete</td>
+                                
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                </div>
+                </div>
+
+
+   
+
+                            <!---------------- END ORDERED THEMED PACKS----------------->
+
+                        </div>       
+                         <!-- 		End of Container -->
+
+                            <script>
+                   $.fn.stars = function() {
+    return $(this).each(function() {
+        const rating = $(this).data("rating");
+        const numStars = $(this).data("numStars");
+        const fullStar = '<i class="fas fa-star"></i>'.repeat(Math.floor(rating));
+        const halfStar = (rating%1!== 0) ? '<i class="fas fa-star-half-alt"></i>': '';
+        const noStar = '<i class="far fa-star"></i>'.repeat(Math.floor(numStars-rating));
+        $(this).html(`${fullStar}${halfStar}${noStar}`);
+    });
+}
+                            </script>
+
+
+{% endblock %}
+
+
+
+
+

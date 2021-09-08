@@ -1,0 +1,283 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'js/dist/js-booking-calendar.css' %}"/>
+<script src="{% static 'js/dist/js-booking-calendar.js' %}"></script>
+                <!-- Begin Page Content -->
+                <div class="main_pack">
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Hotel: {{ accomodation.name }}</h1>
+                    </div>
+
+                    <!-- Content Row -->
+<div class="acomodationSubPage">
+    <form method="POST" action="{% url 'adminPanel:dashboardAccommodationApartmentEdit' accomodation.id %}" class="form-group container-fluid" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        
+
+        <div class="contentalladd">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <div class="row align-items-center change_username">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+                                {{ accomodation_form }}
+                            </div>
+                        </div>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+
+
+    <div class="row  save_Delete">
+                                
+        <button type="submit" class="save col-xl-2 col-lg-3 col-md-3 col-sm-4 ">SAVE</button>
+
+    </div>
+
+    
+    </form>
+
+</div>
+
+
+<div class="acomodationSubPage">
+    {% for form in hotel_tuple %}
+    <form method="POST" action="{% url 'adminPanel:dashboardHotelEdit' accomodation.id %}" 
+    class="form-group container-fluid" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="contentalladd">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <div class="row align-items-center change_username">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+                                <tr>
+                                    <th>  {{ form.room_type.label }}</th>
+                                    <td>  {{ form.room_type }}   </td>
+                                </tr>
+                                <tr>
+                                    <th>   {{ form.bed_type.label }}</th>
+                                    <td>   {{ form.bed_type }}   </td>
+                                </tr>
+                                <tr>
+                                    <th>  {{ form.family.label }}</th>
+                                    <td>    {{ form.family }}   </td>
+                                </tr>
+                                <tr>
+                                    <th>  {{ form.description.label }}</th>
+                                    <td>    {{ form.description }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>  {{ form.price.label }}</th>
+                                    <td>  {{ form.price }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>    {{ form.WiFi_connection.label }}</th>
+                                    <td>   {{ form.WiFi_connection }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>      {{ form.parking.label }}</th>
+                                    <td>   {{ form.parking }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>   {{ form.bar.label }}</th>
+                                    <td>    {{ form.bar }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>   {{ form.pool.label }}</th>
+                                    <td>   {{ form.pool }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>  {{ form.number_of_rooms.label }}</th>
+                                    <td>   {{ form.number_of_rooms }}  </td>
+                                </tr>
+                                <tr id="picture_1">
+                                    <th>   {{ form.picture1.label }}</th>
+                                    <td >   {{ form.picture1 }}  </td>
+                                </tr>
+                                <tr id="picture_2">
+                                    <th>   {{ form.picture2.label }}</th>
+                                    <td>   {{ form.picture2 }}  </td>
+                                </tr>
+                                <tr id="picture_3">
+                                    <th>   {{ form.picture3.label }}</th>
+                                    <td>    {{ form.picture3 }} </td>
+                                </tr>                         
+                                <tr id="picture_4">
+                                    <th>    {{ form.picture4.label }}</th>
+                                    <td>    {{ form.picture4 }} </td>
+                                </tr>                         
+                                <tr id="picture_5">
+                                    <th> {{ form.picture5.label }}</th>
+                                    <td>   {{ form.picture5 }} </td>
+                                </tr>                         
+
+                            </div>
+                        </div>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+    <div class="row  save_Delete">
+                                
+        <button type="submit" class="save col-xl-2 col-lg-3 col-md-3 col-sm-4 ">SAVE</button>
+
+    </div>
+
+    
+    </form>
+    {% endfor %}
+
+</div>
+
+    <div class="col-md-4">
+        <h6 class="calendar_title">Calendar Filter</h6>
+    <form method='POST' action="{% url 'adminPanel:dashboardHotelSingle' accomodation.id %}#caledendar_input" id="caledendar_input">
+        {% csrf_token %}
+        <input id="textfield9" name='calendar_start_date' class="form-control" type="date" id value="">
+        <input id="textfield10" name='calendar_end_date' class="form-control" type="date" value="">
+        <button type='submit' id="submitclick" class="btn btn-primary" >Send</button>
+    </form>
+    </div>
+
+        <div class="gantt-target"></div>
+  
+</div>
+{% for room, dates in calendar_rooms.items %}
+
+{{ dates.0.0|date:"d-m-Y" }}
+{{ dates.1.1|date:"d-m-Y" }}
+
+{% endfor %}
+
+
+<script>
+
+    function initGantt(properties, init_scroll_position = null) {
+        console.log('properties', properties);
+        var gantt_chart = new Gantt(".gantt-target", properties, {
+
+            on_click: function (task) {
+                console.log(task);
+            },
+            on_date_change: function (task, start, end, scrollXPosition) {
+                console.log(scrollXPosition);
+            },
+            on_progress_change: function (task, progress) {
+                console.log(task, progress);
+            },
+            on_view_change: function (mode) {
+                console.log(mode);
+            },
+            on_date_added: function (start, end, property, propertyIdx, xPosition, yPosition) {
+                console.log('start', start);
+                console.log('end', end);
+                console.log('property', property);
+                console.log('propertyIdx', propertyIdx);
+                console.log('xPosition', xPosition);
+                console.log('yPosition', yPosition);
+                let props = properties;
+                props[propertyIdx]['bookings'].push({
+                    id: '100',
+                    start: new date(),
+                    end: "2022-01-01",
+                    name: 'Foodddddddddddddddddd',
+                    description: 'Beschreibung',
+                })
+                initGantt(props, xPosition)
+
+            },
+            view_mode: 'Day',
+            language: 'en',
+            start_date: '{{ calendar_start_date }}',
+            end_date: "{{ calendar_end_date }}",
+            show_label: true,
+            bar_corner_radius: 0,
+            column_width: 10,
+            init_scroll_position: init_scroll_position,
+            custom_click_on_bar: function (task) {
+                console.log('custom_click_on_bar', task)
+            }
+        });
+    }
+
+    var properties = [ 
+    {% for room, dates in calendar_rooms.items %}
+        {
+            name: '{{ room.room_number }}',
+
+            bookings: [
+            
+                {
+                    start: '{{ dates.0.0|date:"Y-m-d" }}',
+                    end: '{{ dates.1.1|date:"Y-m-d" }}',
+                    name: '',
+                    description: 'Beschreibung',
+                },
+            
+            
+            ]
+            
+        },
+        {% endfor %}
+        
+    ];
+
+    initGantt(properties);
+        let count=0
+    let bar=document.querySelectorAll('.gantt .bar');
+    bar.forEach(items=>{
+        let colors = ['Aqua', 'Coral'];
+        console.log(items)
+        items.style.fill=colors[count];
+        if(count<colors.length-1){
+            count++
+        }
+        else{
+            count=0
+        }
+    })
+   
+    </script>
+           <!-- <script>
+               let picture1=document.getElementById('picture_1')
+               let picture_2=document.getElementById('picture_2')
+               let picture_3=document.getElementById('picture_3')
+               let picture_4=document.getElementById('picture_4')
+               let picture_5=document.getElementById('picture_5')
+               let id_picture1=document.getElementById("id_picture1")
+                let id_picture2=document.getElementById("id_picture2")
+                let id_picture3=document.getElementById("id_picture3")
+                let id_picture4=document.getElementById("id_picture4")
+                let id_picture5=document.getElementById("id_picture5")
+               console.log(picture1.children[1].children[0].innerHTML[0]);
+              
+               if(picture1.children[1].children[0].innerHTML[0]!='i'){
+                alert()
+               }
+               if(picture_2.children[1].children[0].innerHTML[0]!='i'){
+                alert()
+               }
+               if(picture_3.children[1].children[0].innerHTML[0]!='i'){
+                alert()
+               }
+               if(picture_4.children[1].children[0].innerHTML[0]!='i'){
+                alert()
+               }
+               if(picture_5.children[1].children[0].innerHTML[0]!='i'){
+                picture_5.style.display="none";
+                id_picture4.addEventListener('change', function(){
+                    picture_5.style.display="revert";
+                })
+               }
+           </script> -->
+                           
+{% endblock %}

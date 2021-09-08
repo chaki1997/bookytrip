@@ -1,0 +1,103 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Hotels</h1>
+                        <div class="add">
+                            <a href="{% url 'adminPanel:dashboardAccomodationAdd' %}">Add Accomodation</a>
+                        </div>
+                    </div>
+
+                 
+
+                    <!-- Content Row -->
+                  <div class="filters">
+                    <select class  ="form-control" name="state" id="maxRows">
+						 
+						 
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="70">70</option>
+                        <option value="100">100</option>
+                        <option value="5000">Show ALL Rows</option>
+                       </select>
+                       <div class="tb_search">
+                        <input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
+                                </div>
+                  </div>
+
+
+<!------------------------------------------------------------------------------>
+                  <table class="table " id= "table-id">
+                      <div class="row">
+                    <thead>
+                        <tr>
+                            <th style="width: 35px;">
+                               
+                            </th>
+                            <th class="AcomodationHeader">Acomodation</th> 
+                            <th ></th> 
+                            <th ></th> 
+                            <th ></th> 
+                        </tr>
+                    </thead>
+                    <tbody >
+                    {% for hotel in hotels %}
+                        {% if hotel.id in hotel_notification_tuple %}
+                            <tr>
+                                <td class=""></td>
+                                <td class="">
+                                    <a href="{% url 'adminPanel:dashboardHotelSingle' hotel.id %}">{{ hotel.name }}</a>
+                                </td>
+                                <td> <span class="new_inner" > NEW</span></td>
+                                <td class="delete confirmation" > 
+                                    <a href="{% url 'adminPanel:dashboardHotelDelete' hotel.id %}">Delete Items </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td class=""></td>
+                                <td class="">
+                                    <a href="{% url 'adminPanel:dashboardHotelSingle' hotel.id %}">{{ hotel.name }}</a>
+                                </td>
+                                <td></td>
+                                <td class="delete confirmation" >
+                                     <a href="{% url 'adminPanel:dashboardHotelDelete' hotel.id %}">Delete Items </a> 
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                    </table>
+                <!---------------------------------------------------------------------------->
+
+                        <!--		Start Pagination -->
+                        <div class='pagination-container'>
+                            <nav>
+                            <ul class="pagination">
+                            <!--	Here the JS Function Will Add the Rows -->
+                            </ul>
+                            </nav>
+                        </div>
+                        <!-- <div class="rows_count">Showing 11 to 20 of 91 entries</div> -->
+
+                        </div> <!-- 		End of Container -->
+
+                                    </div>
+                 
+
+                
+                <!-- /.container-fluid -->
+
+            
+            <!-- End of Main Content -->
+
+{% endblock %}

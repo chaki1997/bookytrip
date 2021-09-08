@@ -1,0 +1,148 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<style>
+  img.card_img {
+    width: 66px;
+}
+.cartpages .cart table tr td {
+    text-align: center;
+    height: 84px;
+    box-shadow: 1px 0px 18px 0px #0000001f;
+}
+.custom-control-input:checked ~ .custom-control-label::before{
+  border-color: #DFB610;
+background-color: #DFB610;
+}
+.themed_product img{
+  width: 100%;
+}
+.description{
+  margin-top: 10px;
+}
+.description p{
+  margin-bottom: 5px;
+}
+.product_inner{
+  border-radius: 11px;
+display: flex;
+box-shadow: 2px 3px 13px 0px #0000000f;
+overflow: hidden;
+}
+ul.list-group.mb-3 {
+  margin-top: 22px;
+ }
+ .order_submit_form {
+   margin-top: 20px;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: #DFB610;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 5px;
+  -webkit-transition: .9s;
+  -o-transition: .9s;
+  transition: .9s;
+}
+.order_submit_form:hover{
+  color: #fff;
+}
+.images_pay img{
+  width: 42%;
+}
+.images_pay{
+  width: 100%;
+  margin-top:25px;
+}
+.billing_address label{
+  margin:10px 0 5px;
+}
+.billing_address input{
+  width: 80%;
+}
+.product_inner h2{
+  padding: 15px 0 0;
+  font-size: 18px;
+}
+.main_checkout{
+  box-shadow: 1px 6px 13px 8px #00000012;
+  width: 100%;
+  margin: 25px auto;
+  padding: 30px 10px;
+  border-radius: 15px;
+}
+</style>
+    <div class="container">
+        <div class="py-5 text-center">
+          
+          <h2>Checkout Page</h2>
+          <p class="lead"></p>
+        </div>
+        <form action="{% url 'personalTour:chechkoutCar' car.id  %}" method="post" style="padding: 0 25px">
+          {% csrf_token %}
+        <div class="row main_checkout">
+          <div class="col-offset-2 col-md-5 order-md-2 mb-4">
+            <h4 class="d-flex justify-content-between align-items-center ">
+              <h4 class="mb-3">Your Cart</h4>
+              <span class="badge badge-secondary badge-pill cart_number"></span>
+            </h4>
+      
+            <div class="cartpages">
+              <div class="cart">
+               
+                <table style="width: 100%;"></table>
+
+                <div class="row themed_product no-gutters">
+                  <div class="product_inner">
+                  <div class="col-md-5 no-gutters nopadding">
+                    <img src="{{ car.picture1.url }}" alt="">
+                  </div>
+                  <div class="col-md-7" style="padding-right: 0;">
+                    <h2>Tbilisi Golden hotel</h2>
+                    <div class="description">
+                    <p>Price</p>
+                    <span>50$</span>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <ul class="list-group mb-3">
+              
+           
+            
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total (USD)</span>
+                <span>$50<strong class="reservation_price"></strong></span>
+              </li>
+            </ul>
+            <div class="terms_condition">
+            <input type="checkbox" class="form-group" id="terms_condition">
+            <label for="terms_condition">
+              I Agree <a href="#">Terms and Condition</a>
+            </label>
+            </div>
+            <button type="submit" class="btn  order_submit_form">Checkout</button>
+            <div class="images_pay">
+           <img src="{% static 'images/MasterCard_credit_cards_and_Visa_If_you_apply_for_both.jpg' %}" alt="">
+           </div>
+          </div>
+          <div class="col-md-7 order-md-1 billing_address">
+            <h4 class="mb-3">Billing address</h4>
+           <div class="flex">
+             <div >
+              {{ form }} 
+            </div>
+          </div>
+          </div>
+        </div>
+      </form>
+        </div>
+      
+      </div>
+
+
+{% endblock %}

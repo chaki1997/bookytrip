@@ -1,0 +1,150 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<style>
+    #pic_2, #pic_3, #pic_4, #pic_5{
+        display: none;
+    }
+
+</style>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">add hotel</h1>
+                    </div>
+
+                 
+
+                 
+<div class="acomodationSubPage">
+    <form method="POST" action="{% url 'adminPanel:dashboardHotelAdd' accomodation_hotel.id %}" class="form-group container-fluid">
+        {% csrf_token %}
+        <div class="contentalladd">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <div class="row align-items-center change_username">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+                                <tr>
+                                    <th>  {{ form.room_type.label }}</th>
+                                    <td>  {{ form.room_type }}   </td>
+                                </tr>
+                                <tr>
+                                    <th>   {{ form.bed_type.label }}</th>
+                                    <td>   {{ form.bed_type }}   </td>
+                                </tr>
+                                <tr>
+                                    <th>  {{ form.family.label }}</th>
+                                    <td>    {{ form.family }}   </td>
+                                </tr>
+                                <tr>
+                                    <th>  {{ form.description.label }}</th>
+                                    <td>    {{ form.description }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>  {{ form.price.label }}</th>
+                                    <td>  {{ form.price }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>    {{ form.WiFi_connection.label }}</th>
+                                    <td>   {{ form.WiFi_connection }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>      {{ form.parking.label }}</th>
+                                    <td>   {{ form.parking }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>   {{ form.bar.label }}</th>
+                                    <td>    {{ form.bar }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>   {{ form.pool.label }}</th>
+                                    <td>   {{ form.pool }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>  {{ form.number_of_rooms.label }}</th>
+                                    <td>   {{ form.number_of_rooms }}  </td>
+                                </tr>
+                                <tr id="pic_1">
+                                    <th>   {{ form.picture1.label }}</th>
+                                    <td>   {{ form.picture1 }}  </td>
+                                </tr>
+                                <tr id="pic_2">
+                                    <th>   {{ form.picture2.label }}</th>
+                                    <td>   {{ form.picture2 }}  </td>
+                                </tr>
+                                <tr id="pic_3">
+                                    <th>   {{ form.picture3.label }}</th>
+                                    <td>    {{ form.picture3 }} </td>
+                                </tr>                         
+                                <tr id="pic_4">
+                                    <th>    {{ form.picture4.label }}</th>
+                                    <td>    {{ form.picture4 }} </td>
+                                </tr>                         
+                                <tr id="pic_5">
+                                    <th> {{ form.picture5.label }}</th>
+                                    <td>   {{ form.picture5 }} </td>
+                                </tr>                         
+           
+                            </div>
+                           
+                        </div>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+            
+    
+        <div class="row  save_Delete">
+                            
+            <button type="submit" class="save col-xl-2 col-lg-3 col-md-3 col-sm-4 ">SAVE</button>
+   
+        </div>
+
+    </form>
+
+</div>
+            <script>
+                let date1=document.getElementById("pic_1")
+                let date2=document.getElementById("pic_2")
+                let date3=document.getElementById("pic_3")
+                let date4=document.getElementById("pic_4")
+                let date5=document.getElementById("pic_5")
+                let id_picture1=document.getElementById("id_picture1")
+                let id_picture2=document.getElementById("id_picture2")
+                let id_picture3=document.getElementById("id_picture3")
+                let id_picture4=document.getElementById("id_picture4")
+                let id_picture5=document.getElementById("id_picture5")
+               
+
+       id_picture1.addEventListener('change', function(){
+  
+        
+        date2.style.display="revert";
+    
+})
+
+id_picture2.addEventListener('change', function(){
+
+        date3.style.display="revert";
+    
+})
+
+id_picture3.addEventListener('change', function(){
+  
+        
+        date4.style.display="revert";
+    
+})
+
+id_picture4.addEventListener('change', function(){
+  
+        
+        date5.style.display="revert";
+    
+})
+            </script>       
+{% endblock %}

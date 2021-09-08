@@ -1,0 +1,256 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<!-- only in thsi page -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<!-- only in thsi page -->
+
+<!-- only in this page 2 -->
+    <!-- Fotorama from CDNJS, 19 KB -->
+
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<!-- only in this page 2 -->
+<div id="fixed-steps">
+    {% for i in  cities %}
+    <div>
+      <a href="{% url 'personalTour:archiveaccommodation' i  %}" class="fixed step_1 active" target="_blank">
+          {{i}} </a>
+          <div id="my_items_sav" style="display: none;">
+
+          </div>
+    </div>
+    {% endfor %}
+
+  </div>
+    <!-- Tour Details -->
+    <div class="spicer_section"></div>
+    <div class="personal_right signle_content">
+        <div>
+            <div class="section_inner" id="accomodations_section">
+                <div class="column_right_header">
+                    <div class="inner_section" id="accomodation_section_inner">
+                    <!-- <input type="text" value="" name="result_server" id="checkout_serverrr"> -->
+
+                    <a href="{% url 'personalTour:archiveaccommodation' %}">
+                        <h3 class="deactivate">Step 1: <span>Choose Accomodation
+                            <i class="fas fa-angle-double-right" style="position:relative; left:4px; "></i>
+                        </span></h3>
+                        </a>
+                        <a href="{% url 'personalTour:archivecar' %}">
+                        <h3 class=" active">Step 2: <span>Choose Car </span></h3>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+      </div>
+      </div>
+   <section id="single_main_banner">
+       <div class="main_color col-lg-9 col-md-12">
+
+            <div class="single_inner">
+               <div class="row no-gutters">
+                   <div class="left_side col-lg-5">
+
+
+                         <div class="fotorama"
+                            data-height="600"
+                            data-nav="thumbs"
+                            data-fit="cover">
+                         <a href="{{ car.picture1.url }}">
+                             <img src="{{ car.picture1.url }}" width="144" height="96"></a>
+                         <a href="{{ car.picture2.url }}">
+                             <img src="{{ car.picture2.url }}" width="144" height="128"></a>
+
+                       </div>
+
+
+                       </div>
+
+                   <div class="right_side col-lg-7">
+                       <h2>{{ car.mark }}</h2>
+                       <p>{{ car.description }}</p>
+                     <div class="sections">
+                         <!-- bedroom -->
+                         <div class="section_inner">
+                            <i class="fas fa-car"></i>
+                             <h6>Car Type: </h6>
+                             <div class="list_icon">
+                                <ul>
+                                    <li>
+                                        <i class="fas fa-check"></i>
+                                       <span>{{ car.get_car_types_display }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                         </div>
+                         <!-- kitchen  -->
+                         <div class="section_inner">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h6>Pick Up Location:</h6>
+                            <div class="list_icon">
+                                <ul>
+                                    <li>
+                                        <i class="fas fa-check"></i>
+                                       <span> {{ car.get_pick_up_location_display }}</span>
+                                    </li>
+                                   
+                                </ul>
+                            </div>
+                            
+                         </div>
+                         <!-- bathroom -->
+                         <div class="section_inner">
+                            <i class="fas fa-restroom"></i>
+                             <h6>Number Of Sits</h6>
+                             <div class="list_icon">
+                                <ul>
+                                    <li>
+                                        <i class="fas fa-check"></i>
+                                       <span>  {{ car.number_of_sits }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                         </div>
+                     </div>
+                   </div>
+               </div>
+
+        </div>
+       </div>
+
+   </section>
+    <!-- endTour Details  -->
+
+   <!-- banner memorey -->
+   <section id="banner_memory">
+       <div class="container">
+           <div class="section_inner">
+
+                <h2>We create memorable experiences  </h2>
+                <p>An exquisite luxury hotel, offering old-world charm, opulent colonial-era suites, an excellent choice of restaurants</p>
+
+            </div>
+       </div>
+   </section>
+   <!-- banner memorey -->
+
+
+
+    <!-- testimonial carousel -->
+    <div class="spicer_section"></div>
+    <section id="testimonial carousel">
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="owl-carousel client-testimonial-carousel">
+                    {% for review in reviews %}
+                    {% if review.permition %}
+                    <div class="single-testimonial-item">
+                        <div class="image">
+                        <img src="{% static 'images/PR-021-SI-01_05_12-539.png' %}" alt="">
+                        </div>
+
+                            <div class="description">
+                                <h6>{{ review.review_name }}</h6>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <p>{{ review.comment }}</p>
+                            </div>
+
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+</div>
+
+    </section>
+    <div class="spicer_section"></div>
+    <!-- testimonial carousel -->
+<section id="faq_question">
+        <div class="container">
+            <div class="Question_inner single_review">
+                <h2>{% trans 'Write Review' %}</h2>
+                <div class="form_faq">
+                    <form action="{% url 'personalTour:carreview' car.id %}" method="Post">
+                        {% csrf_token %}
+
+                        <div >
+                             <label for="Question">Name</label>
+                              <input type="text" class="form-control"  name="review_name" placeholder="Enter your name" >
+                            <label for="Question">Your Review</label>
+                             <textarea name="comment" class="form-control " id="Question" placeholder="Here you can leave your question"></textarea>
+                        </div>
+                        <div class="Send">
+                            <input type="submit" value="Send">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- bottom booking -->
+<section id="booking_bottom">
+    <div class="container" style="height: 100%;">
+        <div class="section_inner">
+            <div class="Total_cost">
+                <p>Total Cost: <span>€ 550</span></p>
+            </div>
+            <div class=""  >
+                <p  id="confirmClickActionElementId">
+                    <form action="{% url 'cart:addcartcar' car.id %}" method="POST" class="confirmform">
+                        {% csrf_token %}
+                        {{form.car_order_start_date}}
+                        {{form.car_order_end_date}}
+                        <input type="submit" class="Book Now booking" value="Book Now">
+                    </form>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- bottom booking -->
+    <!-- footer -->
+<!-- cart Items -->
+<div class="cart_full">
+    <section id="cart_items" data-toggle="modal" data-target="#modal_aside_right">
+        <div class="inner">
+            <p> <i class="fas fa-luggage-cart" style="margin-right:10px"></i> Items In cart</p>
+        </div>
+      <!-- Modal -->
+
+    </section>
+  
+      </div>
+    <!-- cart Items -->
+
+
+<!-- only in this page -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<!-- fotorama -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+<!-- fotorama -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="{% static 'js/manual/testimonial.js' %}"></script>
+
+<!-- only in this page -->
+ 
+{% endblock %}

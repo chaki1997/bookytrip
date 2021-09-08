@@ -1,0 +1,57 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<div class="main_pack">
+
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Contacts</h1>
+        </div>
+        <table class="table " id= "table-id">
+            <div class="row">
+          <thead>
+              <tr>
+                  <th style="width: 35px;">
+                      
+                  </th>
+                  <th class="AcomodationHeader">Name Surname</th> 
+                  <th >Email</th>
+                  <th >Message</th> 
+                  <th >Date</th> 
+                  <th></th>
+
+                </tr>
+
+          </thead>
+           
+{% for contact in contacts %}
+<tbody >
+    <tr>
+        <td class=""></td>
+        <td class="new_class"><a href="{% url 'adminPanel:dashboardContact' contact.id %}">{{ contact.name }}  {{ contact.surname }}</a> 
+         
+        {% if contact.id in contact_notification_tuple %}   
+              <span class="new_inner" >NEW</span> 
+        {% endif %}
+        </td>
+        <td>{{ contact.email }}</td>
+        <td> <a href="">{{ contact.text }} </a> </td>
+        <td> <a href="">{{ contact.send_time }} </a> </td>
+        <td class="delete" > <a href="">Delete Items </a> </td>
+ 
+    </tr>
+</tbody>
+{% endfor %}
+     
+</div>
+</table>
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+
+

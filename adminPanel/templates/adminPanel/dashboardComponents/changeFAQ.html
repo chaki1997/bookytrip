@@ -1,0 +1,130 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+{% load i18n %}
+<div class="main_pack">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!----------------------------------------------------------------------------------->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Change faq</h1>
+                    </div>
+
+
+
+                    <!-------------------------------CHANGE FAQ --------------> 
+
+            <form action="{% url 'adminPanel:editFaq' faq.id %}" method="POST">
+                {% csrf_token %}
+                <div class="contentalladd">
+                    <table>
+                        <thead>
+                            <tr>
+                                <div class="row align-items-center change_username">
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+                                        <label for="question" class="col-form-label">question:</label>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10">
+                                        <div class="form-floating">
+                                            <textarea  id="question" class="form-control" placeholder="Here is your question" name="question" style="height: 100px">{{ faq.question }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+                        </thead>
+                    </table>
+
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <div class="row align-items-center change_username">
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                                        <label for="questiontype" class="col-form-label">question type:</label>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-10">
+                                        <select name="question_type" class="selectpicker form-control "id="">
+                                            <option selected hidden value="{{ faq.question_type }}">{{ faq.get_question_type_display }}</option>
+                                            <option value="1">{% trans 'Pre-Sale Questions' %}</option>
+                                            <option value="2">{% trans 'Other Type Questions' %}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </tr>
+                        </thead>
+                    </table>
+
+
+
+                    <table>
+                        <thead>
+                            <tr>
+
+                                <!--------- answer --------->
+                                <div class="row align-items-center answer">
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+                                    <label for="answer" class="col-form-label">answer:</label>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10">
+                                        <div class="form-floating">
+                                            <textarea id="answer" class="form-control" placeholder="This is your answer" style="height: 100px" name="answer">{{ faq.answer }}</textarea>
+                                          </div>
+                                    </div>
+                                </div>
+                            </tr>
+                        </thead>
+                    </table>
+
+
+
+                    <div class="change_faqckack">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <div class="form-check checkbox">
+                                        <input class="form-check-input" type="checkbox" id="permition" name="permition" >
+                                        <label class="form-check-label" for="permition">Display on front-end</label>
+                                    </div>
+
+
+                                </tr>   
+                            </thead>
+                        </table>
+                    </div>
+
+
+                    <div class="row  save_Delete">
+                            
+                        <button type="submit" class="save button_inner ">SAVE</button>
+                    
+                  </div>
+                </div>
+            </form>
+
+
+
+                        <!---------------------------------- AND CHANGE FAQ ------------------> 
+                    
+
+
+
+
+
+
+                        </div> <!-- 		End of Container -->
+
+                                    </div>
+                 <!---------------------------------------------------------------------------------------->
+
+                
+                <!-- /.container-fluid -->
+
+            
+            <!-- End of Main Content -->
+
+{% endblock %}
+
+
+
+
+

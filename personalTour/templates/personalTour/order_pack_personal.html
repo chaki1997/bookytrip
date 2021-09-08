@@ -1,0 +1,319 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<style>
+  img.card_img {
+    width: 66px;
+}
+.cartpages .cart table tr td {
+    text-align: center;
+    height: 84px;
+    box-shadow: 1px 0px 18px 0px #0000001f;
+}
+.custom-control-input:checked ~ .custom-control-label::before{
+  border-color: #DFB610;
+background-color: #DFB610;
+}
+.themed_product img{
+  width: 100%;
+}
+.description{
+  margin-top: 10px;
+}
+.description p{
+  margin-bottom: 5px;
+}
+.product_inner{
+  border-radius: 11px;
+display: flex;
+box-shadow: 2px 3px 13px 0px #0000000f;
+overflow: hidden;
+}
+ul.list-group.mb-3 {
+  margin-top: 22px;
+ }
+ .order_submit_form {
+   margin-top: 20px;
+  font-size: 17px;
+  font-weight: 500;
+  background-color: #DFB610;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 5px;
+  -webkit-transition: .9s;
+  -o-transition: .9s;
+  transition: .9s;
+}
+.order_submit_form:hover{
+  color: #fff;
+}
+.images_pay img{
+  width: 13%;
+}
+.images_pay{
+  width: 100%;
+  margin-top:25px;
+}
+.billing_address label{
+  margin:10px 0 5px;
+}
+.billing_address input{
+  width: 80%;
+}
+.product_inner h2{
+  padding: 15px 0 0;
+  font-size: 18px;
+}
+.main_checkout{
+  box-shadow: 1px 6px 13px 8px #00000012;
+  width: 100%;
+  margin: 25px auto;
+  padding: 30px 10px;
+  border-radius: 15px;
+}
+</style>
+    <div class="container">
+        <div class="py-5 text-center">
+          
+          <h2>Checkout Page</h2>
+          <p class="lead"></p>
+        </div>
+        <form method="POST" action="{% url 'personalTour:personalCheckout' %}" style="padding: 0 25px">
+          {% csrf_token %}
+       
+        <div class="row main_checkout">
+          <div class=" col-md-12 order-md-2 mb-4">
+            <!-- <h4 class="d-flex justify-content-between align-items-center ">
+              <h4 class="mb-3">Your Cart</h4>
+              <span class="badge badge-secondary badge-pill cart_number"></span>
+            </h4>
+
+            <div class="Dates_people">
+                   
+              <div class="People">
+                <h4>People</h4>
+                <p id="People_inner"></p>
+              </div>
+            </div> -->
+
+            <ul class="list-group mb-3">
+              <div class="checkout_pages row">
+                {% for tuple in hotels %}
+                <div class="items col-md-12" > 
+                  <h4 class="city_in_personal">{{ tuple.0.hotel_name.city.city }}</h4>
+                    <div class="row" style="margin-top:30px;">
+
+                      <div class="col-md-4 left_side"><img src="{{ tuple.0.picture1.url }}">
+                   
+                     <span class="id_data" style="display:none"> </span>  </div> 
+                     <div class="col-md-6 checkfiled">
+                      
+                      <!-- <span  class="deleteLocalsotrage" ><i class="fas fa-times"></i></span> -->
+                      <!-- <a href="#" class="deleteLocalsotrage" ><i class="fas fa-times"></i></a> -->
+                      <div class="cart_tablee">
+                
+                      </div>
+                      
+                        <h5 class="test"><input type="hidden" class="serverid" name="server_id" value="{{hotel.id}}"> </h5>
+                        <div class="description">
+                        <div class="column_one">
+                         <div class="column_one_inner">
+                            <h6>Hotel</h6>
+                            <p class="title_room">{{ tuple.0.hotel_name.name }}</p>
+                        </div>
+                          <div class="column_one_inner">
+                          <h6>Bed Type</h6>
+                           <p class="number_room">{{ tuple.0.get_bed_type_display }}</p>
+                          </div>
+                          </div>
+  
+                          </div>
+  
+  
+                      <div class="description">
+                        <div class="column_one">
+                         <div class="column_one_inner">
+                        <h6>Price</h6>
+                         <p class="checkout_price">{{ tuple.0.price }}</p>
+                          </div>
+                          <div class="column_one_inner roomtype">
+                          <h6>Room Type</h6>
+                           <p> {{ tuple.0.get_room_type_display }} </p>
+                          </div>
+                          </div>
+                           <div class="column_one">
+                         <div class="column_one_inner">
+                        <h6>Start Date</h6>
+                         <p class="checkout_price">{{ tuple.2 }}</p>
+                          </div>
+                          <div class="column_one_inner roomtype">
+                          <h6>End Date</h6>
+                           <p> {{ tuple.3 }} </p>
+                          </div>
+                          </div>
+                      </div>
+                      <div class="date_start">
+                  
+                       <span class="siblingTitle" style="display: none;">{{ tuple.0.hotel_name.city.city }}</span>
+                        <p class="data_startend column_one" style="justify-content: end;">
+                          
+                        </p>
+                      </div>
+
+                        
+                        <div class="check_field_date">
+
+                        <div>
+                          
+                         </div>
+                          </div> 
+                          
+                        </div> 
+                        
+                      <div class="description-hotel">
+                        <div class="column_one">
+                         <div class="column_one_inner">
+                        <h6>Hotel Address</h6>
+                         <p>{{ tuple.0.description }}</p>
+                          </div>
+                          </div>
+  
+                      </div> 
+                      </div>
+                 </div>
+                 <hr>
+                {% endfor %}
+
+                <hr>
+
+                  {% for tuple in cars %}
+                <div class="items col-md-12" >
+                    {% if tuple.0.pick_up_location == '1' %}
+                  <h4 class="city_in_personal">Airport</h4>
+                    {% elif tuple.0.pick_up_location == '2' %}
+                    <h4 class="city_in_personal">Hotel</h4>
+                    {% elif tuple.0.pick_up_location == '3' %}
+                    <h4 class="city_in_personal">Agency</h4>
+                    {% endif %}
+                    <div class="row" style="margin-top:30px;">
+
+                      <div class="col-md-4 left_side"><img src="{{ tuple.0.picture1.url }}">
+
+                     <span class="id_data" style="display:none"> </span>  </div>
+                     <div class="col-md-6 checkfiled">
+
+                      <!-- <span  class="deleteLocalsotrage" ><i class="fas fa-times"></i></span> -->
+                      <!-- <a href="#" class="deleteLocalsotrage" ><i class="fas fa-times"></i></a> -->
+                      <div class="cart_tablee">
+
+                      </div>
+
+                        <h5 class="test"><input type="hidden" class="serverid" name="server_id" value="{{hotel.id}}"> </h5>
+                        <div class="description">
+                        <div class="column_one">
+                         <div class="column_one_inner">
+                            <h6>Car Name</h6>
+                            <p class="title_room">{{ car.mark }}</p>
+                        </div>
+                          <div class="column_one_inner">
+                          <h6>Car Type:</h6>
+                           <p class="number_room">{{ tuple.0.get_bed_type_display }}</p>
+                          </div>
+                          
+                          </div>
+
+                          </div>
+
+
+                      <div class="description">
+                        <div class="column_one">
+                         <div class="column_one_inner">
+                        <h6>Price</h6>
+                         <p class="checkout_price">{{ tuple.0.price }}</p>
+                          </div>
+                          <div class="column_one_inner roomtype">
+                          <h6>Number Of Sits</h6>
+                           <p> {{ tuple.0.get_room_type_display }} </p>
+                          </div>
+                          </div>
+                           <div class="column_one">
+                         <div class="column_one_inner">
+                        <h6>Start Date</h6>
+                         <p class="checkout_price">{{ tuple.1 }}</p>
+                          </div>
+                          <div class="column_one_inner roomtype">
+                          <h6>End Date</h6>
+                           <p> {{ tuple.2 }} </p>
+                          </div>
+                          </div>
+                      </div>
+                      <div class="date_start">
+
+                       <span class="siblingTitle" style="display: none;">{{ tuple.0.hotel_name.city.city }}</span>
+                        <p class="data_startend column_one" style="justify-content: end;">
+
+                        </p>
+                      </div>
+
+
+                        <div class="check_field_date">
+
+                        <div>
+
+                         </div>
+                          </div>
+
+                        </div>
+
+                      <div class="description-hotel">
+                        <div class="column_one">
+                         <div class="column_one_inner">
+                        <h6>Car Description</h6>
+                         <p>{{ tuple.0.description }}</p>
+                          </div>
+                          </div>
+
+                      </div>
+                      </div>
+                 </div>
+                 <hr>
+                {% endfor %}
+              
+  
+      
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total(USD) {{cart.cart_calcs.total_order_price}}</span>
+                <span><strong id="reservation_pricee">{{ total_price }}$</strong></span>
+                <input type="hidden" name="our_price" id="price_hidden">
+              </li>
+            </ul>
+            <div class="terms_condition">
+            <input required type="checkbox" class="form-group" id="terms_condition">
+            <label for="terms_condition">
+              I Agree <a href="{% url 'components:privacyPolicy' %}">Terms and Condition</a>
+            </label>
+            </div>
+            <button type="submit" class="btn  order_submit_form">Checkout</button>
+            <div class="images_pay">
+           <img src="{% static 'images/MasterCard_credit_cards_and_Visa_If_you_apply_for_both.jpg' %}" alt="">
+           </div>
+          </div>
+       
+        </div>
+       
+      </form>
+        </div>
+
+      </div>
+      
+      <script src="{% static 'js/manual/addtocart.js' %}"></script>
+      <script src="{% static 'js/manual/checkoutcart.js' %}"></script>
+
+
+       <script>
+         let orer_end_date=document.getElementById('id_form-0-room_order_end_date');
+        let lastdate= localStorage.getItem('checkout_date');
+        orer_end_date.value=lastdate;
+       </script>       
+{% endblock %}

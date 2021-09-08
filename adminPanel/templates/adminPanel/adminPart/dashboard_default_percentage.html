@@ -1,0 +1,56 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<div class="main_pack">
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Default Percentages</h1>
+        <div class="add">
+            <a href="{% url 'adminPanel:dashboardDefaultPercentageAdd' %}">Add Default Percentage</a>
+        </div>
+    </div>
+
+                 
+
+    <!-- Content Row -->
+    <table class="table" id= "">
+    <thead>
+        <tr>
+            <th>
+               
+            </th>
+            <th >Supplier</th>
+            <th >Percentage</th>
+            <th >Edit</th>
+            <th ></th>
+            <th ></th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for percentage in percentages %}
+            <tr>
+                <td></td>
+                <td colspan=""><a href="{% url 'adminPanel:dashboardDefaultPercentageEdit' percentage.id %}"> 
+                                                                    {{ percentage.supplier.email }} </a></td>
+
+                <td colspan=""><a href="{% url 'adminPanel:dashboardDefaultPercentageEdit' percentage.id %}"> 
+                                                                    {{ percentage.percentage }}% </a></td>
+                <td colspan=""><a href="{% url 'adminPanel:dashboardDefaultPercentageEdit' percentage.id %}"> 
+                    Edit </a></td>
+                <td class="delete confirmation">
+                    <a href="{% url 'adminPanel:dashboardDefaultPercentageDelete' percentage.id %}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+    </table>
+
+</div> 
+
+ {% endblock %}

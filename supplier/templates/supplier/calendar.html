@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css"/>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css"/>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+                
+        $(document).ready(function () {
+            var calendar = $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                events: [
+
+
+                        {
+                            title: "Quantity: {{ day.quantity }} Price {{ day.calendar_price }}",
+                            start: '{{ day.date|date:"d/M/Y" }}',
+                            end: '',
+                            id: '',
+                            allDay: true,
+                        },
+               
+                ],
+                selectable: false,
+                selectHelper: false,
+                editable: false,
+                eventLimit: true,
+                eventAfterRender: function (event, element, view) {
+                    var k=event.title.split(' ');
+            if (k[1] == 0) {
+                
+                //event.color = "#FFB347"; //Em andamento
+                element.css('background-color', 'rgb(255, 64, 31)');
+                
+            } 
+            else if(k[1] > 0){
+                element.css('background-color', 'rgb(66, 185, 4)');
+            }
+           k[0].split('\n');
+            console.log(k)
+// alert('Number of breaks:  ' + numberOfLineBreaks);
+            // event.title[0].addClass('.first');
+            // console.log(k[0])
+            // k[0].setattribute('class', 'dkjajsl')
+        //  let quentity= document.createElement('div');
+
+        //  quentity.append(k[0]);
+        //  quentity.setAttribute('class')
+        //  element.find(".fc-title").append(quentity);
+//   element.find(".fc-title").append('<div class="some">    </div>');
+//   element.find(".fc-title").append('<div class="das">price' + k[1] + '</div>');
+//   $(".fc-title").children().append('dashjdks');
+//   console.log(  $(".fc-  title").children())
+            // element.find('.fc-title').append('<div class="quantity"> Quantity: ' + k[0] + '</div>'  );
+            // element.find('.quantity').append('<div class="das">price' + k[1] + '</div>')
+            
+        },
+
+              
+            });
+        });
+
+    </script>
+        <br/>
+        <h2 align="center"><a href="#"></a></h2>
+        <br/>
+        <div class="container">
+            <div id="calendar"></div>
+        </div>
+    
+</body>
+</html>

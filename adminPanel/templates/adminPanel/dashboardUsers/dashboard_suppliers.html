@@ -1,0 +1,84 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Users</h1>
+        <div class="add">
+            <a href="">Add Supplier</a>
+        </div>
+    </div>
+
+    
+
+    <!-- Content Row -->
+        <table class="table" id= "table-id">
+        <thead>
+            <tr>
+                <th>
+                   
+                </th>
+                <th >Email</th>
+                <th ></th>
+                <th ></th>
+                <th ></th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for supplier in suppliers %}
+                {% if supplier.id in supplier_notification_tuple %}
+                    <tr>
+                        <td></td>
+                        <td colspan="2"><a href="{% url 'adminPanel:editSupplier' supplier.id %}">
+                             {{ supplier.email }} </a>                            
+                        </td>
+                        <td> <span class="new_inner">NEW</span></td>
+                        <td class="delete"><a href="" class="confirmation"> Block</a> </td>
+
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td></td>
+                        <td colspan="2"><a href="{% url 'adminPanel:editSupplier' supplier.id %}"> {{ supplier.email }} </a></td>
+                        <td></td>
+                        <td class="delete"><a href="" class="confirmationsupplier"> Block</a> </td>
+
+                    </tr>
+                {% endif %}
+            {% endfor %}
+    
+        </tbody>
+    </table>
+    
+
+        <!--		Start Pagination -->
+        <div class='pagination-container'>
+            <nav>
+            <ul class="pagination">
+            <!--	Here the JS Function Will Add the Rows -->
+            </ul>
+            </nav>
+        </div>
+        <!-- <div class="rows_count">Showing 11 to 20 of 91 entries</div> -->
+
+        </div> <!-- 		End of Container -->
+
+                    </div>
+    
+<script type="text/javascript">
+    $('.confirmationsupplier').on('click', function () {
+        return confirm('Are you sure to block?');
+    });
+    
+</script>
+<!-- /.container-fluid -->
+
+
+<!-- End of Main Content -->
+
+{% endblock %}

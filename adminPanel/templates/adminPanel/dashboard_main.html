@@ -1,0 +1,269 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+               
+   <!------------------- adminpanel desings --------------------->
+
+    <!------------ titlefaqmotification---- -->
+    <div class="titlefaqmotification">
+      <h1>Notification bar</h1>
+    </div>
+
+    <!-- ------ Faq_notification ----->
+    <h3 class="Distance_all">Suppliers</h3>
+    <div class="Faq_notification others">
+ 
+        <div class=" col-md-5 col-sm-6 acoco_notification  ">
+          <a href="{% url 'adminPanel:dashboardPacks' %}">
+            <div class="card Faq_card4 themed_packs">
+              <h3 class="centerpozition">Themed Packs</h3>
+              <div class="card-body nameboxs">
+                <span>Notification</span>
+                <!-- <span class="number_notification">5</span> -->
+                <div class="notifier new">
+                  <i class="bell fa fa-bell"></i>
+                  {% if themed_pack_count > 0 %}
+                    <div class="badgea jump">{{ themed_pack_count }}</div>
+                  {% else %}
+                    <div class="badgea">{{ themed_pack_count }}</div>
+                  {% endif %}
+              </div>
+            </div>
+            </div>
+            </a>
+        </div>
+        <div class=" col-md-5 col-sm-6 acoco_notification">
+          <a href="{% url 'adminPanel:dashboardHotels' %}">
+            <div class="card Faq_card4 hotels_all">
+              <h3 class="centerpozition">Hotels</h3>
+              <div class="card-body nameboxs">
+                <span>Notification</span>
+                <!-- <span class="number_notification">5</span> -->
+                <div class="notifier new">
+                  <i class="bell fa fa-bell"></i>
+                  {% if hotels_count > 0 %}
+                    <div class="badgea jump">{{ hotels_count }}</div>
+                  {% else %}
+                    <div class="badgea">{{ hotels_count }}</div>
+                  {% endif %}
+              </div>
+            </div>
+            </div>
+            </a>
+        </div>
+        <div class=" col-md-5 col-sm-6 acoco_notification">
+          <a href="{% url 'adminPanel:dashboardApartment' %}">
+            <div class="card Faq_card4 apartments_all">
+              <h3 class="centerpozition">Apartments</h3>
+              <div class="card-body nameboxs">
+                <span>Notification</span>
+                <!-- <span class="number_notification">5</span> -->
+                <div class="notifier new">
+                  <i class="bell fa fa-bell"></i>
+                  {% if apartment_count > 0 %}
+                    <div class="badgea jump">{{ apartment_count }}</div>
+                  {% else %}
+                    <div class="badgea">{{ apartment_count }}</div>
+                  {% endif %}
+              </div>
+            </div>
+            </div>
+            </a>
+        </div>
+        <div class=" col-md-5 col-sm-6 acoco_notification">
+          <a href="{% url 'adminPanel:dashboardCars' %}">
+            <div class="card Faq_card4 cars_all">
+              <h3 class="centerpozition">Cars</h3>
+              <div class="card-body nameboxs">
+                <span>Notification</span>
+                <!-- <span class="number_notification">5</span> -->
+                <div class="notifier new">
+                  <i class="bell fa fa-bell"></i>
+                  {% if car_count > 0 %}
+                    <div class="badgea jump">{{ car_count }}</div>
+                  {% else %}
+                    <div class="badgea">{{ car_count }}</div>
+                  {% endif %}
+              </div>
+            </div>
+            </div>
+            </a>
+        </div>
+
+        <div class=" col-md-5 col-sm-6 acoco_notification">
+          <a href="{% url 'adminPanel:suppliers' %}">
+            <div class="card Faq_card4">
+              <h3 class="centerpozition">Supplier Registration</h3>
+              <div class="card-body nameboxs">
+                <span>Notification</span>
+                <!-- <span class="number_notification">5</span> -->
+                <div class="notifier new">
+                  <i class="bell fa fa-bell"></i>
+                  {% if supplier_count > 0 %}
+                    <div class="badgea jump">{{ supplier_count }}</div>
+                  {% else %}
+                    <div class="badgea">{{ supplier_count }}</div>
+                  {% endif %}
+              </div>
+            </div>
+            </div>
+            </a>
+        </div>
+        <div class=" col-md-5 col-sm-6 acoco_notification">
+          <a href="{% url 'adminPanel:suppliers' %}">
+            <div class="card Faq_card4">
+              <h3 class="centerpozition">Supplier Orders</h3>
+              <div class="card-body nameboxs">
+                <span>Notification</span>
+                <!-- <span class="number_notification">5</span> -->
+                <div class="notifier new">
+                  <i class="bell fa fa-bell"></i>
+                  {% if supplier_count > 0 %}
+                    <div class="badgea jump">{{ supplier_count }}</div>
+                  {% else %}
+                    <div class="badgea">{{ supplier_count }}</div>
+                  {% endif %}
+              </div>
+            </div>
+            </div>
+            </a>
+        </div>
+       </div>
+
+      <hr style="color: #fff;">
+
+    <h3 class="Distance_all">Contacts</h3>
+    <div class="Faq_notification others">
+      <div class=" col-md-5 col-sm-6 acoco_notification ">
+        <a href="{% url 'adminPanel:dashboardContacts' %}">
+
+          <!-------- Faq_card1 ----------->
+          <div class="card Faq_card1 contact_all_new">
+
+            <!----- centerpozition ----->
+            <h3 class="centerpozition">Contacts</h3>
+
+            <!------- nameboxs -------->
+            <div class="card-body nameboxs">
+              <span>Notification</span>
+              <!-- <span class="number_notification">5</span> -->
+
+            <!-----notification icon ------>
+
+              <div class="notifier new">
+                <i class="bell fa fa-bell"></i>
+                {% if contact_count > 0 %}
+                  <div class="badgea jump">{{ contact_count }}</div>
+                {% else %}
+                  <div class="badgea">{{ contact_count }}</div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+       
+
+    <hr style="color: #fff;">
+
+    <h3 class="Distance_all">Reviews</h3>
+    <div class="Faq_notification faq">
+       
+        <div class=" col-md-5 col-sm-6 acoco_notification ">
+          <a href="{% url 'adminPanel:accomodationReview' %}">
+            <div class="card Faq_card2 accommodation_reviews">
+              <h3 class="centerpozition">Accommodation Reviews </h3>
+              <div class="card-body nameboxs">
+                <span>Notification</span>
+                <!-- <span class="number_notification">5</span> -->
+                <div class="notifier new">
+                  <i class="bell fa fa-bell"></i>
+                  {% if accomodation_review_count > 0 %}
+                    <div class="badgea jump">{{ accomodation_review_count }}</div>
+                  {% else %}
+                    <div class="badgea">{{ accomodation_review_count }}</div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </a>
+          </div>
+          <div class=" col-md-5 col-sm-6  acoco_notification">
+          <a href="{% url 'adminPanel:carReview' %}">
+            <div class="card Faq_card3 car_reviews_all">
+              <h3 class="centerpozition">Car Reviews</h3>
+              <div class="card-body nameboxs">
+                <span>Notification</span>
+                <!-- <span class="number_notification">5</span> -->
+                <div class="notifier new">
+                  <i class="bell fa fa-bell"></i>
+                  {% if car_review_count > 0 %}
+                    <div class="badgea jump">{{ car_review_count }}</div>
+                  {% else %}
+                    <div class="badgea">{{ car_review_count }}</div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </a>
+          </div>
+          <div class=" col-md-5 col-sm-6 acoco_notification">
+          <a href="{% url 'adminPanel:themedPackReview' %}">
+            <div class="card Faq_card4 pack_reviews_all">
+              <h3 class="centerpozition">Themed Pack Reviews</h3>
+              <div class="card-body nameboxs">
+                <span>Notification</span>
+                <!-- <span class="number_notification">5</span> -->
+                <div class="notifier new">
+                  <i class="bell fa fa-bell"></i>
+                  {% if themed_pack_review_count > 0 %}
+                    <div class="badgea jump">{{ themed_pack_review_count }}</div>
+                  {% else %}
+                    <div class="badgea">{{ themed_pack_review_count }}</div>
+                  {% endif %}
+              </div>
+            </div>
+            </div>
+            </a>
+        </div>
+    </div>
+    <hr style="color: #fff;">
+
+    <h3 class="Distance_all">FAQ</h3>
+    <div class="Faq_notification others">
+      <div class=" col-md-5 col-sm-6 acoco_notification ">
+        <a href="{% url 'adminPanel:dashboardFaq' %}">
+
+          <!-------- Faq_card1 ----------->
+          <div class="card Faq_card1">
+
+            <!----- centerpozition ----->
+            <h3 class="centerpozition">FAQ Notification</h3>
+
+            <!------- nameboxs -------->
+            <div class="card-body nameboxs">
+              <span>Notification</span>
+              <!-- <span class="number_notification">5</span> -->
+
+            <!-----notification icon ------>
+              <div class="notifier new">
+                <i class="bell fa fa-bell"></i>
+                {% if faq_notificaiton_count > 0 %}
+                  <div class="badgea jump">{{ faq_notificaiton_count }}</div>
+                {% else %}
+                  <div class="badgea">{{ faq_notificaiton_count }}</div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+ 
+
+{% endblock %}

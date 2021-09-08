@@ -1,0 +1,466 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<!-- only in thsi page -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<!-- only in thsi page -->
+
+<!-- only in this page 2 -->
+    <!-- Fotorama from CDNJS, 19 KB -->
+
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    
+<!-- only in this page 2 -->
+<div id="fixed-steps">
+    {% for i in  cities %}
+    <div>
+      <a href="{% url 'personalTour:archiveaccommodation' i  %}" class="fixed step_1 active" target="_blank">
+          {{i}} </a>
+          <div id="my_items_sav" style="display: none;">
+
+          </div>
+    </div>
+    {% endfor %}
+
+  </div>
+    <!-- Tour Details -->
+    <div class="spicer_section"></div>
+    <div class="personal_right signle_content">
+        <div>
+            <div class="section_inner" id="accomodations_section">
+                <div class="column_right_header">
+                    <div class="inner_section" id="accomodation_section_inner">
+                    <!-- <input type="text" value="" name="result_server" id="checkout_serverrr"> -->
+
+                        <a href="">
+                        <h3 class="active">Step 1: <span>Choose Accomodation
+                            <i class="fas fa-angle-double-right" style="position:relative; left:4px; "></i>
+                        </span></h3>
+                        </a>
+                        <a href="{% url 'personalTour:archivecar' %}">
+                        <h3 class="deactivate">Step 2: <span>Choose Car </span></h3>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+      </div>
+      </div>
+   <section id="single_main_banner">
+       <div class="main_color col-lg-9 col-md-12">
+        
+            <div class="single_inner">
+               <div class="row no-gutters">
+                   <div class="left_side col-lg-5">
+                    
+                         
+                         <div class="fotorama"
+                            data-height="600"
+                            data-nav="thumbs"
+                            data-fit="cover">
+                         <a href="{{ accommodation.picture1.url }}">
+                             <img src="{{ accommodation.picture1.url }}" width="144" height="96"></a>
+                         <a href="{{ accommodation.picture2.url }}">
+                             <img src="{{ accommodation.picture2.url }}" width="144" height="128"></a>
+                         <a href="{{ accommodation.picture3.url }}">
+                           <img src="{{ accommodation.picture3.url }}" width="144" height="128"></a>
+                       </div>
+                         
+                       
+                       </div>
+                  
+                   <div class="right_side col-lg-7">
+                       <h2>{{ accommodation.name }}</h2>
+                       <p>{{ accommodation.description }}</p>
+                     <div class="sections">
+                         <!-- bedroom -->
+                         <div class="section_inner">
+                             <i class="fas fa-bed"></i>
+                             <h6>Bedroom</h6>
+                             <div class="list_icon">
+                                 <ul>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Air conditioning</span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Washer</span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Dryer</span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Free parking on premises
+                                        </span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Cable TV
+                                        </span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Wireless Internet
+                                        </span>
+                                     </li>
+                                     
+                                 </ul>
+                             </div>
+                         </div>
+                         <!-- kitchen  -->
+                         <div class="section_inner">
+                            <i class="fas fa-sink"></i>
+                             <h6>Kitchen</h6>
+                             <div class="list_icon">
+                                 <ul>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Heating</span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Shampoo</span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Essentials</span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>TV</span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Internet </span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Air conditioning</span>
+                                     </li>
+                                     
+                                 </ul>
+                             </div>
+                         </div>
+                         <!-- bathroom -->
+                         <div class="section_inner">
+                            <i class="fas fa-restroom"></i>
+                             <h6>Bathroom</h6>
+                             <div class="list_icon">
+                                 <ul>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Heating</span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Shampoo</span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Essentials</span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>TV</span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Internet </span>
+                                     </li>
+                                     <li>
+                                         <i class="fas fa-check"></i>
+                                         <span>Air conditioning</span>
+                                     </li>
+                                     
+                                 </ul>
+                             </div>
+                         </div>
+                     </div>
+                   </div>
+               </div>
+         
+        </div>
+       </div>
+     
+   </section>
+    <!-- endTour Details  -->
+
+   <!-- banner memorey -->
+   <section id="banner_memory">
+       <div class="container">
+           <div class="section_inner">
+           
+                <h2>We create memorable experiences  </h2>
+                <p>An exquisite luxury hotel, offering old-world charm, opulent colonial-era suites, an excellent choice of restaurants</p>
+            
+            </div>
+       </div>
+   </section>
+   <!-- banner memorey -->
+
+
+<div id="some" style="display: block;">
+
+</div>
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+ <div id="exampleModalsinglevalmain"></div>
+ <div id="exampleModalsinglevalmain"></div>
+ <div id="message_not"></div>
+ <div id="adult_leave"></div>
+<a href="{% url 'personalTour:archivecar' %}" class="go" >Add a car  </a>
+    <section>
+        {% for hotel in hotels %}
+         
+
+      
+        
+        <div class="roomn">
+            <p id="city_currentl" style="display: none;"> {{ hotel.hotel_name.city.city }} </p>
+            <div class="yourrom">
+                <div class="container">
+                <div class="col-md-12 col-sm-12">
+                    <p class="number_room" style="display: none;"> {{ hotel.room_number }} </p>
+                      <div class="row">
+                        
+                        <div class="col-md-5 col-sm-6">
+                          <div class="card-body twin_room">
+                             
+                              <p class="room_id" style="display: none;">{{ hotel.id }} </p>
+                              <h2 style="display: none;">{{ accommodation.name }}</h2>
+                            <h2 class="card-title titles roomtype" >{{ hotel.get_room_type_display }}</h2>
+                              <ul class="descprice">
+                                  <li>
+                                      <i class="fas fa-dollar-sign"></i>
+                                      <span>Price:</span>
+                                      <span class="price">{{ hotel.price }}</span>
+                                  </li>
+
+                                  <form action="{% url 'cart:addcart' id hotel.id %}" method="POST">
+                                       {% if hotel.room_type == "2" %}
+                                  <li>
+                                      <i class="far fa-building"></i>
+                                     <span>Bed type:</span>
+
+                                      <span class="">
+                                           <input type="number"  value="" max="{{ hotel.capacity }}" name="capacity_value" class="getcapacity">
+                                      </span>
+
+
+                                  </li>
+
+
+                                  {% else%}
+                                  <li>
+                                      <i class="far fa-building"></i>
+                                     <span>Bed type:</span>
+                                      <span class="">{{ hotel.get_bed_type_display }}</span>
+                                  </li>
+                                   {% endif %}
+
+                                  <div class="capacity_value_id">{{ hotel.capacity }}</div>
+
+
+                                   
+                                   <li>
+                                      <i class="fas fa-baby"></i>
+                                     <span>Child:</span>
+                                      <span>{{ hotel.family }}</span>
+                                  </li>
+                                   
+
+                                  <li>
+                                      <h5 class="personal_description_themed">Description{{hotel.picture1.url}}</h5>
+                                      <p> {{ hotel.description }}<</p>
+
+                                  </li>
+
+                                  <li>
+
+                                      {% csrf_token %}
+                                        {{forms.room}}
+<!--                                      title, room_type, Bed type, price, image -->
+
+
+                                        <div class="">
+                                            <input type="submit" class="addTocart" value="add to cart">
+
+                                        </div>
+                                  </form>
+
+
+                                    
+
+
+                                  </li>
+                              </ul>
+                          </div>
+                        </div>
+
+                        <div class="col-md-7 col-sm-6 hotelimage_nice">
+                             <!-- <img src="{{ room.id }}" alt="..."> -->
+                             <div id="{{ hotel.id }}" class="carousel slide" data-ride="carousel">
+
+                                <div class="carousel-inner">
+                                  <div class="carousel-item active">
+                                    <img class="d-block w-100" src="{% static hotel.picture1.url %}" alt="First slide">
+                                  </div>
+                                  <div class="carousel-item">
+                                    <img class="d-block w-100" src="{% static hotel.picture2.url %}" alt="Second slide">
+                                  </div>
+                                  <div class="carousel-item">
+                                    <img class="d-block w-100" src="{% static hotel.picture3.url %}" alt="Third slide">
+                                  </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#{{ hotel.id }}" role="button" data-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#{{ hotel.id }}" role="button" data-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Next</span>
+                                </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div id="hidden_div" style="display: none;">
+            <div class="overlay" style="background-color: #000000c9; height:100vh; width: 100vw; position: fixed; z-index: 99; top:0; left:0">
+        
+            </div>
+            <div id="go_to">
+              <div class="cart_page" >
+                <span>✓ Your item was added to cart</span>
+             
+             
+             </div>
+             
+             <div class="checkout_pagessss" id="checkout_form">
+              <a href="{% url 'personalTour:archivecar' %}" class="go" >Add a car  </a>
+            
+               <button type="submit"></button>
+               <span  onclick="clearAll()">X</span>
+             </div>
+          
+             </div>
+        
+          </div>
+      
+        </div>
+    </section>
+
+
+
+    <!-- testimonial carousel -->
+    <div class=" registerbootonsize">
+    <section id="testimonial carousel">
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="owl-carousel client-testimonial-carousel">
+                    {% for review in reviews %}
+                    {% if review.permition %}
+                    <div class="single-testimonial-item">
+                        <div class="image">
+                        <img src="{% static 'images/PR-021-SI-01_05_12-539.png' %}" alt="">
+                        </div>
+                       
+                            <div class="description">
+                                <h6>{{ review.review_name }}</h6>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <p>{{ review.comment }}</p>
+                            </div>
+                       
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+   
+</div>
+
+    </section>
+    <div class="spicer_section"></div>
+    <!-- testimonial carousel -->
+<!--write review-->
+<section id="faq_question">
+        <div class="container">
+            <div class="Question_inner single_review">
+                <h2>{% trans 'Write Review' %}</h2>
+                <div class="form_faq">
+                    <form action="{% url 'personalTour:accommodationreview' accommodation.id %}" method="Post">
+                        {% csrf_token %}
+
+                        <div >
+                             <label for="Question">Name</label>
+                              <input type="text" class="form-control"  name="review_name"
+                                     placeholder="Enter your name" >
+                            <label for="Question">Your Review</label>
+                             <textarea name="comment" class="form-control " id="Question"
+                                       placeholder="Here you can leave your question"></textarea>
+                        </div>
+                        <div class="Send">
+                            <input type="submit" value="Send">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<!--write review-->
+<!-- bottom booking -->
+
+    </div>
+<!-- bottom booking -->
+    <!-- footer -->
+<!-- cart Items -->
+<div class="cart_full">
+    <section id="cart_items" data-toggle="modal" data-target="#modal_aside_right">
+        <div class="inner">
+            <p> <i class="fas fa-luggage-cart" style="margin-right:10px"></i> Items In cart</p>
+        </div>
+      <!-- Modal -->
+
+    </section>
+
+      </div>
+    <!-- cart Items -->
+
+
+<!-- only in this page -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<!-- fotorama -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+<!-- fotorama -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="{% static 'js/manual/testimonial.js' %}"></script>
+<script src="{% static 'js/manual/addtocart.js' %}"></script>
+<script src="{% static 'js/manual/map_middle.js' %}"></script>
+
+
+<!-- only in this page -->
+
+{% endblock %}

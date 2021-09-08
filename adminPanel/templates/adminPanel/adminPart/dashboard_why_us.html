@@ -1,0 +1,48 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<div class="main_pack">
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Why Us</h1>
+        {% if number_of_content < 3 %}
+            <div class="add">
+                    <a href="{% url 'adminPanel:dashboardWhyUsAdd' %}">Add Why Us</a>
+            </div>
+        {% endif %}
+    </div>
+
+                 
+
+    <!-- Content Row -->
+    <table class="table" id= "table-id">
+    <thead>
+        <tr>
+            <th>
+               
+            </th>
+            <th >Why Us</th>
+            <th ></th>
+            <th ></th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for us in why_us %}
+            <tr>
+                <td></td>
+                <td colspan="2"><a href="{% url 'adminPanel:dashboardWhyUsEdit' us.id %}"> {{ us.title }} </a></td>
+                <td><a href="{% url 'adminPanel:dashboardWhyUsEdit' us.id %}">Edit</a> </td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+    </table>
+
+</div> 
+
+ {% endblock %}

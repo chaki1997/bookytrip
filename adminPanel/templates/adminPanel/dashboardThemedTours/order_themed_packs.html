@@ -1,0 +1,201 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="main_pack">
+                <div class="container-fluid">
+                    <!----------------------------------------------------------------------------------->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Ordered Themed packs</h1>
+                        <div class="add">
+                            <a href="{% url 'adminPanel:addThemedPackOrder' %}">ORDER THEMED PACK</a>
+                        </div>
+                    </div>
+
+
+                    <!-------------------ORDERED THEMED PACKS---------------------------> 
+
+
+                    <table class="table " id= "table-id">
+
+                        <div class="row">
+                      <thead>
+                          <tr>
+                              <th style="width: 35px;">
+                                
+                              </th>
+                              <th class="AcomodationHeader">ORDERED THEMED PACK</th> 
+                              <th ></th> 
+                          </tr>
+                      </thead>
+                      {% for order in order_packs %}
+                          <tbody >
+
+                                  <tr>
+                                      <td class=""></td>
+                                        <td class=""><a href="{% url 'adminPanel:editThemedPackOrder' order.id %}">{{ order.pack }} | {{ order.user }}</a></td>
+                                        <td><a href="{% url 'adminPanel:editThemedPackOrder' order.id %}">Edit</a></td>
+                                        <td class="delete" > Delete Item </td>
+                                  </tr>
+
+                          </tbody>
+                      {% endfor %}
+
+                    </table>
+
+
+
+                            <!---------------- END ORDERED THEMED PACKS----------------->
+
+                </div>
+                         <!-- 		End of Container -->
+
+
+            
+
+                
+                <!-- /.container-fluid -->
+
+            
+            <!-- End of Main Content -->
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+
+
+
+
+
+
+
+
+         <!-- Footer -->
+         <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; BookyTrip 2021</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- Custom scripts for all pages-->
+<script src="/js/sb-admin-2.js"></script>
+<script type="text/javascript">
+    $('.confirmation').on('click', function () {
+        return confirm('Are you sure to Delete?');
+    });
+</script>
+</body>
+
+</html>
+
+
+
+
+

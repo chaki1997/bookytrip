@@ -1,0 +1,46 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<div class="main_pack">
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Select themed pack duration to change</h1>
+        <div class="add">
+            <a href="{% url 'adminPanel:AddpackDuration' %}">Add themed pack duration</a>
+        </div>
+    </div>
+
+                 
+
+    <!-- Content Row -->
+    <table class="table" id= "table-id">
+    <thead>
+        <tr>
+            <th>
+               
+            </th>
+            <th >THEMED PACK DURATION</th>
+            <th ></th>
+            <th ></th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for duration in pack_duration %}
+            <tr>
+                <td></td>
+                <td colspan="2"><a href=""> {{ duration.duration }} </a></td>
+                <td class="delete confirmation"><a href="{% url 'adminPanel:deletePackDuration' duration.id %}">Delete</a> </td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+    </table>
+
+</div> 
+
+ {% endblock %}

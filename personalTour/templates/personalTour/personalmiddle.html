@@ -1,0 +1,447 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
+
+<!-- fixed left_side_bar steps -->
+<div id="fixed-steps">
+    <div>
+      <a href="#" class="fixed step_1 active" target="_blank">
+          1 Step </a>
+          <div id="my_items_sav" style="display: none;">
+                                
+          </div>
+    </div>
+
+  </div>
+<!-- fixed left_side_bar steps -->
+    <!-- Main Filter -->
+    <div class="spicer_section_20"></div>
+    <section id="personal_archive">
+    <div id="Main_filter">
+        <div class="container">
+            <div class="Section_inner">
+                <div class="row">
+                    <div class="Destination_section col-lg-12 col-sm-12">
+                        <form action="" class="form_layers">
+                            <div class="row" style="width: 100%;">
+                            <div class="choose_form Destination col-lg-3 col-md-12">
+                                <label for="Destination">Destination</label>
+                                <select name="Destination" class="selectpicker form-control" id="Destinations">
+                                    <option value="Georgia">Georgia</option>
+                                </select>
+                            </div>
+                          
+                            <div class="choose_form Departure_Date col-lg-3 col-md-12">
+                                <label for="Departure_Date">Start Departure Date</label>
+                              
+                                    <input class="form-control date_input " readonly id="textfield7" placeholder="DD/MM/YYYY" autocomplete="off" data-date-format="DD/MM/YYYY" id="dateFrom" value="DD/MM/YYYY"  name="Departure_Date" type="date"
+                                     value=""
+        min="1997-01-01" max="2030-12-31">
+                                
+                            </div>
+
+                            <div class="choose_form length_member col-lg-3 col-md-12">
+                              <div class="Guests_single_hotel" style="width: 100%;">
+                                <label for="">The Number Of Traveler</h6>
+                                  <div class="dropdown" style="margin-top: 17px;">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                      id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                      aria-expanded="false">
+                                      <span>Adult: </span> <span id="room"> 0</span>
+                                      <span> Children :</span> <span id="adult"> 0</span>
+                                      <span> Room :</span> <span id="rooms"> 0</span>
+                                    </button>
+                                    <div class="dropdown-menu keep-open" aria-labelledby="dropdownMenuButton"
+                                      style="width: 285px;">
+                                      <div class="dropdown-item">
+
+                                        <div class="rooms_dropdown_ranger">
+                                          <div class="rooms_choise_text">
+                                            <h6>Adults</h6>
+                                          </div>
+                                          <div class="calculation_choise_numb">
+                                            <div class="value-button" id="decrease" onclick="decreaseValue()"
+                                              value="Decrease Value">-</div>
+                                            <input type="number" id="number" value="0" disabled
+                                              style="background: transparent; color: black;" />
+                                            <div class="value-button" id="increase" onclick="increaseValue()"
+                                              value="Increase Value">+</div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+
+                                      <div class="dropdown-item">
+
+                                        <div class="rooms_dropdown_ranger">
+                                          <div class="rooms_choise_text">
+                                            <h6>Children</h6>
+                                          </div>
+                                          <div class="calculation_choise_numb">
+                                            <div class="value-button" id="decrease"
+                                              onclick="decreaseValuee()" value="Decrease Value">-</div>
+                                            <input type="number" id="numbers" value="0" disabled
+                                              maxlength="10"
+                                              style="background: transparent; color: black;" />
+                                            <div class="value-button" id="increase"
+                                              onclick="increaseValuee()" value="Increase Value">+</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="dropdown-item">
+ 
+                                        <div class="rooms_dropdown_ranger">
+                                          <div class="rooms_choise_text">
+                                            <h6>Room</h6>
+                                          </div>
+                                          <div class="calculation_choise_numb">
+                                            <div class="value-button" id="decrease"
+                                              onclick="decreaseValueee()" value="Decrease Value">-</div>
+                                            <input type="number" id="numberss" value="0" disabled
+                                              maxlength="10"
+                                              style="background: transparent; color: black;" />
+                                            <div class="value-button" id="increase"
+                                              onclick="increaseValueee()" value="Increase Value">+</div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="submit_button col-lg-3 col-md-12">
+                              <button type="submit" id="submit_map" class="form-control" onclick=getDataa() >Actualized</button>
+                          </div>
+                            </div>
+                               
+                            <div aria-labelledby="myModalLabel" class="modal left fade modalmiddle" id="myModalcountry" role="dialog" tabindex="-1">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content ">  <span class="close" id="close_modal_map">&times;</span>
+                                  <p>You cant choose it</p></div>
+
+                                    
+                                      </div>
+                                  
+                                  </div>
+                                
+                             
+
+                           
+     
+
+                            
+                        </form>
+                    </div>
+                 
+        
+               
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+    <!-- en Main FIlter -->
+
+    <!-- main section_archive -->
+    <div class="spicer_section_20"></div>
+    <div id="map_content">
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-lg-9 col-md-12">
+      <div style=" margin: auto;"> 
+        <div id="map"style="z-index: 2; position: relative;" ></div>
+      </div>
+      </div>
+      <div class="col-lg-3 col-md-12 nopadding">
+      <div style=" display: flex;
+      ">
+      
+          <ul class="list-group list_icon_column">
+            <li class="list-group-items">
+              <i class="fas fa-pencil-ruler icon_text_color mx-2" style="color: #957689;"></i> 
+              Explote Cities By Clicked
+            </li>
+            <li class="list-group-items">
+              <i class="fas fa-pencil-ruler icon_text_color mx-2" style="color: #957689;"></i> 
+              Choose Desired Cities
+            </li>
+            <li class="list-group-items">
+              <i class="fas fa-pencil-ruler icon_text_color mx-2" style="color: #957689;"></i> 
+              Choose Desired Services
+            </li>
+            <li class="list-group-items">
+              <i class="fas fa-pencil-ruler icon_text_color mx-2" style="color: #957689;"></i> 
+              Choose Desired Services
+            </li>
+           
+          </ul>
+        </div>
+        <div class="choose_cities_main">
+        <div id="choose_cities">
+
+         <form action="{% url 'personalTour:archiveaccommodation' %}">
+          <h3>Cities You can Choise</h3>
+          <a href="" id="Close" style="display: none;">X</a>
+          <div id="result_city"></div>
+         <div id="my_items_save" ></div>
+      
+          <button type="submit" id="save_localstorage" class="goTocheckout" >Go To Archive</button>
+        </form>
+        </div>
+        </div>
+      </div>
+      <!-- end themed content -->
+        <!-- Modal EMPTY-->
+        <div aria-labelledby="myModalLabel" class="modal left fade modalmiddle" id="emptymodal" role="dialog" tabindex="-1">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content "></div>
+            <!-- modal-content -->
+          </div>
+          <!-- modal-dialog -->
+        </div>
+        <!-- modal -->
+      </div>
+      </div>
+    <!-- main section_archive -->
+
+<!-- cart Items -->
+
+<!-- cart Items -->
+<script>
+  /*Custom marker */
+PlaceMarker = L.CircleMarker.extend({
+options: {
+id: '',
+img: '',
+url: '',
+}
+});
+
+/*Include the marker data and create the layers */
+var data = [
+  {% for city in cities %}
+    ["{{ city.city }}", "2", {{ city.x_c }}, {{ city.y_c }},  'https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4', ""],
+  {% endfor %}
+];
+
+var layer1 = new L.LayerGroup();
+for (var i = 0; i < data.length; i++) {
+
+marker = new PlaceMarker([data[i][2], data[i][3]],{
+color: "red ",
+// iconUrl: 'https://i.stack.imgur.com/Ojd0Q.png',
+id: data[i][0],
+img: data[i][4],
+url: data[i][5],
+background:"red",
+bindLabel:data[i][0],
+title: 'Hover Text',
+},  { title: data[i][0]})
+
+marker.addTo(layer1);
+marker.on('click', markerOnClicked);
+marker.on('click',markerOnClick);
+
+// .addTo(layer1).on('mouseover', markerOnClick);
+}
+
+
+
+
+/* Some handy variables*/
+var booklayers = [layer1 ]
+
+var map = L.map('map', {
+
+layers: booklayers,
+crs: L.CRS.Simple,
+title: 'dljasld',
+});
+
+var bounds = [[0,0], [500 ,800]];
+var image = L.imageOverlay('{% static "images/georgia.png" %}', bounds).addTo(map);
+var sol = L.latLng([ 15.268350396973126, 15.86742980025556 ]);
+map.fitBounds(bounds);
+map.setView( [ 230.2546647,350.6829769], 0);
+
+
+map.scrollWheelZoom.disable();
+
+/* Open modal & center map on marker click  */
+function markerOnClick(e) {
+var id = this.options.id;
+var img = this.options.img;
+var url = this.options.url;
+var title=this.options.title;
+
+$("#emptymodal .modal-content").html('<video autoplay muted loop id="video">  <source src="'  + img + '"  type="video/mp4">  </video> ' + '<h3 id="title_map">' + id + '</h3>' + '<button class="add_city" onclick="add_city(this)">Add  </button>'  );
+$('#emptymodal').modal('show');
+
+e.target.openPopup();
+}
+/*Close modal on map click */
+map.on('click', function(e) {
+$('#emptymodal').modal('hide');
+$('#login_signUp').modal('hide');
+});
+function markerOnClicked(e) {
+console.log(this.options.id);
+// window.open(this.options.win_url);
+}
+
+</script>
+
+<script src="{% static 'js/manual/map.js' %}"></script>
+<script>
+if (localStorage.getItem("cities_obj") != null) {
+  gocheck.removeAttribute('disabled', '')
+
+}
+</script>
+
+<script>
+  
+ let start=document.getElementsByClassName('start_input_datelocal');
+ let end=document.getElementsByClassName('end_input_datelocal');
+for(let i=0; i<start.length; i++){
+  let k=start[i].innerHTML.trim();
+  let re=k.slice(2);
+
+ re=re.replaceAll('-', '/')
+  re=re.split('/');
+  console.log(k)
+  console.log(re)
+  
+  start[i].innerHTML=re[2]+'/'+re[1]+'/'+re[0];
+
+}
+for(let i=0; i<end.length; i++){
+  let k=end[i].innerHTML.trim();
+  let re=k.slice(2);
+
+ re=re.replaceAll('-', '/')
+  re=re.split('/');
+  console.log(k)
+  console.log(re)
+  end[i].innerHTML=re[2]+'/'+re[1]+'/'+re[0];
+}
+
+</script>
+<script>
+  
+  document.getElementById("Destinations").value=localStorage.getItem("txtValue10");
+document.getElementById("textfield7").value=localStorage.getItem("txtValue20");
+
+
+document.getElementById("room").innerHTML=localStorage.getItem("adult2");
+document.getElementById("number").value=localStorage.getItem("adult2");
+document.getElementById("adult").innerHTML=localStorage.getItem("children2");
+document.getElementById("numbers").value=localStorage.getItem("children2");
+document.getElementById("rooms").innerHTML=localStorage.getItem("room2");
+document.getElementById("numberss").value=localStorage.getItem("room2");
+let checkii=document.getElementById('save_localstorage');
+checkii.addEventListener('click', function(){
+let end_input=document.getElementsByClassName('end_date_input_form ');
+// console.log(end_input)
+let count='05-01-2021';
+for(var i=0; i<end_input.length; i++){
+  
+  console.log(end_input[i].value);
+  if(end_input[i].value>count){
+    count=end_input[i].value;
+
+  }
+
+}
+console.log(count)
+
+
+localStorage.setItem('checkout_date', count);
+let end_inputt=document.getElementsByClassName('end_date_local ');
+// console.log(end_input)
+let countt='05/01/2021';
+for(var i=0; i<end_inputt.length; i++){
+  
+  console.log(end_inputt[i].value);
+  if(end_inputt[i].value>countt){
+    countt=end_inputt[i].value;
+
+  }
+
+}
+console.log(countt)
+
+
+localStorage.setItem('checkout_date', countt)
+})
+
+</script>
+
+<script>
+  
+
+// add localhost in middle mao
+if(localStorage.getItem('cities_obj')!=null){
+  let my_items_save=document.getElementById('my_items_sav');
+  my_items_save.style.display="block";
+  let buttonDelete=document.createElement('button');
+  buttonDelete.setAttribute('type', 'button')
+  buttonDelete.setAttribute('id', 'Delete_items');
+  buttonDelete.innerHTML="X"
+
+  let tableData = '';
+  tableData += '';
+  JSON.parse(localStorage.getItem('cities_obj')).map(data=>{
+    tableData +=  `<div class="">
+   <div class="fixed_sub"> <a href="#" class="fixed_sub "> 
+   <div>
+   ${data.title}
+   </div> <div style="font-size:11px; padding:5px"> <span class="input_date_start_ac">${data.start_date}, </span>
+   <span class="input_date_end_ac">  ${data.end_date} </span>
+    </div>
+    <div style="font-size:10px"> </div> </a> </div> 
+   
+   </div>
+   `;
+  });
+  my_items_save.innerHTML+=tableData
+  my_items_save.appendChild(buttonDelete)
+ }
+ let start_date_m=document.getElementsByClassName('input_date_start_ac');
+ let end_date=document.getElementsByClassName('input_date_end_ac');
+ for(let i=0; i<start_date_m.length; i++){
+  let k=start_date_m[i].innerHTML.trim();
+  let re=k.slice(2);
+
+ re=re.replaceAll('-', '/')
+  re=re.split('/');
+  console.log(k)
+  console.log(re)
+  
+  start_date_m[i].innerHTML=re[2]+'/'+re[1]+'/'+re[0];
+
+}
+for(let i=0; i<end_date.length; i++){
+  let k=end_date[i].innerHTML.trim();
+  let re=k.slice(2);
+
+ re=re.replaceAll('-', '/')
+  re=re.split('/');
+  console.log(k)
+  console.log(re)
+  end_date[i].innerHTML=re[2]+'/'+re[1]+'/'+re[0];
+}
+</script>
+{% endblock %}

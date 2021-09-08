@@ -1,0 +1,45 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container-fluid">
+
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Select themed pack variety to change</h1>
+        <div class="add">
+            <a href="{% url 'adminPanel:packVarietiesAdd' %}">Add Select themed pack variety</a>
+        </div>
+    </div>
+
+
+    <table class="table" id= "table-id">
+        <thead>
+            <tr>
+                <th>
+                   
+                </th>
+                <th >THEMED PACK VARIETY</th>
+                <th ></th>
+                <th ></th>
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for variety in pack_variety %}
+                <tr>
+                    <td></td>
+                    <td colspan="2"><a href="">{{ variety.pack_variety }} </a></td>
+                    <td class="delete confirmation"><a href="{% url 'adminPanel:deleteVarieties' variety.id %}" class="confirmation"> Delete</a> </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+                   
+
+</div>
+
+{% endblock %}

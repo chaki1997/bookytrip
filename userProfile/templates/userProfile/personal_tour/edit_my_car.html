@@ -1,0 +1,141 @@
+{% extends 'userProfile/base_supplier.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css"/>
+  <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css"/>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+<div class="main_pack">
+            <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">change Car</h1>
+                    </div>
+
+<div class="acomodationSubPage">
+    <form action="{% url 'userProfile:supplierCar' car.id %}" class="form-group container-fluid" method='POST'>
+        {% csrf_token %}    
+        <div class="contentalladd">
+            <div class="contentalladd carpack">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <div class="row align-items-center change_username">
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+        {{ form }}
+    </div>
+</div>
+</tr>
+</thead>
+</table>
+</div>
+        <div class="row  save_Delete">
+                            
+            <button type="submit" class="save button_inner ">SAVE</button>
+
+        </div>
+    </form>
+
+</div>
+
+<script>
+                
+    $(document).ready(function () {
+        var calendar = $('#calendar').fullCalendar({
+            
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+           
+            events: [
+           
+            {% for date in car_order_dates %}
+            
+                    {
+                        title: "Quantity: dkashjkdhk",
+                        start:'{{ date.car_order_start_date|date:"d/M/Y" }}',
+                        end:  '{{ date.car_order_end_date|date:"d/M/Y"}} 24:00:00' ,
+                        displayEventTime: true,
+                        allDay: true,
+                        nextDayThreshold:'00:00:00',
+                        
+                    },
+                {% endfor %}
+            ],
+            selectable: false,
+            selectHelper: false,
+            editable: false,
+            eventLimit: false,
+            allDay: false,
+            
+            eventAfterRender: function (event, element, view) {
+              
+                var k=event.title.split(' ');
+        if (k[1] == 0) {
+            
+            //event.color = "#FFB347"; //Em andamento
+            element.css('background-color', 'rgb(255, 64, 31)');
+            
+        } 
+        else if(k[1] > 0){
+            element.css('background-color', 'rgb(66, 185, 4)');
+        }
+       k[0].split('\n');
+        console.log(k)
+// alert('Number of breaks:  ' + numberOfLineBreaks);
+        // event.title[0].addClass('.first');
+        // console.log(k[0])
+        // k[0].setattribute('class', 'dkjajsl')
+    //  let quentity= document.createElement('div');
+
+    //  quentity.append(k[0]);
+    //  quentity.setAttribute('class')
+    //  element.find(".fc-title").append(quentity);
+//   element.find(".fc-title").append('<div class="some">    </div>');
+//   element.find(".fc-title").append('<div class="das">price' + k[1] + '</div>');
+//   $(".fc-title").children().append('dashjdks');
+//   console.log(  $(".fc-  title").children())
+        // element.find('.fc-title').append('<div class="quantity"> Quantity: ' + k[0] + '</div>'  );
+        // element.find('.quantity').append('<div class="das">price' + k[1] + '</div>')
+        
+    },
+
+          
+        });
+    });
+
+</script>
+    <br/>
+    <h2 align="center"><a href="#"></a></h2>
+    <br/>
+    <div class="container">
+        <div id="calendar"></div>
+    </div>
+
+    <script>
+         $(document).ready(function(){
+
+$("a").on('click', function(event) {
+if (this.hash !== "") {
+event.preventDefault();
+var hash = this.hash;
+$('html, body').animate({
+scrollTop: $(hash).offset().top
+}, 1800, function(){
+
+});
+} 
+});
+});
+
+    </script>
+                          
+{% endblock %}

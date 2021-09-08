@@ -1,0 +1,119 @@
+{% extends 'userProfile/base_supplier.html' %}
+{% block content %}
+{% load static %}
+                 <!-- Begin Page Content -->
+                 <div class="container">
+                    <div class="row">
+                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
+
+
+                            
+                                <!--------- title -------->
+                                <div class="persontitle">
+                                   <h2>Current Payments</h2>
+                                </div>
+                                <!------------ USER TABLE ----------->
+                                 
+                                <div class="boxsshadautab">
+                                    <table class="table">
+                                        <thead class="table_bgcolor">
+                                          <tr>
+                                            <th>ORDER NUMBER</th>
+                                            <th>ITEM</th>
+                                            <th>TITLE</th>
+                                            <th>START-END DATE</th>
+                                            <th>DAYS</th>
+                                            <th>PRICE</th>
+                                          </tr>
+                                        </thead>
+
+                                        
+                                        <tbody>
+                                        {% for hotel in unpaid_hotels %}
+                                          <tr class="currentpay">
+                                            <td>{{hotel.id}}</td>
+                                            {% if hotel.hotel.hotel_name.accommodation_type == '1' %}
+                                         <td>Hotel</td>
+                                       {% else %}
+                                        <td>Hotel</td>
+                                       {% endif %}
+                                            <td>{{hotel.hotel.hotel_name.name}}</td>
+                                            <td>{{hotel.hotel_order_start_date}}</td>
+                                            <td>{{hotel.hotel_order_end_date}}</td>
+                                            <td>{{hotel.order_price}} EUR</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                   
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+
+
+
+
+
+                                <div class="persontitle">
+                                    <h2>Payment History</h2>
+                                 </div>
+                                 <!------------ USER TABLE ----------->
+                                  
+                                 <div class="boxsshadautab">
+                                     <table class="table">
+                                         <thead class="table_bgcolor">
+                                           <tr>
+                                            <th>ORDER NUMBER</th>
+                                            <th>ITEM</th>
+                                            <th>TITLE</th>
+                                            <th>START-END DATE</th>
+                                            <th>DAYS</th>
+                                            <th>PRICE</th>
+                                            <th>INVOICE</th>
+                                           </tr>
+                                         </thead>
+ 
+                                         
+                                         {% for hotel in paid_hotels %}
+                                          <tr class="currentpay">
+                                            <td>{{hotel.id}}</td>
+                                            {% if hotel.hotel.hotel_name.accommodation_type == '1' %}
+                                         <td>Hotel</td>
+                                       {% else %}
+                                        <td>Appartement</td>
+                                       {% endif %}
+                                            <td>{{hotel.hotel.hotel_name.name}}</td>
+                                            <td>{{hotel.hotel_order_start_date}}</td>
+                                            <td>{{hotel.hotel_order_end_date}}</td>
+                                            <td>{{hotel.order_price}} EUR</td>
+                                              <td>
+                                                    <span><i class="fas fa-file-pdf"></i></span>
+                                                    <a href="{% url 'userProfile:generatePdf' hotel.id %}" download="" >Download</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+
+                                         </tbody>
+                                    
+
+                                     </table>
+                                 </div>
+
+
+                            
+
+                        </div>
+                    </div>
+                </div>
+
+
+{% endblock %}
+
+
+
+
+

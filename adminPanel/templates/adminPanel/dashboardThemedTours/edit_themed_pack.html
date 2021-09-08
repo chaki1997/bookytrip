@@ -1,0 +1,246 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+{% load countries %}
+{% load index %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css"/>
+  <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css"/>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+
+
+        <div class="main_pack">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!----------------------------------------------------------------------------------->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Edit Themed Pack</h1>
+                        <div class="gotodc" id="goscrol" >
+                            <a class="save button_inner "  href="#goscrol1">Go descriptions
+                            </a>
+                            <a class="save button_inner " href="#calendar">Go calendar
+                            </a>
+                        </div>
+                    </div>
+
+            <form method="POST" action="{% url 'adminPanel:editPack' pack.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="contentalladd">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <div class="row align-items-center change_username">
+                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+            
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-10">
+                                            {{ form }}
+                                        </div>
+                                    </div>
+                                </tr>
+                            </thead>
+                        </table>
+    
+                        <div class="row  save_Delete">
+                            
+                                <button type="submit" class="save button_inner ">SAVE</button>
+                       
+                              <button type="button" class="Delete2  button_inner">Delete</button>
+                            
+                          </div>
+    
+    
+                </div>
+            </form>
+
+            <!-- Themed pack days description -->
+            <div class="themed_days_description" id="goscrol1">
+            <div class="">
+                <!----------------------------------------------------------------------------------->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Themed Days Description</h1>
+                    
+                </div>
+
+
+                <!---------------------- change themed days description--------------------------------------------> 
+       
+        {% for key,value in form_day_description.items %}        
+        <form method='POST' action="{% url 'adminPanel:editPackDescription' pack.id key %}">
+            {% csrf_token %}
+            <div class="contentalladd description_section">
+                {{ value }}                                    
+                <div id='current_place'>
+                    <button type="submit" class="save button_inner"
+                        style="max-width: 9.5%;
+                                color:#fff;
+                                "
+
+                        >Save</button>
+                
+                </div>     
+            </div>
+        </form>
+        {% endfor %}
+        
+
+    </div>
+    <div class="text-center">
+        <h1 class="h3 mb-0 text-gray-800 ">Edit Themed Pack Calendar</h1>
+    </div>
+    <div class="themed_price">
+    <div class="themed_inner">
+  
+
+    <div class="text-center">
+        <h1 class="h3 mb-0 text-gray-800">Price</h1>
+    </div>
+    
+    <form method='POST' action="{% url 'adminPanel:priceEdit' pack.id %}#number_travelers">
+        {% csrf_token %}
+        {{ form_price }}
+        <button type="submit" class="save button_inner"
+        style="max-width: 9.5%;
+       color:#fff"
+        >Save</button>
+    </form>
+
+    </div>
+    <div class="number_inner">
+    <div class="text-center">
+        <h1 class="h3 mb-0 text-gray-800">Number Of Travelers</h1>
+    </div>
+ 
+    <form method='POST' action="{% url 'adminPanel:quantityEdit' pack.id %}#number_travelers" id="number_travelers">
+        {% csrf_token %}
+        {{ form_quantity }}
+        <button type="submit" class="save button_inner"
+        style="max-width: 9.5%;
+       color:#fff"
+        >Save</button>
+    </form>
+</div>
+</div>
+
+                        <!----------------------END change themed pack---------------------------------------------> 
+
+                        
+
+                        
+                    
+
+
+
+
+                    
+
+                        </div> <!-- 		End of Container -->
+
+                                    </div>
+        </div>
+                 <!---------------------------------------------------------------------------------------->
+
+                
+                <!-- /.container-fluid -->
+
+            
+            <!-- End of Main Content -->
+          
+                    
+            <script>
+                
+                $(document).ready(function () {
+                    var calendar = $('#calendar').fullCalendar({
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'month,agendaWeek,agendaDay'
+                        },
+                        events: [
+                        {% for day in calendar %}
+        
+                                {
+                                    title: "Quantity: {{ day.quantity }} Price {{ day.calendar_price }}",
+                                    start: '{{ day.date|date:"d/M/Y" }}',
+                                    end: '',
+                                    id: '',
+                                    allDay: true,
+                                },
+                        {% endfor %}
+                        ],
+                        selectable: false,
+                        selectHelper: false,
+                        editable: false,
+                        eventLimit: true,
+                        eventAfterRender: function (event, element, view) {
+                            var k=event.title.split(' ');
+                    if (k[1] == 0) {
+                        
+                        //event.color = "#FFB347"; //Em andamento
+                        element.css('background-color', 'rgb(255, 64, 31)');
+                        
+                    } 
+                    else if(k[1] > 0){
+                        element.css('background-color', 'rgb(66, 185, 4)');
+                    }
+                   k[0].split('\n');
+                    console.log(k)
+// alert('Number of breaks:  ' + numberOfLineBreaks);
+                    // event.title[0].addClass('.first');
+                    // console.log(k[0])
+                    // k[0].setattribute('class', 'dkjajsl')
+                //  let quentity= document.createElement('div');
+
+                //  quentity.append(k[0]);
+                //  quentity.setAttribute('class')
+                //  element.find(".fc-title").append(quentity);
+    //   element.find(".fc-title").append('<div class="some">    </div>');
+    //   element.find(".fc-title").append('<div class="das">price' + k[1] + '</div>');
+    //   $(".fc-title").children().append('dashjdks');
+    //   console.log(  $(".fc-  title").children())
+                    // element.find('.fc-title').append('<div class="quantity"> Quantity: ' + k[0] + '</div>'  );
+                    // element.find('.quantity').append('<div class="das">price' + k[1] + '</div>')
+                    
+                },
+
+                      
+                    });
+                });
+        
+            </script>
+                <br/>
+                <h2 align="center"><a href="#"></a></h2>
+                <br/>
+                <div class="container">
+                    <div id="calendar"></div>
+                </div>
+
+                <script>
+                     $(document).ready(function(){
+  
+  $("a").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 1800, function(){
+
+        });
+        } 
+        });
+    });
+
+                </script>
+
+               
+{% endblock %}
+
+
+
+
+

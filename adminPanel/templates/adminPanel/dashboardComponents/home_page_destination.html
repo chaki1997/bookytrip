@@ -1,0 +1,61 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<div class="main_pack">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Home Page Destination</h1>
+                    </div>
+
+                   
+                    <form action="{% url 'adminPanel:homePageDestination' %}" method="POST" enctype="multipart/form-data">
+                        
+                    {% csrf_token %}
+
+                     
+                    <table class="table destination_page" id="" >
+                        
+                            <tr>
+                                
+                              
+                                <td >        
+                                    {{ form.title.label }} <span style="color: grey;">(max length: 20)</span>                          
+                                    {{ form.title }}
+
+                                    {{ form.text.label }}   <span>(max length: 330)</span>                           
+                                    {{ form.text }}
+
+                                    {{ form.video.label }}                          
+                                    {{ form.video }}
+
+                                 </td>                             
+                               
+                            </tr>
+                            
+                     </table>
+                     
+                    <div class="row  save_Delete">
+
+                        <button type="submit" class="save button_inner ">SAVE</button>
+                    
+                    </div>
+                     
+                    </form>
+
+        
+                  
+                        </div> <!-- 		End of Container -->
+
+                                    </div>
+                 
+
+                
+                <!-- /.container-fluid -->
+
+            
+            <!-- End of Main Content -->
+
+ {% endblock %}

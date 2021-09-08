@@ -1,0 +1,259 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<!-- inly in thsi page -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<!-- inly in thsi page -->
+    <!-- banner -->
+        <section id="banner_pack">
+            <video width="400"  autoplay loop muted>
+                <source src="{{ pack.big_video.url }}" type="video/mp4">
+            </video>
+            
+        </section>
+        <div id="banner_bottom_pack">
+            <div class="shape_bottom">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+                    <path class="elementor-shape-fill" opacity="0.33" d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z"></path>
+                    <path class="elementor-shape-fill" opacity="0.66" d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z"></path>
+                    <path class="elementor-shape-fill" d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z"></path>
+                </svg>
+            </div>
+        </div>
+    <!-- banner -->
+    <!-- section_why_us -->
+        <div class="spicer_section"></div>
+        <section id="Interesting_facts">
+            <div class="container">
+                <div class="section_facts">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="column_fact">
+                                <div class="column_fact_inner">
+                                    <div class="column_fact_section">
+                                        <div class="social">
+                                            <ul>
+                                                <li><i class="fab fa-facebook-f"></i></li>
+                                                <li><i class="fab fa-instagram"></i></li>
+                                                <li><i class="fab fa-linkedin-in"></i></li>
+                                            </ul>
+                                        </div>
+                                        <div class="location">
+                                        <h6>
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>Tbilisi Georgia</span>
+                                        </h6>
+                                        <h3>Take A Tour</h3>
+                                    <h2>{{ pack.pack_name }} </h2>
+                                    </div>
+                                    </div>
+                                    
+                                
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="column_inner">
+                           
+                            <div class="column_img">
+                               <img src="{{ pack.picture1.url }}" alt="">
+    
+                            </div>
+                            
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="column_inner">
+                                <div class="spicer_section"></div>
+                                 <div class="column_img">
+                                   <img src="{{ pack.picture2.url }}" alt="">
+        
+                                </div>
+                                
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!--end  section_why_us -->
+
+    <!-- section Experience -->
+    <div class="spicer_section"></div>
+    <section id="services_single_pack">
+        <div class="container">
+            <div class="row">
+                <div class="service col-lg-4 col-12 text-center">
+                    <div class="service_inner">
+                        <i class="fas fa-headset"></i>
+                        <div class="title">
+                            <h3>Experienced Guides</h3>
+                            <p>Lorem ipsum dolor sit amet cotetur adiing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="service col-lg-4 col-12 text-center">
+                    <div class="service_inner">
+                        <i class="far fa-comment-dots"></i>
+                        <div class="title">
+                            <h3>Experienced Guides</h3>
+                            <p>Lorem ipsum dolor sit amet cotetur adiing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="service col-lg-4 col-12 text-center">
+                    <div class="service_inner">
+                        <i class="fas fa-restroom"></i>
+                        <div class="title">
+                            <h3>Experienced Guides</h3>
+                            <p>Lorem ipsum dolor sit amet cotetur adiing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--section Experience -->
+
+    <!-- Tour Details -->
+    <div class="spicer_section"></div>
+    <section id="Tour_Details">
+        <div class="container">
+            <div class="section_inner">
+                <div class="row">
+                    <div class="left_side col-lg-5 col-md-12">
+                        <div class="title">
+                            <h2>Tour Details</h2>
+                        </div>
+                    </div>
+                    <!-- tour Details -->
+                    <div class="right_side col-lg-7 col-md-12">
+                        {% for day in days %}
+                        <div class="accordion-wrapper">
+                            <button class="accordion"><h3>Day {{ forloop.counter }}</h3></button>
+                            <div class="details">
+                             <p>
+                              {{ day.description }}
+                             </p>
+                            </div>
+                          </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="spicer_section"></div>
+    <!-- endTour Details  -->
+
+    <!-- testimonial carousel -->
+    <section id="testimonial carousel">
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="owl-carousel client-testimonial-carousel">
+                    {% for review in reviews %}
+                    {% if review.permition %}
+                    <div class="single-testimonial-item">
+                        <div class="image">
+                        <img src="{% static 'images/PR-021-SI-01_05_12-539.png' %}" alt="">
+                        </div>
+                       
+                            <div class="description">
+                                <h6>{{ review.review_name }}</h6>
+                                {% for star in review.stars|get_range %}
+                                    <i class="fas fa-star"></i>
+                                {% endfor %}
+                                <p>{{ review.comment }}</p>
+                            </div>
+                       
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+   
+</div>
+
+    </section>
+    <div class="spicer_section"></div>
+    <!-- testimonial carousel -->
+
+
+    <!--write review-->
+
+    <section id="faq_question">
+            <div class="container">
+                <div class="Question_inner single_review">
+                    <h2>{% trans 'Write Review' %}</h2>
+                    <div class="form_faq">
+                        <form action="{% url 'themedTour:themedreview' pack.id %}" method="Post" id="ratingForm">
+                            {% csrf_token %}
+                        <fieldset class="rating">
+                            <h4>Rate </h4>
+                            <input type="radio" id="star5" name="stars" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+                            <input type="radio" id="star4" name="stars" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+                            <input type="radio" id="star3" name="stars" value="3" /><label for="star3" title="Meh">3 stars</label>
+                            <input type="radio" id="star2" name="stars" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+                            <input type="radio" id="star1" name="stars" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+                        </fieldset>
+                            <div >
+                                <label for="Question">Your Review</label>
+                                <textarea name="comment" class="form-control " id="Question" placeholder="Here you can leave your question"></textarea>
+                            </div>
+                            <div class="Send">
+                                <input type="submit" value="Send">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section> 
+    <!--write review -->
+
+<!-- 
+    <div class="reservation_none">
+        <span>You can not leave the review before tour is started</span>
+    </div> -->
+
+
+<!-- bottom booking -->
+<section id="booking_bottom">
+    <div class="container" style="height: 100%;">
+        <div class="section_inner">
+            <div class="Total_cost">
+                <p>Total Cost: <span>€ {% widthratio pack.price 4 1 %}</span></p>
+            </div>
+           
+                <a href="{% url 'themedTour:packorder' pack.id %}" id="packid"> {% url 'themedTour:packorder' pack.id %}</a>
+           
+            {% if request.user.is_authenticated %}
+                <div class="booking"  >
+                    <a href="{% url 'themedTour:packorder' pack.id %}" id="confirmClickActionElementId">
+                    Book Now
+                    </a>
+                </div>
+            {% else %}
+                <div class="booking"  >
+                    <a href="" data-toggle="modal" data-target="#login_signUp" id="confirmClickActionElementId">
+                    Book Now
+                    </a>
+                </div>
+                {% url 'themedTour:packorder' pack.id %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!-- only in this page -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="{% static 'js/manual/testimonial.js' %}"></script>
+<!-- only in this page -->
+<!-- bottom booking -->
+{% endblock %}

@@ -1,0 +1,167 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <!-- banner Reservation -->
+    <section id="reservation_banner">
+        <div class="container">
+            <div class="service_inner">
+                <div class="row">
+                    <div class="active col-lg-4 col-md-12">
+                        <div class="column">
+                            <div class="column_inner">
+                                <i class="fas fa-user-tie"></i>
+                                <div class="inner_header">
+                                    {% trans 'My BookyTrip Profile' %}
+                                    <i class="fas fa-angle-double-right" style="position:relative; left:4px; "></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class=" col-lg-4 col-md-12">
+                        <div class="column">
+                            <div class="column_inner">
+                                <a href="">
+                                <i class="fab fa-researchgate"></i>
+                                <div class="inner_header">
+                                    {% trans 'My Reservation' %}
+                                    <i class="fas fa-angle-double-right" style="position:relative; left:4px; "></i>
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="column">
+                            <div class="column_inner">
+                                <a href="{% url 'userProfile:ratepartners' %}">
+                                <i class="fas fa-users"></i>
+                                <div class="inner_header">
+                                    {% trans 'Rate Booky Partners' %}
+                                    <i class="fas fa-angle-double-right" style="position:relative; left:4px; "></i>
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="banner_bottom_pack" class="reservation">
+        <div class="shape_bottom">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+                <path class="elementor-shape-fill" opacity="0.33"
+                    d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z">
+                </path>
+                <path class="elementor-shape-fill" opacity="0.66"
+                    d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z">
+                </path>
+                <path class="elementor-shape-fill"
+                    d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z">
+                </path>
+            </svg>
+        </div>
+    </div>
+    <!-- banner Reservation -->
+
+
+    <!-- my account info -->
+
+    <div id="myAccount">
+        <div class="container">
+            <div class="offset-lg-2  col-lg-8 col-md-12">
+                <div class="myaccount_section">
+                    <h2 class="text-center">My Booky Profile</h2>
+                    <div class="row">
+                        <div class=" left_side col-lg-3 col-md-12">
+                            <img src="{{ request.user.picture.url }}" alt="">
+                        </div>
+                        <div class=" right_side col-lg-9 col-md-12">
+                            <div class="right_side_inner">
+                               
+                                <div class="profile_info">
+                                    <div class=" inner_profile name_surname">
+                                        <div class="name">
+                                            <h4>Name</h4>
+                                            <p>{{ request.user.name }} </p>
+                                        </div>
+                                        <div class="surname">
+                                            <h4>Surnmae</h4>
+                                            <p>{{ request.user.surname }}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="inner_profile email">
+                                        <h4>Email</h4>
+                                        <p>{{ request.user.email }}</p>
+                                    </div>
+                                    <hr>
+                                    <div class="inner_profile date_birth">
+                                        <h4>Date Of Birth</h4>
+                                        <p>{{ request.user.date_of_birth }}</p>
+                                    </div>
+                                    <hr>
+                                    <div class="inner_profile telephone">
+                                        <h4>Telephone</h4>
+                                        <p>{{ request.user.phone }}</p>
+                                    </div>
+                                    <hr>
+                                    <div class="update_user"  data-toggle="modal" data-target="#exampleModal">
+                                        Update Account  
+
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal changeProfile fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            
+          <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-center">Change My Account</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               
+                <form action="{% url 'userProfile:customerProfile' request.user.id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form_inner">
+                        <div class=" form_components name">
+                            {{ form.name }}
+                            {{ form.surname }}
+                        </div>
+                        <div class="form_components email">
+                            {{ form.email }}
+                         </div>
+                        <div class="form_components password">
+                            {{ form.phone }}
+                            {{ form.date_of_birth }}
+                         </div>
+                        <div class="change_account_img"> 
+                            <img src="{{ request.user.picture.url }}">
+                        </div>
+                        <div class=" form_components phone">
+                            {{ form.picture }}
+                        </div>
+                         <button type="submit" class="form-control update_user save">Update Profile</button>
+                    </div>
+                </form>
+                
+            </div>
+          </div>
+        </div>
+    </div>
+            
+    <!-- my account info -->
+{% endblock %}

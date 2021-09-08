@@ -1,0 +1,44 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<div class="main_pack">
+
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Contacts</h1>
+        </div>
+       
+
+
+<div class="row align-items-center change_username">
+    <div class="col-xl-5 col-lg-5 col-md-10 col-sm-10">
+        <div class="content title">
+            <h5>Name Surname:</h5>                                    
+            <p>{{ contact.name }}  {{ contact.surname }}</p>
+        </div>
+        <hr>
+        
+        <div class="content gmail">
+            <h5>Email:</h5>
+            <p>  {{ contact.email }}</p>
+        </div>
+        <hr>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-10">
+    <div class="Description">
+        <h5>Message:</h5>
+        <p> {{ contact.text }}</p>
+    </div>
+    </div>
+</div>
+
+
+</div>
+</div>
+
+{% endblock %}
+
+
+

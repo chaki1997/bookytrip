@@ -1,0 +1,168 @@
+{% extends 'userProfile/base_supplier.html' %}
+{% block content %}
+{% load static %}
+                 <!-- Begin Page Content -->
+                 <div class="container">
+                    <div class="row">
+                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 mx-auto">
+
+
+                            
+                            <div class="card mb-6">
+                                <div class="row no-gutters ">
+                                  <div class="col-md-4">
+                                    <img src="{{ request.user.picture.url }}" class="card-img" alt="...">
+                                    <span class="ratestar">
+                                        <span class="rateper">5.0</span>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </span>
+                                    <button id="myBtn" class="btn btn-md btn-primary btn-block" data-toggle="modal" data-target="#exampleModal">Edit your profile</button>
+                                  </div>
+                                  
+                                  <div class="col-md-8">
+                                    <div class="card-body profileul">
+                                        <ul>
+                                            <li>
+                                                <h6 class="card-title">Name: 
+                                                    <span>{{ request.user.name }} </span>
+                                                </h6>
+                                            </li>
+                                            <hr>
+                                            <li>
+                                                <h6 class="card-title">Last name: 
+                                                    <span>{{ request.user.surname }}</span>
+                                                </h6>
+                                            </li>
+                                            <hr>
+                                      
+                                            <li>
+                                                <h6 class="card-title">Email: 
+                                                    <span>{{ request.user }}</span>
+                                                </h6>
+                                            </li>
+                                            <hr>
+                                            <li>
+                                                <h6 class="card-title">Date of birth: 
+                                                    <span>{{ request.user.date_of_birth }}</span>
+                                                </h6>
+                                            </li>
+                                            <hr>
+                                            <li>
+                                                <h6 class="card-title">Phone: 
+                                                    <span>{{ request.user.phone }}</span>
+                                                </h6>
+                                            </li>
+                                            
+                                            <!-- <li>
+                                                <button id="myBtn" class="btn btn-md btn-primary ss">Edit your profile</button>
+                                            </li> -->
+                                        </ul>
+                                    </div>
+                                   
+                                  </div>
+                                </div>
+                              </div>
+
+
+
+                              <!-- Button trigger modal -->
+ 
+ 
+  
+  <!-- Modal -->
+  <div class="modal fade suplier_profile" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title editpro" id="">Edit profile</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+            <form action="{% url 'userProfile:supplierProfile' request.user.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6 col-sm-10">
+                  <label for="name" class="lbinp">Name</label>
+                  {{ form.name }}
+                </div>
+                <div class="col-md-6 col-sm-10">
+                    <label for="lastname" class="lbinp">Last Name</label>
+                    {{ form.surname }}
+                </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-10">
+                        <label for="username" class="lbinp">Email</label>
+                        {{ form.email }}
+                    </div>
+ 
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-10">
+                        <label for="email" class="lbinp">Phone</label>
+                        {{ form.phone }}
+                    </div>
+                    <div class="col-md-6 col-sm-10">
+                        <label for="date_of_birth" class="lbinp">Date of birth</label>
+                        {{ form.date_of_birth }}
+                    </div>
+
+                    <div class="adminpanel_account_img"> 
+                        <img src="{{ request.user.picture.url }}">
+                    </div>
+
+                    <div class="col-md-12 col-sm-10">
+                        <label for="change_image" class="lbinp">Change image</label>
+                        {{ form.picture }}
+                    </div>
+                </div>
+            
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+         
+                </div>
+            </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+                
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

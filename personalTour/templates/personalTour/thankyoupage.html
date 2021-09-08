@@ -1,0 +1,21 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+
+<div class="thank_you_page text-center">
+    <h1 class="display-3">Thank You!</h1>
+    <p class="lead"><strong>Please check your email</strong> </p>
+    <hr>
+    <p>
+      Having trouble? <a href="{% url 'components:contact' %}">Contact us</a>
+    </p>
+    <p class="">
+      <a class="btn  btn-sm lead_read" href="{% url 'homepage:homepage' %}" role="button">Continue to homepage</a>
+    </p>
+  </div>
+
+
+
+{% endblock %}

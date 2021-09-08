@@ -1,0 +1,45 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<div class="main_pack">
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Interesting Facts</h1>
+        {% if number_of_facts < 4 %}
+            <div class="add">
+                    <a href="{% url 'adminPanel:interestingFactAdd' %}">Add Fact</a>
+            </div>
+        {% endif %}
+    </div>
+
+                 
+
+    <!-- Content Row -->
+    <table class="table" id= "table-id">
+    <thead>
+        <tr>
+            <th>
+                
+            </th>
+            <th >Facts</th>
+            <th ></th>
+            <th ></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fact in facts %}
+            <tr>
+                <td></td>
+                <td colspan="2"><a href="{% url 'adminPanel:interestingFactEdit' fact.id %}">{{ fact.title }}</a></td>
+                <td><a href="{% url 'adminPanel:interestingFactEdit' fact.id %}">Edit</a> </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+</div> 
+
+ {% endblock %}

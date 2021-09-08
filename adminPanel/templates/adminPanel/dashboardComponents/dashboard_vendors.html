@@ -1,0 +1,50 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .vendor_img img{
+        width: 80px;
+    }
+</style>
+<div class="main_pack">
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Vendors</h1>
+            <div class="add">
+                <a href="{% url 'adminPanel:dashboardVendorAdd' %}">Add Vendor</a>
+            </div>
+    </div>
+
+    <!-- Content Row -->
+    <table class="table" id= "table-id">
+    <thead>
+        <tr>
+            <th>
+               
+            </th>
+            <th >Vendors</th>
+            <th ></th>
+            <th ></th>
+            
+        </tr>
+    </thead>
+    <tbody class="vendor_img">
+        
+        {% for vendor in vendors %}
+            <tr>
+                <td></td>
+                <td colspan="2">    <img src="{{ vendor.logo.url }}" alt=""></td>
+                <td class="delete confirmation"><a href="{% url 'adminPanel:dashboardVendorDelete' vendor.id %}">
+                                                Delete</a> </td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+    </table>
+
+</div> 
+
+ {% endblock %}

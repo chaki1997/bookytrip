@@ -1,0 +1,65 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Select Country To Change</h1>
+        <div class="add">
+            <a href="{% url 'adminPanel:addCountry' %}">Add Country</a>
+        </div>
+    </div>
+
+    
+
+    <!-- Content Row -->
+        <table class="table" id= "table-id">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" class="checkAll" name="checkAll" />
+                </th>
+                <th >Country</th>
+                <th ></th>
+                <th ></th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for country in countries %}
+                <tr>
+                    <td><input type="checkbox" name="item[]" value="1"></td>
+                    <td colspan="2"><a href="{% url 'adminPanel:dashboardCities' country.id %}"> {{ country.country.name }} </a></td>
+                    <td class="delete"><a href="{% url 'adminPanel:deleteCountry' country.id %}" class="confirmation"> Delete Country</a> </td>
+
+                </tr>
+            {% endfor %}
+    
+        </tbody>
+    </table>
+    
+
+        <!--		Start Pagination -->
+        <div class='pagination-container'>
+            <nav>
+            <ul class="pagination">
+            <!--	Here the JS Function Will Add the Rows -->
+            </ul>
+            </nav>
+        </div>
+        <!-- <div class="rows_count">Showing 11 to 20 of 91 entries</div> -->
+
+        </div> <!-- 		End of Container -->
+
+                    </div>
+    
+
+
+<!-- /.container-fluid -->
+
+
+<!-- End of Main Content -->
+
+{% endblock %}

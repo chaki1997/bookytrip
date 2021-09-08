@@ -1,0 +1,78 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!----------------------------------------------------------------------------------->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Car Reviews</h1>
+
+                    </div>
+
+
+                    <!-------------------THEMED PACK REVIEW---------------------------> 
+                    
+                    <table class="table " id= "table-id">
+                        <div class="row">
+                      <thead>
+                          <tr>
+                              <th style="width: 35px;">
+                                 
+                              </th>
+                              <th class="AcomodationHeader">Car Reviews</th> 
+                              <th ></th> 
+                              <th ></th> 
+                              <th ></th> 
+                              <th ></th> 
+                            </tr>
+   
+                      </thead>
+  
+                      <tbody >
+                        {% for review in dashboard_car %}
+                            {% if review.id in car_review_notification_tuple %}
+                              <tr>
+                                  <td class=""></td>
+                                    <td class="new_class"><a href="{% url 'adminPanel:carReviewEdit' review.id %}">{{ review.car }} | {{ review.user }}</a>
+                                       </td>
+                                    <td> <span class="new_inner" > NEW</span></td>
+                                    <td> <a href="{% url 'adminPanel:carReviewEdit' review.id %}">Edit </a> </td>
+                                    <td class="delete" > <a href="{% url 'adminPanel:carReviewDelete' review.id %}">Delete Items </a> </td>
+                                    <td></td>
+                              </tr>
+                                {% else %}
+                                <tr>
+                                    <td class=""></td>
+                                      <td class=""><a href="{% url 'adminPanel:carReviewEdit' review.id %}">{{ review.car }} | {{ review.user }}</a></td>
+                                      <td></td>
+                                      <td> <a href="{% url 'adminPanel:carReviewEdit' review.id %}">Edit </a> </td>
+                                      <td class="delete confirmation" > <a href="{% url 'adminPanel:carReviewDelete' review.id %}">Delete Items </a> </td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+                      </tbody>
+                      </table>
+                      
+
+
+                            <!---------------- END THEMED PACK REVIEW----------------->
+
+                        </div>       
+                         <!-- 		End of Container -->
+
+                </div>
+            
+
+                
+                <!-- /.container-fluid -->
+
+            
+            <!-- End of Main Content -->
+
+{% endblock %}
+
+
+
+

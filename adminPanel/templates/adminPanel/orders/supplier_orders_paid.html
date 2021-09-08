@@ -1,0 +1,170 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% block content %}
+{% load static %}
+
+                 <div class="container">
+                   
+                    <div class="row">
+                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
+                          <div class="filter_table_supplier">
+                            <!-- <select name="Hotels" class="select-table-filter form-control" data-table="order-table">
+                              <option value="">Accomodation</option>
+                              {% for accommodation in accommodations %}
+                                <option value="{{ accommodation }}">{{ accommodation }}</option>
+                              {% endfor %}
+                            </select> -->
+                            
+                            <select name="Suppliers" class="select-table-filter form-control" data-table="order-table">
+                              <option value="">Supplier</option>  
+                              {% for supplier in suppliers %}
+                                <option value="{{ supplier }}">{{ supplier }}</option>
+                              {% endfor %}
+                            </select>
+                            </div>
+
+                            
+                          <div class="persontitle">
+                            <h2>Current Payments</h2>
+                         </div>
+                         <!------------ USER TABLE ----------->
+                          
+                         <div class="boxsshadautab">
+                             <table class="table order-table">
+                                 <thead class="table_bgcolor">
+                                   <tr>
+                                     <th>ORDER NUMBER</th>
+                                     <th>ITEM</th>
+                                     <th>TITLE</th>
+                                     <th>START DATE</th>
+                                     <th>END DATE</th>
+                                     <th>Order Date</th>
+                                     <th>PRICE</th>
+                                     <th>Supplier</th>
+                                   </tr>
+                                 </thead>
+         
+                                 
+                                 <tbody>
+                                 {% for hotel in hotels %}
+                                   <tr class="currentpay">
+                                         <td>{{hotel.id}}</td>
+                                       {% if hotel.hotel.hotel_name.accommodation_type == '1' %}
+                                         <td>Hotel</td>
+                                       {% else %}
+                                        <td>Hotel</td>
+                                       {% endif %}
+                                       <--1,hotel_order, 2.hotel, 3.accomodation --/>
+                                         <td>{{hotel.hotel.hotel_name.name}}</td>
+                                         <td>{{hotel.hotel_order_start_date}}</td>
+                                         <td>{{hotel.hotel_order_end_date}}</td>
+                                         <td>10/25/2020</td>
+                                         <td>{{hotel.order_price}} EUR</td>
+                                         <td>{{hotel.hotel.hotel_name.user}}</td>
+
+                                     </tr>
+                                 {% endfor %}
+                                   <tr class="currentpay">
+                                         <td>23</td>
+                                         <td>Hotel</td>
+                                         <td>tbilisi grand hotel</td>
+                                         <td>10/25/2020</td>
+                                         <td>10/30/2020</td>
+                                         <td>10/25/2020</td>
+                                         <td>556 EUR</td>
+                                         <td>supplier16@gmail.com</td>
+                                     </tr>
+                                   <tr class="currentpay">
+                                         <td>23</td>
+                                         <td>Hotel</td>
+                                         <td>tbilisi grand hotel</td>
+                                         <td>10/25/2020</td>
+                                         <td>10/30/2020</td>
+                                         <td>10/25/2020</td>
+                                         <td>556 EUR</td>
+                                         <td>zako123@gmail.com</td>
+                                     </tr>
+                                 </tbody>
+                            
+                                
+                             </table>
+                         </div>
+
+
+
+                            
+
+                        </div>
+                    </div>
+                </div>
+<script>
+  (function(document) {
+	'use strict';
+
+	var LightTableFilter = (function(Arr) {
+
+		var _input;
+    var _select;
+
+		function _onInputEvent(e) {
+			_input = e.target;
+			var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+			Arr.forEach.call(tables, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, _filter);
+				});
+			});
+		}
+    
+		function _onSelectEvent(e) {
+			_select = e.target;
+			var tables = document.getElementsByClassName(_select.getAttribute('data-table'));
+			Arr.forEach.call(tables, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, _filterSelect);
+				});
+			});
+		}
+
+		function _filter(row) {
+      
+			var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+
+		}
+    
+		function _filterSelect(row) {
+     
+			var text_select = row.textContent.toLowerCase(), val_select = _select.options[_select.selectedIndex].value.toLowerCase();
+			row.style.display = text_select.indexOf(val_select) === -1 ? 'none' : 'table-row';
+
+		}
+
+		return {
+			init: function() {
+				var inputs = document.getElementsByClassName('light-table-filter');
+				var selects = document.getElementsByClassName('select-table-filter');
+				Arr.forEach.call(inputs, function(input) {
+					input.oninput = _onInputEvent;
+				});
+				Arr.forEach.call(selects, function(select) {
+         select.onchange  = _onSelectEvent;
+				});
+			}
+		};
+	})(Array.prototype);
+
+	document.addEventListener('readystatechange', function() {
+		if (document.readyState === 'complete') {
+			LightTableFilter.init();
+		}
+	});
+
+})(document);
+</script>
+
+{% endblock %}
+
+
+
+
+

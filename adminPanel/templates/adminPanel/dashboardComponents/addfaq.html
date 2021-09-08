@@ -1,0 +1,130 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+{% load i18n %}
+<div class="main_pack">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!----------------------------------------------------------------------------------->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Add FAQ</h1>
+                        <!-- <div class="add">
+                            <a href="#"></a>
+                        </div> -->
+                    </div>
+
+
+
+                    <!-------------------------------ADD FAQ ------------------------> 
+
+            <form action="{% url 'adminPanel:addFaq' %}" method="POST">
+                {% csrf_token %}
+                <div class="contentalladd">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <div class="row align-items-center change_username">
+                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+                                            <label for="question" class="col-form-label">question:</label>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10">
+                                            <div class="form-floating">
+                                                <textarea  id="question" class="form-control" placeholder="" name="question" style="height: 100px"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </thead>
+                        </table>
+    
+    
+                        <table>
+                            <thead>
+                                <tr>
+                                    <div class="row align-items-center change_username">
+                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                                            <label for="questiontype" class="col-form-label">question type:</label>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-10">
+                                            <select id="questiontype" class="form-select form-control" name="question_type">
+                                                <option value="1">{% trans 'Pre-Sale Questions' %}</option>
+                                                <option value="2">{% trans 'Other Type Questions' %}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </thead>
+                        </table>
+    
+    
+    
+                        <table>
+                            <thead>
+                                <tr>
+    
+                                    <!--------- answer --------->
+                                    <div class="row align-items-center answer">
+                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+                                        <label for="answer" class="col-form-label">answer:</label>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10">
+                                            <div class="form-floating">
+                                                <textarea id="answer" class="form-control" placeholder="" style="height: 100px" name="answer"></textarea>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </thead>
+                        </table>
+    
+    
+    
+                        <div class="change_faqckack">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <div class="form-check checkbox">
+                                            <input class="form-check-input" type="checkbox" id="permition" name="permition" >
+                                            <label class="form-check-label" for="permition">Display on front-end</label>
+                                        </div>
+    
+                                    </tr>   
+                                </thead>
+                            </table>
+                        </div>
+    
+    
+                        <div class="row  save_Delete">
+                            
+                            <button type="submit" class="save col-xl-2 col-lg-3 col-md-3 col-sm-4 ">SAVE</button>
+                   
+                          <!-- <button type="button" class="Delete2 col-xl-2 col-lg-3 col-md-3 col-sm-4 ">Delete</button> -->
+                        
+                      </div>
+                </div>
+            </form>
+
+            <!-------------------------------AND ADD FAQ ------------------------> 
+                    
+
+
+
+
+
+
+                        </div> <!-- 		End of Container -->
+
+                                    </div>
+                 <!---------------------------------------------------------------------------------------->
+
+                
+                <!-- /.container-fluid -->
+
+            
+            <!-- End of Main Content -->
+
+{% endblock %}
+
+
+
+

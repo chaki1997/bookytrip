@@ -1,0 +1,58 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+ <!-- Begin Page Content -->
+ <div class="main_pack">
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">change Accomodation</h1>
+                    </div>
+
+                 
+
+               
+<div class="acomodationSubPage">
+    <form action="{% url 'adminPanel:dashboardAccomodationAdd' %}" class="form-group container-fluid" method="POST" enctype="multipart/form-data"> 
+        {% csrf_token %}
+            <div class="contentalladd">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <div class="row align-items-center change_username">
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+                                    {{ form }}
+                                </div>
+                            </div>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        <div class="row  save_Delete">
+                            
+            <button type="submit" class="save col-xl-2 col-lg-3 col-md-3 col-sm-4 ">SAVE</button>
+   
+        </div>
+
+    </form>
+
+</div>
+                          
+                   
+
+
+
+                        </div> <!-- 		End of Container -->
+
+                                    </div>
+                 
+
+                
+                <!-- /.container-fluid -->
+
+            
+            <!-- End of Main Content -->
+
+{% endblock %}

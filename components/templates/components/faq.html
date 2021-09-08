@@ -1,0 +1,118 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <!-- section Experience -->
+    <div class="spicer_section_50"></div>
+        <section id="Faq">
+            <div class="container">
+                <div class="faq_inner">
+                    <h2>{% trans 'Pre-Sale Questions' %}</h2>
+                        <div class="right_side col-lg-12 col-md-12">
+                            {% for faq in faqs %}
+                                {% if faq.permition %}
+                                    {% if faq.question_type == '1' %}
+                            <div class="accordion-wrapper">
+                                <button class="accordion"><h3>{{ faq.question }}</h3></button>
+                                <div class="details">
+                                <p>
+                                    {{ faq.answer }}
+                                </p>
+
+                                </div>
+
+
+
+
+                            </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                 </div>
+
+
+        </div>
+    </section>
+        <section id="Faq">
+            <div class="container">
+                <div class="faq_inner">
+                    <h2>{% trans 'Other Types' %}</h2>
+                        <div class="right_side col-lg-12 col-md-12">
+                            {% for faq in faqs %}
+                                {% if faq.permition %}
+                                    {% if faq.question_type == '2' %}
+                            <div class="accordion-wrapper">
+                                <button class="accordion"><h3>{{ faq.question }}</h3></button>
+                                <div class="details">
+                                <p>
+                                    {{ faq.answer }}
+                                </p>
+
+                                </div>
+                            </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                 </div>
+
+
+        </div>
+    </section>
+
+
+<div class="spicer_section"></div>
+<section id="faq_question">
+        <div class="container">
+            <div class="Question_inner">
+                <h2>{% trans 'Ask Question' %}</h2>
+                <div class="form_faq">
+                    <form action="{% url 'components:faq' %}" method="Post">
+                        {% csrf_token %}
+                            <div class="question_type">
+                                {{ form }}
+
+                            <div class="Send">
+                                {% if request.user.is_authenticated %}
+                                <input type="submit" value="Send Question">
+                                {% else %}
+                                <input type="submit" value="First Log in">
+                                {% endif %}
+                            </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+</section>
+    
+   
+    <div class="spicer_section"></div>
+
+<script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+    </script>
+
+<script>
+    document.getElementById("confirmClickActionElementId")
+    .addEventListener("click", function( e ){ //e => event
+        if( ! confirm("Do You want To go in Checkout") ){
+            e.preventDefault(); // ! => don't want to do this
+        } 
+    });
+</script>
+<!-- only in this page -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="assets/js/manual/testimonial.js"></script>
+<!-- only in this page -->
+ 
+{% endblock %}

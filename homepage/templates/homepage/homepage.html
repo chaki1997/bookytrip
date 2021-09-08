@@ -1,0 +1,501 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <!-- banner -->
+
+<section id="banner">
+<div class="container">
+    <div class="banner_section_inner">
+        <div class="row no-gutters">
+            <div class="column_left col-lg-5 col-md-12 col-12">
+                <div class="element_animation">
+                    <img src="{% static 'images/Group_6.svg' %}" alt="" style="width: 80px;">
+                    
+                </div>
+                <div class="column_inner column_left_inner " data-toggle="modal" data-target=".bd-example-modal-lg">
+                    <div class="column_inner_section">
+                    <div class="img">
+                        <img src="{% static 'images/traveling-clipart-travel-sticker-2.gif' %}" alt="">
+                    </div>
+                    <h3 class="title">{{ themeVideo.name }}</h3>
+                    <div class="description ">
+                        <p>
+                    {{ themeVideo.description }}
+                </p>   
+                </div>
+                </div>
+                </div>
+            </div>
+            <div class="column_center col-lg-2 col-md-12 col-12 ">
+                <div class="column_center_inner">
+                    <div >
+                        <h2 id="app" ></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="  column_right col-lg-5 col-md-12 col-12" >
+                <div class="element_animation">
+                    <img src="{% static 'images/Group_6.svg' %}" alt="" style="width: 80px;">
+                </div>
+                <div class=" column_inner column_right_inner" data-toggle="modal" data-target=".second_modal_personal">
+                    <div class="column_inner_section">
+                        <div class="img">
+                            <img src="{% static 'images/traveling-clipart-travel-sticker-2.gif' %}" alt="">
+                        </div>
+                        <h3 class="title">{{ personalVideo.name }}</h3>
+                        <div class="description ">
+                            <p>
+                            {{ personalVideo.description }}
+                        </p>   
+                        </div>
+                        </div>
+                </div>
+            </div>
+            <!-- modal box in Booky Packs -->
+            <div id="BookyPacks_Popup">
+                <!-- Large modal -->
+                <div class="modal fade bd-example-modal-lg " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                    <div class="Destination_section">
+                        <form action="" method="" class="form_layers">
+                        <div class="row" style="justify-content: center;">
+                            <div class="choose_form Destination  col-lg-2 col-md-12">
+                                <label for="Destination">Destination</label>
+                                <select name="" class="selectpicker form-control" id="Destination" required>
+                                    <option selected> Choose Counties</option>
+                                    {% for country in countries %}
+                                        <option value="{{ country.country.name }}">{{ country.country.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="choose_form departure col-lg-2 col-md-12">
+                                <label for="departure">Departure</label>
+                                <select name="" class="selectpicker form-control" id="departure" required>
+                                    {% for city in cities %}
+                                    <option value="{{ city.city }}">{{ city.city }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="choose_form Departure_Date  col-lg-2 col-md-12">
+                                <label for="Departure_Date">Departure Date</label>
+                                
+                                    <input class="form-control date_input " placeholder="DD/MM/YYYY"
+                                           autocomplete="off" id="depart_date" name="" type="date" required>
+                                
+                            </div>
+                            <!-- გასარკვევია -->
+                            <div class="choose_form duration col-lg-1 col-md-12">
+                                <label for="duration">duration</label>
+                                
+                                <select name="" class="selectpicker form-control" id="duration" required>
+                                    <option selected disabled>-----</option>
+                                    {% for duration in durations %}
+                                        <option value="{{ duration.duration }}">{{ duration.duration }}</option>
+                                    {% endfor %}
+                                </select>
+                                
+                            </div>
+                            <div class="choose_form Travelers col-lg-3 col-md-12">
+                                <label for="Travelers">Number Or Travelers</label>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="false"
+                                    aria-expanded="false">
+                                    <span>Adult: </span> <span id="room"> 1</span>
+                                    <span> Children :</span> <span id="adult"> 0</span>
+                                    <span> Room :</span> <span id="rooms"> 1</span>
+                                </button>
+                                    <div class="dropdown-menu keep-open" aria-labelledby="dropdownMenuButton"
+                                    style="width: 285px;">
+                                    <div class="dropdown-item">
+
+                                        <div class="rooms_dropdown_ranger">
+                                        <div class="rooms_choise_text">
+                                            <h6>Adults</h6>
+                                        </div>
+                                        <div class="calculation_choise_numb">
+                                            <div class="value-button" id="decrease" onclick="decreaseValue()"
+                                            value="Decrease Value">-</div>
+                                            <input type="number" id="number" value="1" disabled
+                                            style="background: transparent; color: black;" />
+                                            <div class="value-button" id="increase" onclick="increaseValue()"
+                                            value="Increase Value">+</div>
+                                        </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="dropdown-item">
+
+                                        <div class="rooms_dropdown_ranger">
+                                        <div class="rooms_choise_text">
+                                            <h6>Children</h6>
+                                        </div>
+                                        <div class="calculation_choise_numb">
+                                            <div class="value-button" id="decrease"
+                                            onclick="decreaseValuee()" value="Decrease Value">-</div>
+                                            <input type="number" id="numbers" value="0" disabled
+                                            maxlength="10"
+                                            style="background: transparent; color: black;" />
+                                            <div class="value-button" id="increase"
+                                            onclick="increaseValuee()" value="Increase Value">+</div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-item">
+
+                                        <div class="rooms_dropdown_ranger">
+                                        <div class="rooms_choise_text">
+                                            <h6>Room</h6>
+                                        </div>
+                                        <div class="calculation_choise_numb">
+                                            <div class="value-button" id="decrease"
+                                            onclick="decreaseValueee()" value="Decrease Value">-</div>
+                                            <input type="number" id="numberss" value="1" disabled
+                                            maxlength="10"
+                                            style="background: transparent; color: black;" />
+                                            <div class="value-button" id="increase"
+                                            onclick="increaseValueee()" value="Increase Value">+</div>
+                                        </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="submit_button center_b col-lg-2 col-md-12">
+                                <button type="submit" class="form-control" formaction="{% url 'themedTour:packchoice' %}"  onclick="getData()" >Actualized</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- modal box in Booky Packs -->
+            <div id="BookyPacks_Popup">
+                <!-- Large modal -->
+                <div class="modal fade bd-example-modal-lg second_modal_personal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                    <div class="Destination_section">
+                        <form action=""  method="" class="form_layers">
+                            <div class="row" style="width: 100%; justify-content: center;">
+                            <div class="choose_form Destination form_choose_all col-lg-2 col-md-12">
+                                <label for="Destination">Destination</label>
+                                <select name="" class="selectpicker form-control" id="Destinations" required>
+                                    <option value="Georgia">Georgia</option>
+                                </select>
+                            </div>
+                            
+                            <div class="choose_form Departure_Date form_choose_all col-lg-2 col-md-12">
+                                <label for="Departure_Date">Start Departure Date</label>
+                                
+                                    <input class="form-control date_input " autocomplete="off" placeholder="DD/MM/YYYY"
+                                           id="textfield7" name="" type="date" required>
+                                
+                            </div>
+                           
+                            <div class="choose_form length_member form_choose_all col-lg-2 col-md-12">
+                                <div class="Guests_single_hotel" style="width: 100%;     justify-content: center;">
+                                    <label for="">Number Of Travelers</h6>
+                                    <div class="dropdown" style="margin-top: 17px;">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" 
+                                        aria-expanded="false" data-bs-toggle="dropdown" aria-expanded="true">
+                                        <span>Adult: </span> <span id="room22"> 1</span>
+                                        <span> Children :</span> <span id="adult22"> 0</span>
+                                        <span> Room :</span> <span id="rooms22"> 1</span>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                        style="width: 285px;">
+                                        <div class="dropdown-item">
+
+                                            <div class="rooms_dropdown_ranger">
+                                            <div class="rooms_choise_text">
+                                                <h6>Adults</h6>
+                                            </div>
+                                            <div class="calculation_choise_numb">
+                                                <div class="value-button" id="decrease" onclick="decreaseValue1()"
+                                                value="Decrease Value">-</div>
+                                                <input type="number" id="number1" value="1" disabled
+                                                style="background: transparent; color: black;" />
+                                                <div class="value-button" id="increase" onclick="increaseValue1()"
+                                                value="Increase Value">+</div>
+                                            </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="dropdown-item">
+
+                                            <div class="rooms_dropdown_ranger">
+                                            <div class="rooms_choise_text">
+                                                <h6>Children</h6>
+                                            </div>
+                                            <div class="calculation_choise_numb">
+                                                <div class="value-button" id="decrease"
+                                                onclick="decreaseValuee2()" value="Decrease Value">-</div>
+                                                <input type="number" id="numbers2" value="0" disabled
+                                                maxlength="10"
+                                                style="background: transparent; color: black;" />
+                                                <div class="value-button" id="increase"
+                                                onclick="increaseValuee2()" value="Increase Value">+</div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-item">
+
+                                            <div class="rooms_dropdown_ranger">
+                                            <div class="rooms_choise_text">
+                                                <h6>Room</h6>
+                                            </div>
+                                            <div class="calculation_choise_numb">
+                                                <div class="value-button" id="decrease"
+                                                onclick="decreaseValueee3()" value="Decrease Value">-</div>
+                                                <input type="number" id="numberss3" value="1" disabled
+                                                maxlength="10"
+                                                style="background: transparent; color: black;" />
+                                                <div class="value-button" id="increase"
+                                                onclick="increaseValueee3()" value="Increase Value">+</div>
+                                            </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="submit_button col-lg-2 col-md-12" >
+                                <button type="submit" class="form-control"  formaction="{% url 'personalTour:accomodationMiddle' %}" onclick="getDataa()">Actualized</button>
+                            </div>
+                            </div>
+                                <div id="myModal" class="modal">
+
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <p>the number of Bookytriper being more than 10, please contact our services at 0X XX XX XX XX or schedule a call
+                                        with a Booky administrator&quot</p>
+                                    </div>
+                                
+                                </div>
+
+                            
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</section>
+<div id="banner_bottom">
+<div class="shape_bottom">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+        <path class="elementor-shape-fill" opacity="0.33" d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z"></path>
+        <path class="elementor-shape-fill" opacity="0.66" d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z"></path>
+        <path class="elementor-shape-fill" d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z"></path>
+    </svg>
+</div>
+</div>
+<!-- banner -->
+<!-- section_why_us -->
+<div class="spicer_section"></div>
+<section id="Why_us">
+<div class="container">
+    <div class="section">
+        <div class="section_inner">
+            <h2>{% trans 'Why Us' %}</h2>
+            <div class="spicer_section"></div>
+            <!-- services -->
+            <div class="row">
+            {% for us in why_us %}
+                        <div class="section_column col-lg-4 col-md-6 col-sm-6 col-12">
+                            
+                                <div class="section_column col-lg-12 col-md-12 col-sm-12 col-12">
+                                   
+                                    <div class="services ">
+                                        <div class="services_inner">
+                                            <div class="service_cover">
+                                                <div class="service_icon">
+                                                    <img src="{{ us.image.url }}" alt="">                                  
+                                                    <!-- <i class="fas fa-medal"></i> -->
+                                                </div>
+                                            </div>
+                                            <div class="service_description">
+                                                <h3>{{ us.title }}</h3>
+                                                <p>{{ us.text }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            
+                        </div>
+                        {% endfor %}
+                        </div>
+            <!-- services end -->
+        </div>
+    </div>
+</div>
+</section>
+<!--end  section_why_us -->
+
+<!-- Enjoy SOme you -->
+<div class="spicer_section"></div>
+<section id="Enjoy_trip">
+<div class="container">
+<div class="Section row">
+    <div class="col-lg-5 col-md-3 left_side ">
+        <div class="section_inner">
+            <h3>{{ destination.title }}</h3>
+            <p>{{ destination.text }}</p>
+        </div>
+    </div>
+    <div class="col-lg-7 col-md-8 center_video ">
+        <div class="section_inner">
+            <video width="" height="" controls>
+                <source src="{{ destination.video.url }}" type="video/mp4">
+                
+                </video>
+        </div>
+    </div>
+
+</div>
+</div>
+</section>
+<!-- Enjoy SOme you -->
+
+<!-- interesting facts -->
+<div class="spicer_section"></div>
+<section id="Interesting_facts">
+<div class="container">
+<div class="section_facts">
+    <div class="row" style="margin-bottom:80px;">
+        <div class="col-md-4">
+            <div class="column_fact">
+                <div class="column_fact_inner">
+                    <div class="main_interest_facts">
+                        <h2>
+                            {% trans 'INTERESTING FACTS' %}
+                        </h2>
+                        <h3>{% trans 'About Georgia' %}</h3>
+                        <div class="divider-seperator"></div>
+                    </div>
+                  
+                </div>
+                
+            </div>
+        </div>
+        <div  class="col-md-8">
+            <div class="row">
+                <!-- dizaini aris gasasworebeli. loop gvchirdeba  -->
+                {% for fact in facts %}
+                    {% if forloop.counter|divisibleby:2 %}
+                        <div class="col-md-6 ma{{forloop.counter}} ">
+                            <div class="column_inner">
+                            <div class="column_title">
+                                <h3>{{ fact.title }}</h3>
+                            </div>
+                                <div class="column_img">
+                                    <img src="{% static 'images/lefteris-kallergis-etWlaoFnTl4-unsplash-768x1151.jpg' %}" alt="">
+                                </div>
+                                <div class="column_paragraph">
+                                    <p>{{ fact.text }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                            <div class="col-md-6 ma{{forloop.counter}}">
+                            <div class="column_inner">
+                                <div class="column_title">
+                                    <h3>{{ fact.title }}</h3>
+                                </div>
+                                <div class="column_paragraph">
+                                    <p>{{ fact.text }}</p>
+                                </div>
+                                <div class="column_img">
+                                    <img src="{% static 'images/pietro-guarino-KC2e8V1bhiY-unsplash-1365x2048.jpg' %}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div  class="col-md-8">
+            <div class="row">
+                <!-- dizaini aris gasasworebeli. loop gvchirdeba  -->
+                {% for fact in facts %}
+                    {% if forloop.counter|divisibleby:2 %}
+                        <div class="col-md-6 ms{{forloop.counter}}">
+                            <div class="column_inner">
+                            <div class="column_title">
+                                <h3>{{ fact.title }}</h3>
+                            </div>
+                                <div class="column_img">
+                                    <img src="{% static 'images/lefteris-kallergis-etWlaoFnTl4-unsplash-768x1151.jpg' %}" alt="">
+                                </div>
+                                <div class="column_paragraph">
+                                    <p>{{ fact.text }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                    <div class="col-md-6 ms{{forloop.counter}}">
+                        <div class="column_inner">
+                            <div class="column_title">
+                                <h3>{{ fact.title }}</h3>
+                            </div>
+                            <div class="column_paragraph">
+                                <p>{{ fact.text }}</p>
+                            </div>
+                            <div class="column_img">
+                                <img src="{% static 'images/pietro-guarino-KC2e8V1bhiY-unsplash-1365x2048.jpg' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+
+        </div>
+        </div>
+        <div class="col-md-4">
+            <div class="column_fact">
+                <div class="column_fact_inner">
+
+                    <div class="what_else">
+                        <h2>What Else </h2>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</section>
+<div class="spicer_section"></div>
+<!-- end interesting facts -->
+
+{% endblock %}
+
+
+

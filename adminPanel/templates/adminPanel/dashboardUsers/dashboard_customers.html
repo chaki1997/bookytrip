@@ -1,0 +1,65 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Users</h1>
+        <div class="add">
+            <a href="">Add User</a>
+        </div>
+    </div>
+
+    
+
+    <!-- Content Row -->
+        <table class="table" id= "table-id">
+        <thead>
+            <tr>
+                <th>
+                  
+                </th>
+                <th >Email</th>
+                <th ></th>
+                <th ></th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+                <tr>
+                    <td></td>
+                    <td colspan="2"><a href="{% url 'adminPanel:editCustomer' customer.id %}"> {{ customer.email }} </a></td>
+                    <td class="delete"><a href="" class="confirmation">Block</a> </td>
+
+                </tr>
+            {% endfor %}
+    
+        </tbody>
+    </table>
+    
+
+        <!--		Start Pagination -->
+        <div class='pagination-container'>
+            <nav>
+            <ul class="pagination">
+            <!--	Here the JS Function Will Add the Rows -->
+            </ul>
+            </nav>
+        </div>
+        <!-- <div class="rows_count">Showing 11 to 20 of 91 entries</div> -->
+
+        </div> <!-- 		End of Container -->
+
+                    </div>
+    
+
+
+<!-- /.container-fluid -->
+
+
+<!-- End of Main Content -->
+
+{% endblock %}

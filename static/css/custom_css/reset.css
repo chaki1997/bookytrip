@@ -1,0 +1,164 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+*{
+  margin:0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+font: inherit;
+vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+display: block;
+}
+.bootstrap-select .dropdown-toggle:focus, .bootstrap-select>select.mobile-device:focus+.dropdown-toggle{
+outline: 0!important;
+}
+body {
+line-height: 1;
+}
+ol, ul {
+list-style: none;
+}
+blockquote, q {
+quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+content: '';
+content: none;
+}
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+@font-face {
+  font-family: playfairdisplay;
+  src: url(../../fonts/PlayfairDisplay-Regular.ttf);
+}
+@font-face {
+  font-family: circular;
+  src: url(../../fonts/CircularXXWeb-Book-cd7d2bcec649b1243839a15d5eb8f0a3.woff2);
+}
+@font-face {
+  font-family: roboto;
+  src: url(../../fonts/Roboto-Light.ttf);
+}
+@font-face {
+  font-family: roboto_regular;
+  src: url(../../fonts/Roboto-Regular.ttf);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+font-family: playfairdisplay;
+color: #562443;
+word-break: break-all;
+}
+h2{
+font-size:45px ;
+}
+h3{
+font-size:22px ;
+}
+h4{
+font-size:18px ;
+}
+a{
+  color: #333;
+  text-decoration: none;
+}
+a:hover{
+  word-break: break-all;
+  text-decoration: none;
+}
+a:active, a:focus, a:-moz-focusring {
+  border: none;
+  outline: none!important;
+  border: none!important;
+}
+a:visited {
+  outline: none!important;
+  border: none!important;
+}
+a,
+button{
+font-family: circular;
+}
+p,
+pre{
+word-break: break-all;
+color: #7A7A7A;
+font-family: 'roboto', sans-serif;
+}
+span{
+word-break: break-all;
+
+font-family: 'roboto', sans-serif;
+}
+
+#banner .dropdown-item.active, .dropdown-item:active {
+
+  text-decoration: none;
+  background-color: transparent!important;
+  color: black;
+}
+.spicer_section{
+height: 80px;
+}
+.spicer_section_20{
+height: 20px;
+}
+.spicer_section_50{
+height: 50px;
+}
+.divider-seperator{
+width: 15%;
+ height: 3px;
+background: #DFB610;
+}
+.divider_main_color {
+  width: 35%;
+  margin: 5px auto;
+  height: 2px;
+  background: #562443;
+}
+.container_900{
+max-width: 900px;
+margin: auto;
+}
+.nopadding{
+margin-right: 0!important;
+padding: 0!important;
+}
+.dropdown-toggle::after{
+  display: none;
+}

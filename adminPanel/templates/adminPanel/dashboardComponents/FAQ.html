@@ -1,0 +1,79 @@
+{% extends 'adminPanel/admin_menu.html' %}
+{% load static %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!----------------------------------------------------------------------------------->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">FAQ</h1>
+                        <div class="add">
+                            <a href="{% url 'adminPanel:addFaq' %}">ADD FAQ</a>
+                        </div>
+                    </div>
+
+
+                    <!-------------------FAQ---------------------------> 
+
+
+                    <table class="table " id= "table-id">
+                        <div class="row">
+                      <thead>
+                          <tr>
+                              <th style="width: 35px;">
+                                  
+                              </th>
+                              <th class="AcomodationHeader">FAQ</th> 
+                              <th ></th> 
+                              <th ></th> 
+                              <th ></th> 
+                              <th ></th> 
+                            </tr>
+   
+                      </thead>
+  
+                      <tbody >
+                            {% for faq in faqs %}
+                                {% if faq.id in faq_notification_tuple %}
+                              <tr>
+                                  <td class=""></td>
+                                    <td class="new_class"><a href="{% url 'adminPanel:editFaq' faq.id %}">{{ faq.get_question_type_display }} | {{ faq.user }}</a>
+                                      </td>
+                                    <td>  <span class="new_inner"> NEW</span></td>
+                                    <td> <a href="{% url 'adminPanel:editFaq' faq.id %}">Edit </a> </td>
+                                    <td class="delete" > <a href="{% url 'adminPanel:deleteFaq' faq.id %}">Delete Items </a> </td>
+                                    <td></td>
+                              </tr>
+                                {% else %}
+                                <tr>
+                                    <td class=""></td>
+                                      <td class=""><a href="{% url 'adminPanel:editFaq' faq.id %}">{{ faq.get_question_type_display }} | {{ faq.user }}</a></td>
+                                      <td></td>
+                                      <td> <a href="{% url 'adminPanel:editFaq' faq.id %}">Edit </a> </td>
+                                      <td class="delete confirmation" > <a href="{% url 'adminPanel:deleteFaq' faq.id %}">Delete Items </a> </td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+                      </tbody>
+                      </table>
+
+
+
+                            <!---------------- END FAQ ----------------->
+
+                        </div>       
+                         <!-- 		End of Container -->
+
+                </div>
+            
+
+                
+                <!-- /.container-fluid -->
+
+            
+            <!-- End of Main Content -->
+{% endblock %}
+
+
+
+

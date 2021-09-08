@@ -1,0 +1,295 @@
+{% extends 'userProfile/base_supplier.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" />
+<link rel="stylesheet" href="{% static 'js/dist/js-booking-calendar.css' %}"/>
+<script src="{% static 'js/dist/js-booking-calendar.js' %}"></script>
+                <!-- Begin Page Content -->
+                <div class="main_pack">
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Hotel: {{ accomodation.name }}</h1>
+                    </div>
+
+                    <!-- Content Row -->
+<div class="acomodationSubPage">
+    <form method="POST" action="{% url 'userProfile:supplierAccommodationEdit' accomodation.id %}" 
+          class="form-group container-fluid" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        
+
+        <div class="contentalladd">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <div class="row align-items-center change_username">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+                                {{ accomodation_form }}
+                            </div>
+                        </div>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+
+
+    <div class="row  save_Delete">
+                                
+        <button type="submit" class="save col-xl-2 col-lg-3 col-md-3 col-sm-4 ">SAVE</button>
+
+    </div>
+
+    
+    </form>
+
+
+
+</div>
+<section>
+    <div class="container imageslider">
+        <div class="row slider">
+            <div class="">
+                <div class="">
+                    <img src="{{ accomodation.picture1.url }}" alt="">
+                </div>
+            </div>
+
+            <div class="">
+                <div class="">
+                    <img src="{{ accomodation.picture2.url }}" alt="">
+                </div>
+            </div>
+
+            <div class="">
+                <div class="">
+                    <img src="{{ accomodation.picture3.url }}" alt="">
+                </div>
+            </div>
+
+            <div class="">
+                <div class="">
+                    <video src="{{ accomodation.video.url }}"></video> 
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Hotel Description</h1>
+</div>
+<div class="acomodationSubPage">
+    {% for form in hotel_tuple %}
+    <form method="POST" action="{% url 'userProfile:editHotel' accomodation.id form.1.id %}" class="form-group container-fluid"
+    enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="contentalladd">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <div class="row align-items-center change_username">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-10">
+                                <tr>
+                                    <th>  {{ form.0.room_type.label }}</th>
+                                    <td>  {{ form.0.room_type }}   </td>
+                                </tr>
+                                <tr id="capacity_id">
+                                    <th>  {{ form.0.capacity.label }}</th>
+                                    <td>    {{ form.0.capacity }}   </td>
+                                </tr>
+                                <tr>
+                                    <th>   {{ form.0.bed_type.label }}</th>
+                                    <td>   {{ form.0.bed_type }}   </td>
+                                </tr>
+
+                              
+                                
+                                <tr>
+                                    <th>  {{ form.0.family.label }}</th>
+                                    <td>    {{ form.0.family }}   </td>
+                                </tr>
+                                <tr>
+                                    <th>  {{ form.0.description.label }}</th>
+                                    <td>    {{ form.0.description }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>  {{ form.0.price.label }}</th>
+                                    <td>  {{ form.0.price }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>    {{ form.0.WiFi_connection.label }}</th>
+                                    <td>   {{ form.0.WiFi_connection }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>      {{ form.0.parking.label }}</th>
+                                    <td>   {{ form.0.parking }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>   {{ form.0.bar.label }}</th>
+                                    <td>    {{ form.0.bar }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>   {{ form.0.pool.label }}</th>
+                                    <td>   {{ form.0.pool }}  </td>
+                                </tr>
+                                <tr>
+                                    <th>  {{ form.0.number_of_rooms.label }}</th>
+                                    <td>   {{ form.0.number_of_rooms }}  </td>
+                                </tr>
+                                <tr id="pic_1">
+                                    <th>   {{ form.0.picture1.label }}</th>
+                                    <td>   {{ form.0.picture1 }}  </td>
+                                </tr>
+                                <tr id="pic_2">
+                                    <th>   {{ form.0.picture2.label }}</th>
+                                    <td>   {{ form.0.picture2 }}  </td>
+                                </tr>
+                                <tr id="pic_3">
+                                    <th>   {{ form.0.picture3.label }}</th>
+                                    <td>    {{ form.0.picture3 }} </td>
+                                </tr>                         
+                                <tr id="pic_4">
+                                    <th>    {{ form.0.picture4.label }}</th>
+                                    <td>    {{ form.0.picture4 }} </td>
+                                </tr>                         
+                                <tr id="pic_5">
+                                    <th> {{ form.0.picture5.label }}</th>
+                                    <td>   {{ form.0.picture5 }} </td>
+                                </tr>    
+                            </div>
+                        </div>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+    <div class="row  save_Delete">
+                                
+        <button type="submit" class="save col-xl-2 col-lg-3 col-md-3 col-sm-4 ">SAVE</button>
+
+    </div>
+                    </form>
+    {% endfor %}
+
+</div>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Rooms</h1>
+</div>
+
+    <div class="col-md-4">
+        <h6 class="calendar_title">Calendar Filter</h6>
+    <form method='POST' action="{% url 'adminPanel:dashboardHotelSingle' accomodation.id %}" id="caledendar_input">
+        {% csrf_token %}
+        <input id="textfield9" name='calendar_start_date' class="form-control" type="date" value="">
+        <input id="textfield10" name='calendar_end_date' class="form-control" type="date" value="">
+        <button type='submit' class="btn btn-primary">Send</button>
+    </form>
+    </div>
+        <div class="gantt-target"></div>
+  
+</div>
+
+
+<script>
+
+    function initGantt(properties, init_scroll_position = null) {
+        console.log('properties', properties);
+        var gantt_chart = new Gantt(".gantt-target", properties, {
+
+            on_click: function (task) {
+                console.log(task);
+            },
+            on_date_change: function (task, start, end, scrollXPosition) {
+                console.log(scrollXPosition);
+            },
+            on_progress_change: function (task, progress) {
+                console.log(task, progress);
+            },
+            on_view_change: function (mode) {
+                console.log(mode);
+            },
+            on_date_added: function (start, end, property, propertyIdx, xPosition, yPosition) {
+                console.log('start', start);
+                console.log('end', end);
+                console.log('property', property);
+                console.log('propertyIdx', propertyIdx);
+                console.log('xPosition', xPosition);
+                console.log('yPosition', yPosition);
+                let props = properties;
+                props[propertyIdx]['bookings'].push({
+                    id: '100',
+                    start: new date(),
+                    end: "2022-01-01",
+                    name: 'Foodddddddddddddddddd',
+                    description: 'Beschreibung',
+                })
+                initGantt(props, xPosition)
+
+            },
+            view_mode: 'Day',
+            language: 'en',
+            start_date: '{{ calendar_start_date }}',
+            end_date: "{{ calendar_end_date }}",
+            show_label: true,
+            bar_corner_radius: 0,
+            column_width: 10,
+            init_scroll_position: init_scroll_position,
+            custom_click_on_bar: function (task) {
+                console.log('custom_click_on_bar', task)
+            }
+        });
+    }
+
+    var properties = [ 
+    {% for room, dates in calendar_rooms.items %}
+        {
+            name: '{{ room.room_number }}',
+
+            bookings: [
+            
+                {
+                    start: '{{ dates.0.0|date:"Y-m-d" }}',
+                    end: '{{ dates.1.1|date:"Y-m-d" }}',
+                    name: '',
+                    description: 'Beschreibung',
+                },
+            
+            
+            ]
+            
+        },
+        {% endfor %}
+        
+    ];
+
+    initGantt(properties);
+        let count=0
+    let bar=document.querySelectorAll('.gantt .bar');
+    bar.forEach(items=>{
+        let colors = ['Aqua', 'Coral'];
+        console.log(items)
+        items.style.fill=colors[count];
+        if(count<colors.length-1){
+            count++
+        }
+        else{
+            count=0
+        }
+    })
+   
+    </script>
+
+
+
+
+<script src="{% static 'js/slider_adminpanel/slick.min.js' %}"></script>
+<script src="{% static 'js/slider_adminpanel/slider-panel.js' %}"></script>
+
+                                     
+{% endblock %}

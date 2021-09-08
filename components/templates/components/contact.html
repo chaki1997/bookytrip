@@ -1,0 +1,102 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<!-- main section contact us header -->
+<div class="spicer_section"></div>
+  <section id="contact_us_header">
+      <div class="container">
+        <div class="section_inner">
+            <h2>{% trans 'Contact Us' %}</h2>
+            <p>Award winning team of professional architests, customizing in home & garden design. We have vast experience of both small and large scale projects. Award winning team of professional architests, customizing in home.</p>
+        </div>
+      </div>
+  </section>
+<!-- end main section contact us header -->
+<!-- main section contact us -->
+<div class="spicer_section"></div>
+  <section id="contact_us">
+      <div class="section_inner">
+          <div class="row nopadding" >
+              <div class="col-lg-6 col-md-12">
+                  <div class="left_section">
+                      <div class="left_side_form">
+                          <div class="inner_section">
+                              <form action="{% url 'components:contact' %}" method="POST">
+                                  {% csrf_token %}
+                                <div class="name_surname">
+                                        <div class="Name" >
+                                            {{ form.name }}
+                                            {{ form.errors }}
+                                            
+                                        </div>
+                                        <div class="Surname" >
+                                            {{ form.surname }}
+                                            {{ form.errors }}
+                                        </div>
+                                    </div>
+                                    <div class="Email">
+                                       {{ form.email }}
+                                       {{ form.errors }}
+                                    </div>
+                                    <div class="Message">
+                                        {{ form.text }}
+                                        {{ form.errors }}
+                                    </div>
+                                    <button type="submit" class="form-control" > Send</button>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                  <div class="right_side_section">
+                      <div class="section_inner">
+                          <h2>Contact Us</h2>
+                          <div class="divider-seperator"></div>
+                          <div class="icon-list">
+                              <ul>
+                                  <li> 
+                                    <i class="fas fa-phone-alt"></i> 
+                                    <span> <a href="tel: 599 25 25 25"> 599 25 25 25 </a></span>
+                                  </li>
+                                  <li> 
+                                    <i class="fas fa-envelope"></i>
+                                    <span> <a href="mailto: info@bookytrip.com">info@bookytrip.com</a></span>
+                                  </li>
+                                  <li> 
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span> <a href="">France #234</a></span>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div class="social_list">
+                              <div class="inner">
+                                <div class="socials_content">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                <div class="socials_content">
+                                    <i class="fab fa-instagram"></i>
+                                </div>
+                                <div class="socials_content">
+                                    <i class="fab fa-youtube"></i>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <div class="spicer_section"></div>
+
+<!-- only in this page -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="assets/js/manual/testimonial_vendors.js"></script>
+<!-- only in this page -->
+
+{% endblock %}
